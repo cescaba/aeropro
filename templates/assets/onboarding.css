@@ -356,6 +356,9 @@ display: flex;
 
 .vc-stepper__num{
   display: inline-block;
+      color: white;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .vc-stepper__line{
