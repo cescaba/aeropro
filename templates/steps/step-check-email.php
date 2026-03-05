@@ -2,6 +2,10 @@
 if (!defined('ABSPATH')) exit;
 ?>
 <div class="vc-check-email">
+  <?php if (!empty($notices_html)): ?>
+    <?php echo $notices_html; ?>
+  <?php endif; ?>
+
   <div class="vc-check-email__stepper">
     <?php echo $stepper_html; ?>
   </div>

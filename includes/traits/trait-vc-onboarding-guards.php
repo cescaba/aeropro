@@ -8,10 +8,23 @@ trait VC_Onboarding_Wizard_Guards {
 
     if ($path === 'verificar') {
       $uid = isset($_GET['uid']) ? absint($_GET['uid']) : 0;
-      $token = isset($_GET['token']) ? (string) $_GET['token'] : '';
+      $token = isset($_GET['token']) ? (string) wp_unslash($_GET['token']) : '';
 
       if (!$uid || !$token) {
         wp_safe_redirect($this->step_url('register'));
+        exit;
+      }
+
+      // Idempotent verify: if already verified (token previously consumed), continue flow.
+      if ($this->is_verified($uid)) {
+        wp_set_current_user($uid);
+        wp_set_auth_cookie($uid);
+
+        if (!$this->is_onboard_done($uid)) {
+          wp_safe_redirect($this->step_url('registro-datos'));
+        } else {
+          wp_safe_redirect($this->dashboard_url());
+        }
         exit;
       }
 
@@ -23,7 +36,9 @@ trait VC_Onboarding_Wizard_Guards {
         exit;
       }
 
-      if (!hash_equals($hash, wp_hash($token))) {
+      $token_decoded = rawurldecode($token);
+      $is_valid_token = hash_equals($hash, wp_hash($token)) || hash_equals($hash, wp_hash($token_decoded));
+      if (!$is_valid_token) {
         wp_safe_redirect(add_query_arg('verify', 'invalid', $this->step_url('register')));
         exit;
       }

@@ -148,6 +148,13 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $current_user = wp_get_current_user();
     $user_email = $current_user instanceof WP_User ? $current_user->user_email : '';
+    $notices_html = '';
+    if (isset($_GET['verify']) && $_GET['verify'] === 'expired') {
+      $notices_html .= $this->render_notice('Verification link expired. Please request a new email.', 'error');
+    }
+    if (isset($_GET['verify']) && $_GET['verify'] === 'invalid') {
+      $notices_html .= $this->render_notice('Invalid verification link. Please use the latest email we sent.', 'error');
+    }
     $stepper_html = $this->render_template('templates/steps/stepper.php', [
       'steps' => [
         ['key' => 'account', 'label' => 'Account'],
@@ -161,6 +168,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       'stepper_html' => $stepper_html,
       'user_email' => $user_email,
       'continue_url' => $this->step_url('registro-datos'),
+      'notices_html' => $notices_html,
     ]);
 
     return $html . $this->inline_css();
