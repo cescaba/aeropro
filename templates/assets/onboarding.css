@@ -137,7 +137,8 @@ font-family: "Poppins", Sans-serif;
   border-radius:10px;
 }
 
-.vc-onb-card input[type=email],input[type=password]{
+
+.vc-onb-card input[type=email],#step-2 input[type=password]{
     padding: 4px 12px;
     height: 48px;
     background: #F7F7F7;
@@ -202,6 +203,38 @@ background-color: #1447E6;
 .vc-onb-card .button-primary:hover,.vc-onb-card  .button-primary:active, .vc-onb-card .button-primary:focus{
   background-color: #1447E6;
 }
+
+.vc-check-email{
+  text-align:center;
+}
+
+.vc-check-email__address{
+  margin: 0 0 24px;
+  font-family: 'Poppins';
+  font-size: 14px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.vc-check-email__tips{
+  margin: 0 auto 28px;
+  max-width: 360px;
+}
+
+.vc-check-email__tips p{
+  margin: 0 0 8px;
+  font-family: 'Poppins';
+  font-size: 14px;
+  line-height: 21px;
+  color: #666666;
+}
+
+.vc-check-email__button{
+  display: inline-block;
+  text-decoration: none;
+  opacity: 1 !important;
+}
+
 .vc-stepper{
   width: 100%;
 }
