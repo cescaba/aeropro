@@ -108,7 +108,17 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $this->assign_trial_level($uid);
 
+    $stepper_html = $this->render_template('templates/steps/stepper.php', [
+      'steps' => [
+        ['key' => 'account', 'label' => 'Account'],
+        ['key' => 'profile', 'label' => 'Profile'],
+        ['key' => 'home', 'label' => 'Home'],
+      ],
+      'current_step' => 2,
+    ]);
+
     $html = $this->render_template('templates/steps/step3.php', [
+      'stepper_html' => $stepper_html,
       'action_url' => admin_url('admin-post.php'),
       'nonce_html' => wp_nonce_field('vc_onboard_save_profile', 'vc_onboard_profile_nonce', false, false),
       'first_name' => get_user_meta($uid, 'first_name', true),
@@ -144,7 +154,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
         ['key' => 'profile', 'label' => 'Profile'],
         ['key' => 'home', 'label' => 'Home'],
       ],
-      'current_step' => 2,
+      'current_step' => 1,
     ]);
 
     $html = $this->render_template('templates/steps/step-check-email.php', [

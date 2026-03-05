@@ -138,7 +138,7 @@ font-family: "Poppins", Sans-serif;
 }
 
 
-.vc-onb-card input[type=email],#step-2 input[type=password]{
+.vc-onb-card input[type=email],#step-2 input[type=password],#step-3 input[type=text]{
     padding: 4px 12px;
     height: 48px;
     background: #F7F7F7;
@@ -162,6 +162,57 @@ color: #666666;
 .vc-onb-card last{
   margin-bottom: 30px;
 }
+.vc-field{
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.vc-choice-group{
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.vc-choice-option{
+  flex: 1 1 120px;
+  position: relative;
+}
+
+.vc-choice-input{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vc-choice-chip{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  border: 2px solid #D6DCE5;
+  border-radius: 12px;
+  background: #F6F8FB;
+  color: #2E3138;
+  font-family: 'Poppins';
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.vc-choice-input:checked + .vc-choice-chip{
+  border-color: #1447E6;
+  box-shadow: 0 0 0 1px #1447E6 inset;
+  background: #FFFFFF;
+}
+
+.vc-choice-input:focus-visible + .vc-choice-chip{
+  outline: 2px solid #1447E6;
+  outline-offset: 2px;
+}
+
 .vc-onb-card form{
   margin-bottom:34px;
 }
@@ -212,21 +263,20 @@ background-color: #1447E6;
   margin: 0 0 36px;
 }
 
-.vc-check-email .vc-stepper__list{
-  gap: 10px;
-}
 
 .vc-check-email .vc-stepper__item{
   min-width: 0;
   width: 100%;
-  grid-template-columns: 56px 1fr;
-  grid-template-rows: 56px auto;
+display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .vc-check-email .vc-stepper__circle{
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   font-size: 28px;
+  background: #1447E6;
 }
 
 .vc-check-email .vc-stepper__line{
@@ -273,8 +323,8 @@ background-color: #1447E6;
 .vc-stepper__list{
   list-style: none;
   display: flex;
-  align-items: flex-start;
-  gap: 28px;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0;
   margin: 0;
 }
@@ -300,8 +350,8 @@ background-color: #1447E6;
 }
 
 .vc-stepper__check{
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
 }
 
 .vc-stepper__num{
@@ -330,12 +380,12 @@ background-color: #1447E6;
 
 /* Estados */
 .vc-stepper__item.is-done .vc-stepper__circle{
-  background: #1f4bff;
+  background: #1447E6;
   color: #fff;
 }
 
 .vc-stepper__item.is-current .vc-stepper__circle{
-  background: #1f4bff;
+  
   color: #fff;
 }
 
@@ -345,7 +395,11 @@ background-color: #1447E6;
 }
 
 .vc-stepper__line.is-filled{
-  background: #1f4bff;
+  background: #1447E6;
+      width: 250px;
+    margin-bottom: 25px;
+    margin-left: -30px;
+    margin-right: -30px;
 }
 
 .vc-stepper__line.is-empty{
