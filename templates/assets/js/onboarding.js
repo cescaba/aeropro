@@ -41,13 +41,13 @@ function validateStep3(form){
   const firstName = form.querySelector("input[name='first_name']");
   const lastName = form.querySelector("input[name='last_name']");
   const certTrack = form.querySelector("input[name='cert_track']:checked");
-  const userStage = form.querySelector("select[name='user_stage']");
+  const userStage = form.querySelector("input[name='user_stage']:checked");
 
   return (
     firstName && firstName.value.trim() !== "" &&
     lastName && lastName.value.trim() !== "" &&
     certTrack &&
-    userStage && userStage.value.trim() !== ""
+    userStage
   );
 }
 

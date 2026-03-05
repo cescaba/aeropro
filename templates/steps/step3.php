@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 ?>
-<div class="vc-onboard">
+<div class="vc-onb-card">
   <?php if (!empty($stepper_html)): ?>
     <div class="vc-check-email__stepper">
       <?php echo $stepper_html; ?>
@@ -35,16 +35,23 @@ if (!defined('ABSPATH')) exit;
       </div>
     </div>
 
-    <p>
-      <label>What best describes you? *<br>
-        <select name="user_stage" required>
-          <option value="">Select…</option>
-          <option value="Student" <?php selected($user_stage, 'Student'); ?>>Student</option>
-          <option value="Graduate" <?php selected($user_stage, 'Graduate'); ?>>Graduate</option>
-          <option value="Technician" <?php selected($user_stage, 'Technician'); ?>>Technician</option>
-        </select>
-      </label>
-    </p>
+    <div class="vc-field">
+      <label>What best describes you? *</label>
+      <div class="vc-choice-group" role="radiogroup" aria-label="What best describes you?">
+        <div class="vc-choice-option">
+          <input class="vc-choice-input" type="radio" id="user_stage_student" name="user_stage" value="Student" <?php checked($user_stage, 'Student'); ?> required>
+          <label class="vc-choice-chip" for="user_stage_student">Student</label>
+        </div>
+        <div class="vc-choice-option">
+          <input class="vc-choice-input" type="radio" id="user_stage_graduate" name="user_stage" value="Graduate" <?php checked($user_stage, 'Graduate'); ?> required>
+          <label class="vc-choice-chip" for="user_stage_graduate">Graduate</label>
+        </div>
+        <div class="vc-choice-option">
+          <input class="vc-choice-input" type="radio" id="user_stage_technician" name="user_stage" value="Technician" <?php checked($user_stage, 'Technician'); ?> required>
+          <label class="vc-choice-chip" for="user_stage_technician">Technician</label>
+        </div>
+      </div>
+    </div>
 
     <p><button class="button button-primary" type="submit">Continue</button></p>
   </form>

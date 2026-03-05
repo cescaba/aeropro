@@ -137,7 +137,23 @@ font-family: "Poppins", Sans-serif;
   border-radius:10px;
 }
 
-
+#step-3{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+#step-3 p{
+  text-align: left;
+  width: 100%;
+}
+#step-3 .vc-onb-card label{
+  text-align: left;
+  width: 100%;
+}
+#step-3 .vc-field{
+    width: 100%;
+}
 .vc-onb-card input[type=email],#step-2 input[type=password],#step-3 input[type=text]{
     padding: 4px 12px;
     height: 48px;
@@ -264,13 +280,7 @@ background-color: #1447E6;
 }
 
 
-.vc-check-email .vc-stepper__item{
-  min-width: 0;
-  width: 100%;
-display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .vc-check-email .vc-stepper__circle{
   width: 40px;
@@ -330,14 +340,12 @@ display: flex;
 }
 
 .vc-stepper__item{
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  grid-template-rows: 64px auto;
-  align-items: center;
-  position: relative;
-  min-width: 220px; /* ajusta según tu layout */
+  min-width: 0;
+  width: 100%;
+display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 .vc-stepper__circle{
   width: 64px;
   height: 64px;
