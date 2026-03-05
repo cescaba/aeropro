@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 <form id="step-2" method="post" action="<?php echo esc_url($action_url); ?>">
   <input type="hidden" name="action" value="vc_onboard_email_start" />
-  <?php echo $nonce_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+  <?php echo $nonce_html; ?>
 
   <input type="hidden" name="email" value="<?php echo esc_attr($prefill_email); ?>" />
 

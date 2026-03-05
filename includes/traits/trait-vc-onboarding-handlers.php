@@ -4,8 +4,17 @@ if (!defined('ABSPATH')) exit;
 
 trait VC_Onboarding_Wizard_Handlers {
   public function handle_email_start() {
-    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'vc_onboard_email_start')) {
-      wp_die('Invalid nonce');
+    $nonce = '';
+    if (isset($_POST['vc_onboard_email_nonce'])) {
+      $nonce = sanitize_text_field(wp_unslash($_POST['vc_onboard_email_nonce']));
+    } elseif (isset($_POST['_wpnonce'])) {
+      $nonce = sanitize_text_field(wp_unslash($_POST['_wpnonce']));
+    }
+
+    if (empty($nonce) || !wp_verify_nonce($nonce, 'vc_onboard_email_start')) {
+      $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+      wp_safe_redirect(add_query_arg(['email' => $email, 'err' => 'invalid_nonce'], $this->step_url('registro-email')));
+      exit;
     }
 
     $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
@@ -60,7 +69,14 @@ trait VC_Onboarding_Wizard_Handlers {
       exit;
     }
 
-    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'vc_onboard_save_profile')) {
+    $nonce = '';
+    if (isset($_POST['vc_onboard_profile_nonce'])) {
+      $nonce = sanitize_text_field(wp_unslash($_POST['vc_onboard_profile_nonce']));
+    } elseif (isset($_POST['_wpnonce'])) {
+      $nonce = sanitize_text_field(wp_unslash($_POST['_wpnonce']));
+    }
+
+    if (empty($nonce) || !wp_verify_nonce($nonce, 'vc_onboard_save_profile')) {
       wp_die('Invalid nonce');
     }
 

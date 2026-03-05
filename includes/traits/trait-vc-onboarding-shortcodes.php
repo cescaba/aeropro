@@ -75,10 +75,13 @@ trait VC_Onboarding_Wizard_Shortcodes {
     if (isset($_GET['err']) && $_GET['err'] === 'pass_mismatch') {
       $error_html = $this->render_notice('Passwords do not match. Please try again.', 'error');
     }
+    if (isset($_GET['err']) && $_GET['err'] === 'invalid_nonce') {
+      $error_html = $this->render_notice('Session expired. Please try again.', 'error');
+    }
 
     $html = $this->render_template('templates/steps/step2.php', [
       'action_url' => admin_url('admin-post.php'),
-      'nonce_html' => wp_nonce_field('vc_onboard_email_start', '_wpnonce', true, false),
+      'nonce_html' => wp_nonce_field('vc_onboard_email_start', 'vc_onboard_email_nonce', false, false),
       'prefill_email' => $prefill_email,
       'error_html' => $error_html,
     ]);
@@ -102,7 +105,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $html = $this->render_template('templates/steps/step3.php', [
       'action_url' => admin_url('admin-post.php'),
-      'nonce_html' => wp_nonce_field('vc_onboard_save_profile', '_wpnonce', true, false),
+      'nonce_html' => wp_nonce_field('vc_onboard_save_profile', 'vc_onboard_profile_nonce', false, false),
       'first_name' => get_user_meta($uid, 'first_name', true),
       'last_name' => get_user_meta($uid, 'last_name', true),
       'cert_track' => get_user_meta($uid, self::META_CERT, true),

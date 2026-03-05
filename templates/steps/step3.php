@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
   <h2>Your details</h2>
   <form method="post" action="<?php echo esc_url($action_url); ?>">
     <input type="hidden" name="action" value="vc_onboard_save_profile" />
-    <?php echo $nonce_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+    <?php echo $nonce_html; ?>
 
     <p><label>First name<br><input type="text" name="first_name" value="<?php echo esc_attr($first_name); ?>" required></label></p>
     <p><label>Last name<br><input type="text" name="last_name" value="<?php echo esc_attr($last_name); ?>" required></label></p>
