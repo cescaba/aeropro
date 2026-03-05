@@ -80,6 +80,9 @@ trait VC_Onboarding_Wizard_Shortcodes {
     if (isset($_GET['err']) && $_GET['err'] === 'invalid_nonce') {
       $error_html = $this->render_notice('Session expired. Please try again.', 'error');
     }
+    if (isset($_GET['err']) && $_GET['err'] === 'email_exists') {
+      $error_html = $this->render_notice('This email already has an account. Please use Log in.', 'error');
+    }
 
     $html = $this->render_template('templates/steps/step2.php', [
       'action_url' => admin_url('admin-post.php'),
@@ -135,8 +138,17 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $current_user = wp_get_current_user();
     $user_email = $current_user instanceof WP_User ? $current_user->user_email : '';
+    $stepper_html = $this->render_template('templates/steps/stepper.php', [
+      'steps' => [
+        ['key' => 'account', 'label' => 'Account'],
+        ['key' => 'profile', 'label' => 'Profile'],
+        ['key' => 'home', 'label' => 'Home'],
+      ],
+      'current_step' => 2,
+    ]);
 
     $html = $this->render_template('templates/steps/step-check-email.php', [
+      'stepper_html' => $stepper_html,
       'user_email' => $user_email,
       'continue_url' => $this->step_url('registro-datos'),
     ]);

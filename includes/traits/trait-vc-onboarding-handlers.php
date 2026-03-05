@@ -32,7 +32,29 @@ trait VC_Onboarding_Wizard_Handlers {
     }
 
     if (email_exists($email)) {
-      wp_safe_redirect(wp_login_url($this->step_url('register')));
+      $existing_user = get_user_by('email', $email);
+      if ($existing_user instanceof WP_User) {
+        $existing_user_id = (int) $existing_user->ID;
+
+        if (!$this->is_verified($existing_user_id)) {
+          // Keep the latest password submitted by user for pending accounts.
+          wp_set_password($pass, $existing_user_id);
+
+          $token = wp_generate_password(32, false, false);
+          $hash  = wp_hash($token);
+          update_user_meta($existing_user_id, self::META_TOKEN, $hash);
+          update_user_meta($existing_user_id, self::META_TOKEN_EXPIRES, time() + 24 * 3600);
+          $this->send_verification_email($existing_user_id, $token);
+
+          wp_set_current_user($existing_user_id);
+          wp_set_auth_cookie($existing_user_id);
+
+          wp_safe_redirect($this->check_email_step_url());
+          exit;
+        }
+      }
+
+      wp_safe_redirect(add_query_arg(['email' => $email, 'err' => 'email_exists'], $this->step_url('registro-email')));
       exit;
     }
 

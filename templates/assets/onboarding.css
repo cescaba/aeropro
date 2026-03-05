@@ -208,6 +208,37 @@ background-color: #1447E6;
   text-align:center;
 }
 
+.vc-check-email__stepper{
+  margin: 0 0 36px;
+}
+
+.vc-check-email .vc-stepper__list{
+  gap: 10px;
+}
+
+.vc-check-email .vc-stepper__item{
+  min-width: 0;
+  width: 100%;
+  grid-template-columns: 56px 1fr;
+  grid-template-rows: 56px auto;
+}
+
+.vc-check-email .vc-stepper__circle{
+  width: 56px;
+  height: 56px;
+  font-size: 28px;
+}
+
+.vc-check-email .vc-stepper__line{
+  height: 6px;
+}
+
+.vc-check-email .vc-stepper__label{
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
 .vc-check-email__address{
   margin: 0 0 24px;
   font-family: 'Poppins';
