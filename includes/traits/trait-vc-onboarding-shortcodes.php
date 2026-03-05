@@ -9,7 +9,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     global $post;
     if (!$post) return $template;
 
-    $slugs = ['register', 'registro-email', 'registro-datos', 'registro-verifica-email', 'registro-final', 'verificar'];
+    $slugs = ['register', 'registro-email', 'registro-datos', 'registro-final', 'verificar'];
 
     if (!in_array($post->post_name, $slugs, true)) return $template;
 
@@ -28,8 +28,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     if (is_user_logged_in()) {
       $uid = get_current_user_id();
       if (!$this->is_verified($uid)) {
-        wp_safe_redirect($this->step_url('registro-verifica-email'));
-        exit;
+        return $this->shortcode_check_email();
       }
 
       if (!$this->is_onboard_done($uid)) {
@@ -42,6 +41,9 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
 
     $notices_html = '';
+    if (isset($_GET['check_email']) && $_GET['check_email'] === '1') {
+      $notices_html .= $this->render_notice('Check your email to verify your account. You must verify before accessing the dashboard.', 'info');
+    }
     if (isset($_GET['verify']) && $_GET['verify'] === 'expired') {
       $notices_html .= $this->render_notice('Verification link expired. Please sign up again.', 'error');
     }
@@ -97,7 +99,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $uid = get_current_user_id();
     if (!$this->is_verified($uid)) {
-      wp_safe_redirect($this->step_url('registro-verifica-email'));
+      wp_safe_redirect($this->check_email_step_url());
       exit;
     }
 

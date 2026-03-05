@@ -59,7 +59,7 @@ trait VC_Onboarding_Wizard_Handlers {
     wp_set_current_user($user_id);
     wp_set_auth_cookie($user_id);
 
-    wp_safe_redirect($this->step_url('registro-verifica-email'));
+    wp_safe_redirect($this->check_email_step_url());
     exit;
   }
 

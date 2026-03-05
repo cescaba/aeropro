@@ -24,6 +24,10 @@ trait VC_Onboarding_Wizard_Helpers {
     return home_url('/' . trim($slug, '/') . '/');
   }
 
+  private function check_email_step_url(): string {
+    return add_query_arg('check_email', '1', $this->step_url('register'));
+  }
+
   private function is_verified(int $user_id): bool {
     return (bool) get_user_meta($user_id, self::META_VERIFIED, true);
   }
