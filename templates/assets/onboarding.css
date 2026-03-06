@@ -202,10 +202,11 @@ width: 100%;
   pointer-events: none;
 }
 
-.vc-choice-chip{
+#step-3 .vc-choice-chip{
   display: flex;
   align-items: center;
   justify-content: center;
+  width: auto;
   height: 54px;
   border: 2px solid #E2E8F0;
   border-radius: 10px;
@@ -217,17 +218,18 @@ width: 100%;
   letter-spacing: -0.2px;
   cursor: pointer;
   transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  text-align: center;
 }
 
 
 
 
-.vc-choice-input:checked + .vc-choice-chip{
+#step-3 .vc-choice-input:checked + .vc-choice-chip{
     border-color: #1447E6;
     background: #F1F5F9;
 }
 
-.vc-choice-input:focus-visible + .vc-choice-chip{
+#step-3 .vc-choice-input:focus-visible + .vc-choice-chip{
     border-color: #1447E6;
     background: #F1F5F9;
 }

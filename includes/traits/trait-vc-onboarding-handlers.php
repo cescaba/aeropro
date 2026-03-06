@@ -4,6 +4,15 @@ if (!defined('ABSPATH')) exit;
 
 trait VC_Onboarding_Wizard_Handlers {
   public function handle_email_start() {
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $pass  = isset($_POST['password']) ? (string) $_POST['password'] : '';
+    $pass2 = isset($_POST['password_confirm']) ? (string) $_POST['password_confirm'] : '';
+
+    if ($pass !== $pass2) {
+      wp_safe_redirect(add_query_arg(['email' => $email, 'err' => 'pass_mismatch'], $this->step_url('registro-email')));
+      exit;
+    }
+
     $nonce = '';
     if (isset($_POST['vc_onboard_email_nonce'])) {
       $nonce = sanitize_text_field(wp_unslash($_POST['vc_onboard_email_nonce']));
@@ -12,17 +21,7 @@ trait VC_Onboarding_Wizard_Handlers {
     }
 
     if (empty($nonce) || !wp_verify_nonce($nonce, 'vc_onboard_email_start')) {
-      $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
       wp_safe_redirect(add_query_arg(['email' => $email, 'err' => 'invalid_nonce'], $this->step_url('registro-email')));
-      exit;
-    }
-
-    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
-    $pass  = isset($_POST['password']) ? (string) $_POST['password'] : '';
-    $pass2 = isset($_POST['password_confirm']) ? (string) $_POST['password_confirm'] : '';
-
-    if ($pass !== $pass2) {
-      wp_safe_redirect(add_query_arg(['email' => $email, 'err' => 'pass_mismatch'], $this->step_url('registro-email')));
       exit;
     }
 
