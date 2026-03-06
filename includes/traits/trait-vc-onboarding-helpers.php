@@ -64,13 +64,31 @@ trait VC_Onboarding_Wizard_Helpers {
     ], $this->step_url('verificar'));
 
     $subject = 'Verify your email to start your 14-day trial';
-    $message = "Hi {$user->display_name},\n\n";
-    $message .= "Click the link below to verify your email and activate your 14-day trial:\n\n";
-    $message .= $verify_url . "\n\n";
-    $message .= "If you didn't request this, you can ignore this email.\n\n";
-    $message .= "Thanks.";
+    $recipient_name = trim((string) $user->display_name);
+    if ($recipient_name === '') {
+      $recipient_name = trim((string) $user->user_login);
+    }
 
-    return wp_mail($user->user_email, $subject, $message);
+    $message = $this->render_template('templates/emails/verification-email.php', [
+      'subject' => $subject,
+      'recipient_name' => $recipient_name,
+      'verify_url' => $verify_url,
+      'site_name' => wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES),
+    ]);
+
+    if ($message === '') {
+      $message = "Hi {$recipient_name},\n\n";
+      $message .= "Click the link below to verify your email and activate your 14-day trial:\n\n";
+      $message .= $verify_url . "\n\n";
+      $message .= "If you didn't request this, you can ignore this email.\n\n";
+      $message .= "Thanks.";
+
+      return wp_mail($user->user_email, $subject, $message);
+    }
+
+    $headers = ['Content-Type: text/html; charset=UTF-8'];
+
+    return wp_mail($user->user_email, $subject, $message, $headers);
   }
 
   private function render_notice(string $msg, string $type = 'info'): string {

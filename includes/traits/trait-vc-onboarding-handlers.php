@@ -129,7 +129,7 @@ trait VC_Onboarding_Wizard_Handlers {
 
     update_user_meta($uid, self::META_ONBOARD_DONE, 1);
 
-    wp_safe_redirect($this->dashboard_url());
+    wp_safe_redirect($this->step_url('registro-final'));
     exit;
   }
 }

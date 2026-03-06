@@ -106,6 +106,11 @@ trait VC_Onboarding_Wizard_Shortcodes {
       exit;
     }
 
+    if ($this->is_onboard_done($uid)) {
+      wp_safe_redirect($this->step_url('registro-final'));
+      exit;
+    }
+
     $this->assign_trial_level($uid);
 
     $stepper_html = $this->render_template('templates/steps/stepper.php', [
@@ -186,8 +191,11 @@ trait VC_Onboarding_Wizard_Shortcodes {
       exit;
     }
 
-    wp_safe_redirect($this->dashboard_url());
-    exit;
+    $html = $this->render_template('templates/steps/step-final.php', [
+      'dashboard_url' => $this->dashboard_url(),
+    ]);
+
+    return $html . $this->inline_css();
   }
 
   public function shortcode_verify(): string {
