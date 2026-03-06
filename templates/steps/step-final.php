@@ -32,7 +32,7 @@ if (!defined('ABSPATH')) exit;
         </svg>
       </div>
       <div class="vc-final-step__feature-copy">
-        <h2>FAA Mock Test</h2>
+       <p class="h2">FAA Mock Test</p>
         <p>Practice with 100-question exams in 120 minutes, just like the real exam</p>
       </div>
     </article>
@@ -44,7 +44,7 @@ if (!defined('ABSPATH')) exit;
         </svg>
       </div>
       <div class="vc-final-step__feature-copy">
-        <h2>Progress tracking</h2>
+        <p class="h2">Progress tracking</p>
         <p>Track your progress in each category and identify areas for improvement</p>
       </div>
     </article>
