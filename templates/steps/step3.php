@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 ?>
-<div class="vc-onb-card">
+<div class="vc-check-email">
   <?php if (!empty($stepper_html)): ?>
     <div class="vc-check-email__stepper">
       <?php echo $stepper_html; ?>
@@ -22,15 +22,15 @@ if (!defined('ABSPATH')) exit;
       <div class="vc-choice-group" role="radiogroup" aria-label="Which certification are you pursuing?">
         <div class="vc-choice-option">
           <input class="vc-choice-input" type="radio" id="cert_track_airframe" name="cert_track" value="Airframe" <?php checked($cert_track, 'Airframe'); ?> required>
-          <label class="vc-choice-chip" for="cert_track_airframe">Airframe</label>
+          <p class="vc-choice-chip" for="cert_track_airframe">Airframe</p>
         </div>
         <div class="vc-choice-option">
           <input class="vc-choice-input" type="radio" id="cert_track_powerplant" name="cert_track" value="Powerplant" <?php checked($cert_track, 'Powerplant'); ?> required>
-          <label class="vc-choice-chip" for="cert_track_powerplant">Powerplant</label>
+          <p class="vc-choice-chip" for="cert_track_powerplant">Powerplant</p>
         </div>
         <div class="vc-choice-option">
           <input class="vc-choice-input" type="radio" id="cert_track_both" name="cert_track" value="Both (A&amp;P)" <?php checked($cert_track, 'Both (A&P)'); ?> required>
-          <label class="vc-choice-chip" for="cert_track_both">Both (A&amp;P)</label>
+          <p class="vc-choice-chip" for="cert_track_both">Both (A&amp;P)</p>
         </div>
       </div>
     </div>
