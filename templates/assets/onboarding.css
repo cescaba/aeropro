@@ -359,12 +359,12 @@ background-color: #1447E6;
 .vc-final-step__title{
   margin: 0 0 8px;
   font-family: 'Poppins';
-  font-size: 28px;
+font-size: 32px;
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.4px;
+line-height: 48px;
   color: #212121;
 }
+
 
 .vc-final-step__subtitle{
   max-width: 380px;
@@ -408,7 +408,7 @@ background-color: #1447E6;
   height: 28px;
 }
 
-.vc-final-step__feature-copy h2{
+.vc-final-step__feature-copy .h2{
   margin: 0 0 6px;
   font-family: 'Poppins';
   font-size: 18px;

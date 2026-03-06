@@ -8,8 +8,8 @@ if (!defined('ABSPATH')) exit;
     </svg>
   </div>
 
-  <h1 class="vc-final-step__title">Welcome to Aeropro!</h1>
-  <p class="vc-final-step__subtitle">These are the tools that will help you pass your A&amp;P exam</p>
+  <p class="vc-final-step__title">Welcome to Aeropro!</p>
+  <p class="subtitle">These are the tools that will help you pass your A&amp;P exam</p>
 
   <div class="vc-final-step__features" aria-label="Included tools">
     <article class="vc-final-step__feature">
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) exit;
         </svg>
       </div>
       <div class="vc-final-step__feature-copy">
-        <h2>Flashcards by category</h2>
+        <p class="h2">Flashcards by category</p>
         <p>Study with over 1,000 flashcards organized by General, Airframe, and Powerplant</p>
       </div>
     </article>
