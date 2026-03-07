@@ -219,10 +219,14 @@ trait VC_Onboarding_Wizard_Shortcodes {
     );
 
     $account_url = home_url('/account/');
+    $is_reset_password = isset($_GET['action']) && sanitize_key(wp_unslash($_GET['action'])) === 'reset_pass';
+    $sign_in_url = get_permalink() ? remove_query_arg('action', get_permalink()) : home_url('/');
 
     $html = $this->render_template('templates/login/custom-login.php', [
       'is_logged_in' => is_user_logged_in(),
+      'is_reset_password' => $is_reset_password,
       'account_url' => $account_url,
+      'sign_in_url' => $sign_in_url,
       'google_login_url' => wp_login_url($this->dashboard_url()),
       'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'pmpro_login_html' => do_shortcode('[pmpro_login]'),
