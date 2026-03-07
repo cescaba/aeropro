@@ -210,12 +210,21 @@ trait VC_Onboarding_Wizard_Shortcodes {
       [],
       file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') : '1.0.0'
     );
+    wp_enqueue_script(
+      'vc-custom-login-js',
+      VC_OW_PLUGIN_URL . 'templates/assets/login.js',
+      [],
+      file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/login.js') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/login.js') : '1.0.0',
+      true
+    );
 
     $account_url = home_url('/account/');
 
     $html = $this->render_template('templates/login/custom-login.php', [
       'is_logged_in' => is_user_logged_in(),
       'account_url' => $account_url,
+      'google_login_url' => wp_login_url($this->dashboard_url()),
+      'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'pmpro_login_html' => do_shortcode('[pmpro_login]'),
     ]);
 

@@ -100,6 +100,14 @@ width: 100%;
   font-weight: 600;
 }
 
+.vc-login-form-wrap .login-password {
+  position: relative;
+}
+
+.vc-login-password-wrap {
+  position: relative;
+}
+
 .vc-login-form-wrap .pmpro_submit,
 .vc-login-form-wrap .pmpro_btn,
 .vc-login-form-wrap input[type="submit"] {
@@ -112,6 +120,57 @@ width: 100%;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.vc-login-password-wrap input[type="password"],
+.vc-login-password-wrap input[type="text"] {
+  padding-right: 56px;
+}
+
+.vc-login-form-wrap .pmpro_form_field-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+.vc-login-form-wrap .pmpro_form_field-password-toggle .pmpro_btn {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vc-login-form-wrap .pmpro_form_field-password-toggle-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vc-login-password-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.vc-login-password-actions a {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+}
+
+.vc-login-password-actions a:hover {
+  color: #111;
 }
 
 .vc-login-form-wrap .pmpro_btn:hover,
