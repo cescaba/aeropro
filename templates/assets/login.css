@@ -328,10 +328,20 @@ display: none;
   justify-content: flex-start;
   align-self: flex-start;
   font-family: 'Poppins';
-  font-size: 12px;
-  line-height: 1.4;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: -0.15px;
   color: #666666;
   text-decoration: none;
+}
+
+.vc-login-back img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
 }
 
 .vc-login-back:hover {
@@ -507,6 +517,13 @@ display: none;
   font-family: 'Poppins';
   font-size: 16px;
   font-weight: 600;
+  opacity: 0.45;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+
+.vc-login-form-wrap--set-password.is-ready .pmpro_form_submit .pmpro_btn-submit {
+  opacity: 1;
+  background: #1447E6;
 }
 
 .vc-login-form-wrap--set-password .pmpro_form_hint {
@@ -614,6 +631,10 @@ display: none;
   font-size: 12px;
   line-height: 1.5;
   color: #999999;
+}
+
+.vc-login-reset--confirm .vc-login-resend {
+  text-align: center;
 }
 
 .vc-login-resend a {

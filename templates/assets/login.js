@@ -37,6 +37,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  document.querySelectorAll(".vc-login-form-wrap--set-password").forEach(function (setPasswordWrap) {
+    const pass1 = setPasswordWrap.querySelector("input[name='pass1']");
+    const pass2 = setPasswordWrap.querySelector("input[name='pass2']");
+
+    if (!pass1 || !pass2) {
+      return;
+    }
+
+    const refreshState = function () {
+      const isReady = pass1.value.trim() !== "" && pass2.value.trim() !== "";
+      setPasswordWrap.classList.toggle("is-ready", isReady);
+    };
+
+    pass1.addEventListener("input", refreshState);
+    pass2.addEventListener("input", refreshState);
+    refreshState();
+  });
+
   document.querySelectorAll(".vc-login-form-wrap .pmpro_login_wrap").forEach(function (loginWrap) {
     const passwordField = loginWrap.querySelector(".login-password");
     if (!passwordField) {

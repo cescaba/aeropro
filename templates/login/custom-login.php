@@ -31,14 +31,12 @@ if (!defined('ABSPATH')) exit;
     <?php elseif (!empty($is_reset_confirm)): ?>
       <div class="vc-login-reset vc-login-reset--confirm">
         <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
-          <span aria-hidden="true">&larr;</span>
+          <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
           Back to sign in
         </a>
 
         <div class="vc-login-reset__badge vc-login-reset__badge--success" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
-            <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="<?php echo esc_url($check_email_icon_url); ?>" alt="" aria-hidden="true">
         </div>
 
         <div class="vc-login-header vc-login-header--reset">
@@ -48,10 +46,7 @@ if (!defined('ABSPATH')) exit;
 
         <div class="vc-login-email-box">
           <div class="vc-login-email-box__icon" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
-              <path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="m4 8 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="<?php echo esc_url($check_email_body_icon_url); ?>" alt="" aria-hidden="true">
           </div>
           <div class="vc-login-email-box__content">
             <p class="vc-login-email-box__value"><?php echo esc_html($reset_login_hint !== '' ? $reset_login_hint : 'your email address'); ?></p>
@@ -78,15 +73,12 @@ if (!defined('ABSPATH')) exit;
     <?php elseif (!empty($is_reset_password)): ?>
       <div class="vc-login-reset">
         <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
-          <span aria-hidden="true">&larr;</span>
+          <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
           Back to sign in
         </a>
 
         <div class="vc-login-reset__badge" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
-            <path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="m4 8 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="<?php echo esc_url($email_forget_icon_url); ?>" alt="" aria-hidden="true">
         </div>
 
         <div class="vc-login-header vc-login-header--reset">
