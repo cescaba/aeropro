@@ -1,0 +1,162 @@
+.vc-login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f7f7f7;
+}
+
+.vc-login-card {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.vc-login-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.vc-login-title {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.vc-login-subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.vc-login-form-wrap .pmpro {
+  margin: 0;
+}
+
+.vc-login-form-wrap .pmpro_form,
+.vc-login-form-wrap form {
+  margin: 0;
+}
+
+.vc-login-form-wrap .pmpro_form .input,
+.vc-login-form-wrap .pmpro_form input[type="text"],
+.vc-login-form-wrap .pmpro_form input[type="email"],
+.vc-login-form-wrap .pmpro_form input[type="password"] {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  padding: 0 16px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.vc-login-form-wrap .pmpro_form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vc-login-form-wrap .pmpro_submit,
+.vc-login-form-wrap .pmpro_btn,
+.vc-login-form-wrap input[type="submit"] {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vc-login-form-wrap .pmpro_btn:hover,
+.vc-login-form-wrap input[type="submit"]:hover {
+  opacity: 0.92;
+}
+
+.vc-login-form-wrap a {
+  color: #111;
+  text-decoration: none;
+}
+
+.vc-login-form-wrap a:hover {
+  text-decoration: underline;
+}
+
+.vc-login-form-wrap .pmpro_message {
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.vc-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.vc-onboarding--login .vc-onb-wrap--login {
+  flex-direction: row-reverse;
+}
+
+.vc-onboarding--login .vc-onb-card {
+  width: 100%;
+  max-width: 520px;
+}
+
+.vc-onboarding--login .vc-login-page {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+}
+
+.vc-onboarding--login .vc-login-card {
+  max-width: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.vc-onboarding--login .vc-login-page--logged .vc-login-card {
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .vc-login-page {
+    padding: 24px 16px;
+  }
+
+  .vc-login-card {
+    padding: 24px;
+  }
+
+  .vc-login-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 960px) {
+  .vc-onboarding--login .vc-onb-wrap--login {
+    flex-direction: column;
+  }
+
+  .vc-onboarding--login .vc-login-page {
+    padding: 24px 0 0;
+  }
+}

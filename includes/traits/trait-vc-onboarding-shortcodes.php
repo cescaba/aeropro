@@ -11,7 +11,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $slugs = ['register', 'registro-email', 'registro-datos', 'registro-final', 'verificar'];
 
-    if (!in_array($post->post_name, $slugs, true)) return $template;
+    $uses_blank_template = in_array($post->post_name, $slugs, true) || has_shortcode($post->post_content, 'vc_custom_login');
+    if (!$uses_blank_template) return $template;
 
     foreach (['page-blank.php', 'blank.php', 'templates/blank.php'] as $file) {
       $found = locate_template($file);
@@ -200,6 +201,25 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
   public function shortcode_verify(): string {
     return $this->render_notice('Verifying…', 'info') . $this->inline_css();
+  }
+
+  public function shortcode_custom_login($atts = [], $content = null): string {
+    wp_enqueue_style(
+      'vc-custom-login-css',
+      VC_OW_PLUGIN_URL . 'templates/assets/login.css',
+      [],
+      file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') : '1.0.0'
+    );
+
+    $account_url = home_url('/account/');
+
+    $html = $this->render_template('templates/login/custom-login.php', [
+      'is_logged_in' => is_user_logged_in(),
+      'account_url' => $account_url,
+      'pmpro_login_html' => do_shortcode('[pmpro_login]'),
+    ]);
+
+    return $html;
   }
 
   private function inline_css(): string {

@@ -32,6 +32,7 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
       add_shortcode('vc_onboard_check_email', [$this, 'shortcode_check_email']);
       add_shortcode('vc_onboard_final', [$this, 'shortcode_final']);
       add_shortcode('vc_onboard_verify', [$this, 'shortcode_verify']);
+      add_shortcode('vc_custom_login', [$this, 'shortcode_custom_login']);
 
       add_action('admin_post_nopriv_vc_onboard_email_start', [$this, 'handle_email_start']);
       add_action('admin_post_vc_onboard_email_start', [$this, 'handle_email_start']);
@@ -44,17 +45,7 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
       add_filter('template_include', [$this, 'use_blank_template_for_onboarding'], 99);
 
       add_action('admin_init', [$this, 'block_wp_admin_for_unverified']);
-      add_action('wp_enqueue_scripts', function() {
-        if (is_page()) {
-          wp_enqueue_script(
-            'vc-onboarding-js',
-            VC_OW_PLUGIN_URL . 'templates/assets/js/onboarding.js',
-            [],
-            '1.0.0',
-            true
-          );
-        }
-      });
+      add_action('wp_enqueue_scripts', [$this, 'enqueue_public_assets']);
     }
   }
 }

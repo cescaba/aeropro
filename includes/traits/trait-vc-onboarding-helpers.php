@@ -3,6 +3,18 @@
 if (!defined('ABSPATH')) exit;
 
 trait VC_Onboarding_Wizard_Helpers {
+  public function enqueue_public_assets() {
+    if (is_page()) {
+      wp_enqueue_script(
+        'vc-onboarding-js',
+        VC_OW_PLUGIN_URL . 'templates/assets/js/onboarding.js',
+        [],
+        file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/js/onboarding.js') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/js/onboarding.js') : '1.0.0',
+        true
+      );
+    }
+  }
+
   private function render_template(string $template_relative_path, array $vars = []): string {
     $template_file = VC_OW_PLUGIN_DIR . ltrim($template_relative_path, '/');
     if (!file_exists($template_file)) return '';
