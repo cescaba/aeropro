@@ -30,10 +30,12 @@ if (!defined('ABSPATH')) exit;
       </div>
     <?php elseif (!empty($is_reset_confirm)): ?>
       <div class="vc-login-reset vc-login-reset--confirm">
-        <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
-          <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
-          Back to sign in
-        </a>
+        <div class="vc-login-back-row">
+          <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
+            <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
+            Back to sign in
+          </a>
+        </div>
 
         <div class="vc-login-reset__badge vc-login-reset__badge--success" aria-hidden="true">
           <img src="<?php echo esc_url($check_email_icon_url); ?>" alt="" aria-hidden="true">
@@ -72,10 +74,12 @@ if (!defined('ABSPATH')) exit;
       </div>
     <?php elseif (!empty($is_reset_password)): ?>
       <div class="vc-login-reset">
-        <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
-          <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
-          Back to sign in
-        </a>
+        <div class="vc-login-back-row">
+          <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
+            <img src="<?php echo esc_url($back_icon_url); ?>" alt="" aria-hidden="true">
+            Back to sign in
+          </a>
+        </div>
 
         <div class="vc-login-reset__badge" aria-hidden="true">
           <img src="<?php echo esc_url($email_forget_icon_url); ?>" alt="" aria-hidden="true">

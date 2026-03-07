@@ -329,6 +329,12 @@ display: none;
   text-align: center;
 }
 
+.vc-login-back-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .vc-login-back {
   display: inline-flex;
   align-items: center;
