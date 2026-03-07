@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    const passwordLabel = toggleWrapper.querySelector("label");
+    if (passwordLabel && passwordLabel.parentNode === toggleWrapper) {
+      field.insertBefore(passwordLabel, passwordInput);
+    }
+
     let inputWrap = field.querySelector(".vc-login-password-wrap");
     if (!inputWrap) {
       inputWrap = document.createElement("div");

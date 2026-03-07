@@ -12,11 +12,6 @@ if (!defined('ABSPATH')) exit;
       <a class="vc-login-btn" href="<?php echo esc_url($account_url); ?>">Go to account</a>
     <?php elseif (!empty($is_set_new_password)): ?>
       <div class="vc-login-reset vc-login-reset--set-password">
-        <a class="vc-login-back" href="<?php echo esc_url($sign_in_url); ?>">
-          <span aria-hidden="true">&larr;</span>
-          Back to sign in
-        </a>
-
         <div class="vc-login-reset__badge" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
             <path d="M8 11V8a4 4 0 1 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
