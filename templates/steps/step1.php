@@ -17,6 +17,6 @@ if (!defined('ABSPATH')) exit;
 </form>
 
 <p class="mensaje">By creating an account, you agree to our Terms of Service and Privacy Policy</p>
-<p class="mensaje-bottom">Already have an account?<a href="#">Log in</a></p>
+<p class="mensaje-bottom">Already have an account?<a href="<?php echo esc_url(home_url('/login/')); ?>">Log in</a></p>
 
 <?php echo $notices_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

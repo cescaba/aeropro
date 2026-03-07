@@ -105,7 +105,7 @@ if (!defined('ABSPATH')) exit;
       <div class="vc-login-form-wrap">
         <?php echo $pmpro_login_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
       </div>
-      <p class="mensaje-bottom">Not Account yet?<a href="#">Create Account</a></p>
+      <p class="mensaje-bottom">Not Account yet?<a href="<?php echo esc_url(home_url('/register/')); ?>">Create Account</a></p>
     <?php endif; ?>
   </div>
 </div>

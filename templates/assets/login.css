@@ -175,6 +175,14 @@ display: none;
   font-weight: 600;
 }
 
+.vc-login-form-wrap .pmpro_form_field > label,
+.vc-login-form-wrap .pmpro_form_field .pmpro_form_label,
+.vc-login-form-wrap .login-username > label,
+.vc-login-form-wrap .login-password > label,
+.vc-login-password-meta label {
+  margin-bottom: 8px !important;
+}
+
 .vc-login-form-wrap .login-password {
   position: relative;
 }
@@ -325,7 +333,8 @@ display: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 28px;
+  width: fit-content;
+  margin: 0 auto 28px 0;
   justify-content: flex-start;
   align-self: flex-start;
   font-family: 'Poppins';
@@ -390,6 +399,10 @@ display: none;
   letter-spacing: -0.15px;
   color: #666666;
   text-align: left;
+}
+
+.vc-login-form-wrap--reset label {
+  font-weight: 400 !important;
 }
 
 .vc-login-form-wrap--reset .pmpro_asterisk {
