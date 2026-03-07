@@ -27,21 +27,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (lostPasswordLink) {
-      let actionsWrap = passwordField.querySelector(".vc-login-password-actions");
-      if (!actionsWrap) {
-        actionsWrap = document.createElement("div");
-        actionsWrap.className = "vc-login-password-actions";
-        passwordField.appendChild(actionsWrap);
+      const passwordLabel = passwordField.querySelector("label");
+      let metaWrap = passwordField.querySelector(".vc-login-password-meta");
+
+      if (!metaWrap) {
+        metaWrap = document.createElement("div");
+        metaWrap.className = "vc-login-password-meta";
+
+        if (passwordLabel) {
+          passwordField.insertBefore(metaWrap, passwordLabel);
+          metaWrap.appendChild(passwordLabel);
+        } else {
+          passwordField.insertBefore(metaWrap, inputWrap);
+        }
       }
 
-      if (lostPasswordLink.parentNode !== actionsWrap) {
-        actionsWrap.appendChild(lostPasswordLink);
+      if (lostPasswordLink.parentNode !== metaWrap) {
+        lostPasswordLink.classList.add("vc-login-password-link");
+        metaWrap.appendChild(lostPasswordLink);
       }
 
       const cardActions = loginWrap.querySelector(".pmpro_card_actions");
       if (cardActions && !cardActions.querySelector("a")) {
         cardActions.style.display = "none";
       }
+    }
+
+    const rememberField = loginWrap.querySelector(".login-remember");
+    if (rememberField) {
+      rememberField.style.display = "none";
     }
   });
 });

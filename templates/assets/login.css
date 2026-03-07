@@ -126,6 +126,18 @@ width: 100%;
   position: relative;
 }
 
+.vc-login-password-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.vc-login-password-meta label {
+  margin: 0 !important;
+}
+
 .vc-login-password-wrap {
   position: relative;
   display: block;
@@ -185,42 +197,19 @@ width: 100%;
   border: 0;
 }
 
-.vc-login-password-actions {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  text-align: right;
-}
-
-.vc-login-password-actions a {
+.vc-login-password-link {
   font-size: 13px;
   line-height: 1.4;
   color: #666;
+  white-space: nowrap;
 }
 
-.vc-login-password-actions a:hover {
+.vc-login-password-link:hover {
   color: #111;
 }
 
 .vc-login-form-wrap .login-remember {
-  margin: 4px 0 24px;
-}
-
-.vc-login-form-wrap .login-remember label {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 10px;
-  width: auto !important;
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
-}
-
-.vc-login-form-wrap .login-remember input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
+  display: none !important;
 }
 
 .vc-login-form-wrap .login-submit {
