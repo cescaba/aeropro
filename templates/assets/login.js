@@ -1,7 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".vc-login-form-wrap--reset #lostpasswordform").forEach(function (resetForm) {
+    const loginInput = resetForm.querySelector("input[name='user_login']");
+    const resetWrap = resetForm.closest(".vc-login-form-wrap--reset");
+
+    const refreshState = function () {
+      if (!loginInput || !resetWrap) {
+        return;
+      }
+
+      const isReady = loginInput.value.trim() !== "";
+      resetWrap.classList.toggle("is-ready", isReady);
+    };
+
+    if (loginInput) {
+      loginInput.addEventListener("input", refreshState);
+      refreshState();
+    }
+
     resetForm.addEventListener("submit", function () {
-      const loginInput = resetForm.querySelector("input[name='user_login']");
       if (!loginInput) {
         return;
       }
