@@ -1,4 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".vc-login-form-wrap--reset #lostpasswordform").forEach(function (resetForm) {
+    resetForm.addEventListener("submit", function () {
+      const loginInput = resetForm.querySelector("input[name='user_login']");
+      if (!loginInput) {
+        return;
+      }
+
+      const value = loginInput.value.trim();
+      document.cookie = "vc_reset_login_hint=" + encodeURIComponent(value) + "; path=/; max-age=3600; SameSite=Lax";
+    });
+  });
+
+  document.querySelectorAll(".vc-login-form-wrap--set-password .pmpro_form_field").forEach(function (field) {
+    const passwordInput = field.querySelector("input[type='password'], input[type='text']");
+    const toggleWrapper = field.querySelector(".pmpro_form_field-password-toggle");
+
+    if (!passwordInput || !toggleWrapper) {
+      return;
+    }
+
+    let inputWrap = field.querySelector(".vc-login-password-wrap");
+    if (!inputWrap) {
+      inputWrap = document.createElement("div");
+      inputWrap.className = "vc-login-password-wrap";
+      passwordInput.parentNode.insertBefore(inputWrap, passwordInput);
+      inputWrap.appendChild(passwordInput);
+    }
+
+    if (toggleWrapper.parentNode !== inputWrap) {
+      inputWrap.appendChild(toggleWrapper);
+    }
+  });
+
   document.querySelectorAll(".vc-login-form-wrap .pmpro_login_wrap").forEach(function (loginWrap) {
     const passwordField = loginWrap.querySelector(".login-password");
     if (!passwordField) {

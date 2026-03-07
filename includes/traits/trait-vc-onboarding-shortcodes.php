@@ -220,13 +220,23 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $account_url = home_url('/account/');
     $is_reset_password = isset($_GET['action']) && sanitize_key(wp_unslash($_GET['action'])) === 'reset_pass';
-    $sign_in_url = get_permalink() ? remove_query_arg('action', get_permalink()) : home_url('/');
+    $is_set_new_password = isset($_GET['action']) && in_array(sanitize_key(wp_unslash($_GET['action'])), ['rp', 'resetpass'], true);
+    $is_reset_confirm = isset($_GET['checkemail']) && sanitize_key(wp_unslash($_GET['checkemail'])) === 'confirm';
+    $sign_in_url = get_permalink()
+      ? remove_query_arg(['action', 'checkemail', 'login', 'key', 'wp_lang'], get_permalink())
+      : home_url('/');
+    $reset_password_url = add_query_arg('action', 'reset_pass', $sign_in_url);
+    $reset_login_hint = isset($_COOKIE['vc_reset_login_hint']) ? sanitize_text_field(wp_unslash($_COOKIE['vc_reset_login_hint'])) : '';
 
     $html = $this->render_template('templates/login/custom-login.php', [
       'is_logged_in' => is_user_logged_in(),
       'is_reset_password' => $is_reset_password,
+      'is_set_new_password' => $is_set_new_password,
+      'is_reset_confirm' => $is_reset_confirm,
       'account_url' => $account_url,
       'sign_in_url' => $sign_in_url,
+      'reset_password_url' => $reset_password_url,
+      'reset_login_hint' => $reset_login_hint,
       'google_login_url' => wp_login_url($this->dashboard_url()),
       'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'pmpro_login_html' => do_shortcode('[pmpro_login]'),

@@ -16,7 +16,6 @@
     background: #F7F7F7;
     border: 1px solid #E2E8F0;
     border-radius: 8px;
-    margin-bottom: 24px;
     font-size: 14px;
     font-family: 'Poppins';
     color: #5e5e5e;
@@ -70,9 +69,17 @@ padding:0;
 }
 
 .vc-login-header--reset {
-  margin-bottom: 28px;
+  margin-bottom: 0px;
 }
-
+.vc-login-reset .pmpro_card{
+margin: 0px;
+}
+.vc-login-reset .pmpro_card_content{
+padding: 0px;
+}
+.vc-login-reset .pmpro_card_actions{
+display: none;
+}
 .vc-login-title {
   margin: 0 0 10px;
   font-size: 32px;
@@ -102,8 +109,8 @@ padding:0;
   width: 100%;
 }
 
-.vc-login-form-wrap .pmpro_form p,
-.vc-login-form-wrap #loginform p {
+.vc-login-form-wrap .pmpro_form p:not(.login-remember),
+.vc-login-form-wrap #loginform p:not(.login-remember) {
   display: block !important;
   width: 100%;
   margin: 0 0 20px;
@@ -272,7 +279,6 @@ padding:0;
 
 .vc-login-reset {
   width: 100%;
-  max-width: 360px;
   margin: 0 auto;
 }
 
@@ -281,6 +287,8 @@ padding:0;
   align-items: center;
   gap: 6px;
   margin-bottom: 28px;
+  justify-content: flex-start;
+  align-self: flex-start;
   font-family: 'Poppins';
   font-size: 12px;
   line-height: 1.4;
@@ -301,6 +309,11 @@ padding:0;
   color: #1447E6;
   display: grid;
   place-items: center;
+}
+
+.vc-login-reset__badge--success {
+  background: #EEF2FF;
+  color: #2F5BEA;
 }
 
 .vc-login-form-wrap--reset .pmpro_lost_password-instructions,
@@ -358,6 +371,191 @@ padding:0;
   font-family: 'Poppins';
   font-size: 14px;
   font-weight: 500;
+}
+
+.vc-login-form-wrap--set-password .pmpro_message {
+  margin-bottom: 18px;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_fields,
+.vc-login-form-wrap--set-password .pmpro_form_submit,
+.vc-login-form-wrap--set-password .pmpro_form_field {
+  width: 100%;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field {
+  margin-bottom: 18px;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Poppins';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #666666;
+}
+
+.vc-login-form-wrap--set-password .pmpro_asterisk {
+  color: #DC2626;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background: #F7F7F7;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: 'Poppins';
+  color: #5e5e5e;
+  box-sizing: border-box;
+}
+
+.vc-login-form-wrap--set-password .vc-login-password-wrap input[type="password"],
+.vc-login-form-wrap--set-password .vc-login-password-wrap input[type="text"] {
+  padding-right: 56px;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle .pmpro_btn {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field-description {
+  margin-top: 10px;
+  font-family: 'Poppins';
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6B7280;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_submit .pmpro_btn-submit {
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: 14px;
+  background: #1447E6;
+  color: #FFFFFF;
+  font-family: 'Poppins';
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vc-login-email-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background: #F8FAFC;
+}
+
+.vc-login-email-box__icon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  color: #6280F6;
+  display: grid;
+  place-items: center;
+}
+
+.vc-login-email-box__value,
+.vc-login-email-box__meta,
+.vc-login-instructions__title,
+.vc-login-resend {
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.vc-login-email-box__value {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #212121;
+}
+
+.vc-login-email-box__meta {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #9CA3AF;
+}
+
+.vc-login-instructions {
+  margin: 0 0 16px;
+  padding: 14px;
+  border: 1px solid #D8E2FF;
+  border-radius: 8px;
+  background: #F5F8FF;
+}
+
+.vc-login-instructions__title {
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #6280F6;
+}
+
+.vc-login-instructions ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.vc-login-instructions li {
+  margin-bottom: 4px;
+  font-family: 'Poppins';
+  font-size: 12px;
+  line-height: 1.5;
+  color: #4D6BDA;
+}
+
+.vc-login-btn--primary {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 8px;
+  background: #4453F4;
+}
+
+.vc-login-resend {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #999999;
+}
+
+.vc-login-resend a {
+  color: #666666;
+  text-decoration: underline;
 }
 
 .vc-onboarding--login .vc-onb-card {
