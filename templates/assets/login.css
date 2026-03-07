@@ -137,6 +137,36 @@ display: none;
   box-sizing: border-box;
 }
 
+.vc-login-form-wrap .pmpro_form .input:focus,
+.vc-login-form-wrap .pmpro_form input[type="text"]:focus,
+.vc-login-form-wrap .pmpro_form input[type="email"]:focus,
+.vc-login-form-wrap .pmpro_form input[type="password"]:focus,
+.vc-login-form-wrap .pmpro_form .input:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="text"]:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="email"]:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="password"]:focus-visible {
+  outline: none;
+  border-color: #C9D6F2;
+  box-shadow: none;
+}
+
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #F7F7F7 inset;
+  -webkit-text-fill-color: #5e5e5e;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .vc-login-form-wrap .pmpro_form label {
   display: block;
   margin-bottom: 8px;
@@ -280,6 +310,14 @@ display: none;
 .vc-login-reset {
   width: 100%;
   margin: 0 auto;
+}
+
+.vc-login-reset--confirm {
+  text-align: left;
+}
+
+.vc-login-reset--confirm .vc-login-header {
+  text-align: center;
 }
 
 .vc-login-back {
@@ -567,11 +605,12 @@ display: none;
   min-height: 48px;
   border-radius: 8px;
   background: #4453F4;
+  color: #FFFFFF !important;
 }
 
 .vc-login-resend {
   margin-top: 14px;
-  text-align: center;
+  text-align: left;
   font-size: 12px;
   line-height: 1.5;
   color: #999999;
