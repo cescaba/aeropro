@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 trait VC_Onboarding_Wizard_Guards {
   public function guard_routes() {
-    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $path = $this->normalize_path((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
     if ($path === 'verificar') {
       $uid = isset($_GET['uid']) ? absint($_GET['uid']) : 0;
@@ -60,7 +60,7 @@ trait VC_Onboarding_Wizard_Guards {
       exit;
     }
 
-    if ($path === self::DASHBOARD_SLUG) {
+    if ($this->is_dashboard_request($path)) {
       if (!is_user_logged_in()) {
         wp_safe_redirect($this->step_url('register'));
         exit;
@@ -80,6 +80,12 @@ trait VC_Onboarding_Wizard_Guards {
 
       if (!$this->is_onboard_done($uid)) {
         wp_safe_redirect($this->step_url('registro-datos'));
+        exit;
+      }
+
+      $resolved_dashboard_path = $this->path_from_url($this->dashboard_url());
+      if ($path === $this->normalize_path(self::DASHBOARD_SLUG) && $resolved_dashboard_path !== '' && $resolved_dashboard_path !== $path) {
+        wp_safe_redirect($this->dashboard_url());
         exit;
       }
     }
