@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".vc-login-form-wrap--reset #lostpasswordform").forEach(function (resetForm) {
     const loginInput = resetForm.querySelector("input[name='user_login']");
     const resetWrap = resetForm.closest(".vc-login-form-wrap--reset");
+    const submitButton = resetForm.querySelector("input[type='submit'], .pmpro_btn-submit");
 
     const refreshState = function () {
       if (!loginInput || !resetWrap) {
@@ -10,6 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const isReady = loginInput.value.trim() !== "";
       resetWrap.classList.toggle("is-ready", isReady);
+
+      if (submitButton) {
+        submitButton.style.opacity = isReady ? "1" : "0.45";
+        submitButton.style.pointerEvents = isReady ? "auto" : "none";
+        submitButton.disabled = !isReady;
+        submitButton.setAttribute("aria-disabled", isReady ? "false" : "true");
+      }
     };
 
     if (loginInput) {
@@ -17,8 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
       refreshState();
     }
 
-    resetForm.addEventListener("submit", function () {
+    resetForm.addEventListener("submit", function (event) {
       if (!loginInput) {
+        return;
+      }
+
+      if (submitButton && submitButton.disabled) {
+        event.preventDefault();
+        refreshState();
         return;
       }
 
@@ -129,5 +143,41 @@ document.addEventListener("DOMContentLoaded", function () {
     if (rememberField) {
       rememberField.style.display = "none";
     }
+  });
+
+  /* Mantiene el CTA de login deshabilitado hasta que usuario y password tengan contenido. */
+  document.querySelectorAll(".vc-login-form-wrap #loginform").forEach(function (loginForm) {
+    const usernameInput = loginForm.querySelector("input[name='log']");
+    const passwordInput = loginForm.querySelector("input[name='pwd']");
+    const submitButton = loginForm.querySelector("#wp-submit, input[type='submit'], .button-primary");
+
+    if (!usernameInput || !passwordInput || !submitButton) {
+      return;
+    }
+
+    /* Replica el patron visual del onboarding para evitar submits vacios en el login. */
+    const refreshLoginState = function () {
+      const isReady = usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "";
+
+      submitButton.style.opacity = isReady ? "1" : "0.4";
+      submitButton.style.pointerEvents = isReady ? "auto" : "none";
+      submitButton.disabled = !isReady;
+      submitButton.setAttribute("aria-disabled", isReady ? "false" : "true");
+    };
+
+    usernameInput.addEventListener("input", refreshLoginState);
+    passwordInput.addEventListener("input", refreshLoginState);
+    usernameInput.addEventListener("change", refreshLoginState);
+    passwordInput.addEventListener("change", refreshLoginState);
+
+    /* Revalida el estado al enviar por si el submit llega desde Enter o autofill. */
+    loginForm.addEventListener("submit", function (event) {
+      if (submitButton.disabled) {
+        event.preventDefault();
+        refreshLoginState();
+      }
+    });
+
+    refreshLoginState();
   });
 });

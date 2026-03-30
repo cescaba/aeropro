@@ -131,10 +131,12 @@ display: none;
 .vc-login-form-wrap .pmpro_form input[type="password"] {
   width: 100%;
   height: 52px;
-  border: 1px solid #d9d9d9;
-  border-radius: 12px;
   padding: 0 16px;
-  font-size: 15px;
+  background: #F7F7F7;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #111827;
   box-sizing: border-box;
 }
 
@@ -146,8 +148,9 @@ display: none;
 .vc-login-form-wrap .pmpro_form input[type="text"]:focus-visible,
 .vc-login-form-wrap .pmpro_form input[type="email"]:focus-visible,
 .vc-login-form-wrap .pmpro_form input[type="password"]:focus-visible {
+  /* Mantiene estable el borde de los campos de login al enfocar para evitar un cambio visual extra. */
   outline: none;
-  border-color: #C9D6F2;
+  border: 1px solid #E2E8F0;
   box-shadow: none;
 }
 
@@ -246,6 +249,11 @@ display: none;
   justify-content: center;
 }
 
+/* Fuerza el icono del toggle de password al color azul de la UI. */
+.vc-login-form-wrap .pmpro_form_field-password-toggle svg {
+  stroke: #1447E6;
+}
+
 .vc-login-form-wrap .pmpro_form_field-password-toggle-state {
   position: absolute;
   width: 1px;
@@ -281,11 +289,6 @@ display: none;
 .vc-login-form-wrap .pmpro_actions_nav {
   margin: 0;
   padding: 0;
-}
-
-.vc-login-form-wrap .pmpro_btn:hover,
-.vc-login-form-wrap input[type="submit"]:hover {
-  opacity: 0.92;
 }
 
 .vc-login-form-wrap a {
@@ -432,6 +435,14 @@ display: none;
   color: #9CA3AF;
 }
 
+.vc-login-form-wrap--reset .pmpro_form_input:focus,
+.vc-login-form-wrap--reset .pmpro_form_input:focus-visible,
+.vc-login-form-wrap--reset .pmpro_form_input:active {
+  outline: none;
+  border: 1px solid #E2E8F0;
+  box-shadow: none;
+}
+
 .vc-login-form-wrap--reset .pmpro_form_submit .pmpro_btn-submit {
   width: 100%;
   min-height: 52px;
@@ -515,6 +526,10 @@ display: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle svg {
+  stroke: #1447E6;
 }
 
 .vc-login-form-wrap--set-password .pmpro_form_field-password-toggle-state {

@@ -168,7 +168,9 @@ font-family: "Poppins", Sans-serif;
 }
 .vc-onb-card input[type=email]:active,#step-2 input[type=password]:active,#step-3 input[type=text]:active,
 .vc-onb-card input[type=email]:focus,#step-2 input[type=password]:focus,#step-3 input[type=text]:focus{
-border: 2px solid #E2E8F0;
+border: 1px solid #E2E8F0;
+outline: none;
+box-shadow: none;
 }
 .vc-onb-card label{
 font-family: 'Poppins';
