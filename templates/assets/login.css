@@ -21,6 +21,14 @@
     color: #5e5e5e;
     line-height: 100%;
 }
+.vc-login-page .pmpro_section #loginform .input:focus,
+.vc-login-page .pmpro_section #loginform .input:focus-visible {
+    background: #F7F7F7;
+    border-color: #E2E8F0;
+    box-shadow: none;
+    outline: none;
+    word-break: initial;
+}
 .vc-login-page .pmpro_section #loginform label:not(.pmpro_section #loginform .login-remember label){
 font-family: 'Poppins';
 font-style: normal;
