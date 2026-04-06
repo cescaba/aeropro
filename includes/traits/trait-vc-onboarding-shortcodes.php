@@ -399,15 +399,11 @@ trait VC_Onboarding_Wizard_Shortcodes {
   }
 
   private function render_dashboard_mock_test_view(): string {
-    $checkout_url = function_exists('pmpro_url') ? pmpro_url('levels') : '#';
+    if (shortcode_exists('vc_exam_simulator')) {
+      return do_shortcode('[vc_exam_simulator]');
+    }
 
-    return '<section class="vc-dashboard-panel-grid vc-dashboard-panel-grid--single">'
-      . '<article class="vc-dashboard-card vc-dashboard-card--callout">'
-      . '<h3>Exam mode coming next</h3>'
-      . '<p>Use this area for timed tests, graded attempts and review mode. The layout is already wired into the dashboard so you can connect the real test engine here.</p>'
-      . '<div class="vc-dashboard-card__actions"><a class="vc-dashboard-button vc-dashboard-button--secondary" href="' . esc_url($checkout_url) . '">View plans</a></div>'
-      . '</article>'
-      . '</section>';
+    return '<p>' . esc_html__('The exam simulator is not available.', 'vc-onboarding-wizard') . '</p>';
   }
 
   private function render_dashboard_profile_view(int $user_id): string {
