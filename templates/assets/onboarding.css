@@ -241,6 +241,7 @@ width: 100%;
 }
 
 .vc-onb-card form{
+  /* Reduce el hueco entre el submit y el texto inferior para que la jerarquia quede mas compacta. */
   margin-bottom:34px;
 }
 .vc-onb-card .mensaje{
@@ -262,6 +263,7 @@ line-height: 21px;
 text-align: center;
 letter-spacing: -0.15px;
 color: #666666;
+margin: 32px 0 0;
 }
 .vc-onb-card .mensaje-bottom a{
 

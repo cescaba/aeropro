@@ -359,7 +359,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       default:
         return [
           'title' => 'Flashcards',
-          'subtitle' => 'Practice under real exam conditions and track your progress.',
+          'subtitle' => 'Practice under exam conditions and track your progress.',
           'content' => $this->render_dashboard_flashcards_view($user_id),
         ];
     }

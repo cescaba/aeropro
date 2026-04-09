@@ -6,6 +6,12 @@
   padding: 40px 20px;
   background: #f7f7f7;
 }
+
+/* Limita el reset del espaciado de PMPro solo a esta pantalla para manejar el margen localmente. */
+.vc-login-page #pmpro_login.pmpro_section {
+  margin: 0;
+}
+
 .vc-login-page .pmpro_card{
     border: none;
     box-shadow: none;
@@ -46,6 +52,19 @@ width: 100%;
     color: white;
     border: none;
     border-radius: 8px;
+}
+
+/* Neutraliza los estados interactivos que PMPro redefine para este submit. */
+.vc-login-page .pmpro_section #loginform .login-submit .button:hover,
+.vc-login-page .pmpro_section #loginform .login-submit .button:focus,
+.vc-login-page .pmpro_section #loginform .login-submit .button:focus-visible,
+.vc-login-page .pmpro_section #loginform .login-submit .button:active {
+    background-color: #1447E6;
+    color: #ffffff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    opacity: 1;
 }
 .vc-login-page .pmpro_card_content + .pmpro_card_actions{
   border: none;

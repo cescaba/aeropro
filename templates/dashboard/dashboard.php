@@ -134,23 +134,24 @@ $render_icon = static function (string $icon): string {
               <span class="vc-dashboard-avatar-fallback"><?php echo esc_html($initials); ?></span>
             <?php endif; ?>
           </span>
-          <span class="vc-dashboard-user-copy">
+          <div class="vc-dashboard-user-copy">
             <strong><?php echo esc_html($display_name); ?></strong>
             <small><?php echo esc_html($membership_label); ?></small>
-          </span>
+          </div>
         </div>
       </div>
     </header>
 
     <main class="vc-dashboard-content">
-      <div class="vc-dashboard-heading">
-        <h1 class="header-h1"><?php echo esc_html($page_title); ?></h1>
+      <header class="vc-dashboard-heading">
+        <h1 id="vc-dashboard-panel-title" class="header-h1"><?php echo esc_html($page_title); ?></h1>
         <p><?php echo esc_html($page_subtitle); ?></p>
-      </div>
+        <div class="vc-dashboard-heading-session-meta" hidden></div>
+      </header>
 
-      <div class="vc-dashboard-panel vc-dashboard-panel--<?php echo esc_attr($active_view); ?>">
+      <section class="vc-dashboard-panel vc-dashboard-panel--<?php echo esc_attr($active_view); ?>" aria-labelledby="vc-dashboard-panel-title">
         <?php echo $content_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-      </div>
+      </section>
     </main>
   </div>
 </div>
