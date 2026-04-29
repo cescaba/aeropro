@@ -337,7 +337,7 @@ padding:0px;
 }
 
 .vc-dashboard-content:has(.vc-dashboard-panel--flashcards) .vc-dashboard-heading {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .vc-dashboard-heading .header-h1 {
@@ -394,7 +394,7 @@ padding:0px;
   align-items: center;
   justify-content: space-between;
   gap: 0;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .vc-dashboard-content:has(.vc-dashboard-panel--mock-test [data-vc-exam-view="session"]:not([hidden])) .vc-dashboard-heading .header-h1 {
@@ -689,6 +689,11 @@ padding:0px;
   border-radius: 12px;
 }
 
+.vc-profile-card,
+.vc-profile-card * {
+  font-family: Poppins, sans-serif;
+}
+
 .vc-profile-hero {
   display: flex;
   align-items: flex-start;
@@ -733,7 +738,7 @@ padding:0px;
 
 .vc-profile-hero-copy .h2-profile {
   margin: 0px;
-  font-family: 'Inter';
+  font-family: Poppins, sans-serif;
 font-weight: 400;
 font-size: 18px;
 line-height: 28px;
@@ -744,7 +749,7 @@ color: #212121;
 .vc-profile-hero-copy p {
   margin: 0;
   color: #666666;
-  font-family: 'Inter';
+  font-family: Poppins, sans-serif;
 font-weight: 400;
 font-size: 16px;
 line-height: 24px;
@@ -768,7 +773,7 @@ padding-bottom: 9px;
 padding-left: 15px;
 border-width: 1px;
 border-top: 1px solid var(--Outline-cards, #E2E8F0);
-font-family: 'Inter';
+ font-family: Poppins, sans-serif;
 font-weight: 400;
 font-size: 14px;
 line-height: 20px;
@@ -785,7 +790,7 @@ color:#212121;
   align-items: center;
   justify-content: center;
   padding: 0 18px;
-  border-radius: 14px;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
 }
@@ -829,7 +834,7 @@ color:#212121;
 
 .vc-profile-field span {
   color: #666666;
-  font-family: Inter, sans-serif;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -842,12 +847,13 @@ color:#212121;
 .vc-dashboard-panel .vc-profile-card .vc-profile-field textarea {
   width: 100%;
   min-height: 24px;
+  opacity: 1;
   padding: 11px 16px;
   border: 1px solid #E2E8F0;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #fff;
   color: #212121;
-  font-family: Inter, sans-serif;
+  font-family: Poppins, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -880,17 +886,14 @@ color:#212121;
 }
 
 .vc-profile-verify-button {
-  min-width: 112px;
-  min-height: 60px;
-  height: 60px;
   align-self: end;
-  padding: 11px 24px;
+  padding: 13px 23px;
   border: 0;
-  border-radius: 16px;
+  border-radius: 10px;
   background: #1447E6;
   color: #FFFFFF;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
   font-style: normal;
   font-size: 14px;
   line-height: 20px;
@@ -942,16 +945,51 @@ color:#212121;
 }
 
 .vc-profile-save {
-  min-width: 180px;
   border: 0;
   background: #2b50da;
   color: #fff;
 }
 
+/* Neutraliza el hover/focus global heredado solo dentro de My profile.
+   Cada control conserva su color real en lugar del fondo rosa del tema base. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-cancel:is(:hover, :focus, :focus-visible),
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-photo-button:is(:hover, :focus, :focus-visible) {
+  background: #fff;
+  color: #1f2430;
+  border-color: #d7dfec;
+  text-decoration: none;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-save:is(:hover, :focus, :focus-visible) {
+  background: #2b50da;
+  color: #fff;
+  text-decoration: none;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-verify-button:is(:hover, :focus, :focus-visible) {
+  background: #1447E6;
+  color: #fff;
+  text-decoration: none;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-photo-delete:is(:hover, :focus, :focus-visible) {
+  background: transparent;
+  color: #f04438;
+  text-decoration: none;
+}
+
+.vc-privacy-card,
+.vc-privacy-card * {
+  font-family: Poppins, sans-serif;
+}
+
+.vc-privacy-card {
+  --vc-privacy-control-radius: 10px;
+}
+
 .vc-privacy-header h2 {
   margin: 0 0 28px;
   color: #212121;
-  font-family: Inter, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
@@ -961,11 +999,11 @@ color:#212121;
 .vc-dashboard-panel .vc-privacy-card .vc-profile-field input[type="password"] {
   width: 100%;
   padding: 11px 16px;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
+  opacity: 1;
+  border: 0.63px solid #E2E8F0;
+  border-radius: var(--vc-privacy-control-radius);
   background: #fff;
   color: #212121;
-  font-family: Inter, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -983,10 +1021,9 @@ color:#212121;
 .vc-privacy-save {
   padding: 11px 24px;
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--vc-privacy-control-radius);
   background: linear-gradient(180deg, #5B3DF5 0%, #4E46E5 100%);
   color: #FFFFFF;
-  font-family: Inter, sans-serif;
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
