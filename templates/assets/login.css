@@ -1,0 +1,1296 @@
+
+
+/* Login page canvas: centra el card y define el fondo de la vista. */
+.vc-login-page {
+  --vc-login-font: "Poppins", sans-serif;
+  --vc-onboarding-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f7f7f7;
+  font-family: var(--vc-login-font);
+}
+
+.vc-onboarding--login {
+  --vc-login-font: "Poppins", sans-serif;
+  --vc-onboarding-radius: 8px;
+  font-family: var(--vc-login-font);
+}
+
+.vc-login-page button,
+.vc-login-page input,
+.vc-login-page select,
+.vc-login-page textarea,
+.vc-onboarding--login button,
+.vc-onboarding--login input,
+.vc-onboarding--login select,
+.vc-onboarding--login textarea {
+  font-family: inherit;
+}
+
+/* Limita el reset del espaciado de PMPro solo a esta pantalla para manejar el margen localmente. */
+.vc-login-page #pmpro_login.pmpro_section {
+  margin: 0;
+}
+
+/* Login PMPro card reset: elimina superficie visual heredada por PMPro. */
+.vc-login-page .pmpro_card{
+    border: none;
+    box-shadow: none;
+}
+/* Login PMPro inputs: adapta campos nativos de PMPro al diseno del sitio. */
+.vc-login-page  .pmpro_section #loginform .input{
+    padding: 4px 12px;
+    height: 48px;
+    background: #F7F7F7;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--vc-onboarding-radius);
+    font-size: 14px;
+    color: #5e5e5e;
+    line-height: 100%;
+}
+.vc-login-page .pmpro_section #loginform .input:hover,
+.vc-login-page .pmpro_section #loginform .input:focus,
+.vc-login-page .pmpro_section #loginform .input:focus-visible {
+    background: #F7F7F7;
+    border-color: #E2E8F0;
+    box-shadow: none;
+    outline: none;
+    word-break: initial;
+}
+/* Login PMPro labels: normaliza tipografia de labels excepto remember. */
+.vc-login-page .pmpro_section #loginform label:not(.pmpro_section #loginform .login-remember label){
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: -0.15px;
+color: #666666;
+width: 100%;
+}
+/* Login PMPro submit: CTA principal a ancho completo. */
+.vc-login-page .pmpro_section #loginform .login-submit .button{
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 0;
+    padding: 10px 12px;
+    background-color: #1447E6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+    opacity: 1;
+}
+
+/* Neutraliza los estados interactivos que PMPro redefine para este submit. */
+.vc-login-page .pmpro_section #loginform .login-submit .button:hover,
+.vc-login-page .pmpro_section #loginform .login-submit .button:focus,
+.vc-login-page .pmpro_section #loginform .login-submit .button:focus-visible,
+.vc-login-page .pmpro_section #loginform .login-submit .button:active {
+    background-color: #1447E6;
+    color: #ffffff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    opacity: 1;
+}
+/* Login PMPro actions reset: elimina borde y fondo del contenedor de acciones. */
+.vc-login-page .pmpro_card_content + .pmpro_card_actions{
+  border: none;
+  background-color: transparent;
+}
+/* Login PMPro content reset: quita padding interno para controlar el espaciado local. */
+.vc-login-page  .pmpro_card_content{
+padding:0 !important;
+}
+/* Login password link: posiciona el enlace de recuperacion junto al campo password. */
+.vc-login-page .vc-login-password-link{
+    color: #1447E6;
+    margin-left: 16px;
+    font-size:14px;
+}
+/* Login remember field: oculta remember para mantener el formulario compacto. */
+.vc-login-page .login-remember{
+  display:none;
+}
+
+/* ==========================================================================
+   Component: Login Card
+   Card principal, header, titulo, subtitulo y wrapper de formulario.
+   ========================================================================== */
+
+.vc-login-card {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.vc-login-state,
+.vc-login-state__header,
+.vc-login-state__social,
+.vc-login-state__body,
+.vc-login-state__footer,
+.vc-login-state__actions,
+.vc-login-reset__header,
+.vc-login-reset__body,
+.vc-login-reset__actions {
+  width: 100%;
+}
+
+.vc-login-state {
+  text-align: center;
+}
+
+.vc-login-state__google {
+  align-items: center;
+}
+
+.vc-login-state__google-icon {
+  flex: 0 0 auto;
+}
+
+/* Login header: separacion y centrado del bloque de titulo. */
+.vc-login-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Login reset header: elimina margen extra en variantes de reset. */
+.vc-login-header--reset {
+  margin-bottom: 0px;
+}
+/* Login reset PMPro card: elimina margen heredado en reset. */
+.vc-login-reset .pmpro_card{
+margin: 0px;
+}
+/* Login reset PMPro content: elimina padding heredado en reset. */
+.vc-login-reset .pmpro_card_content{
+padding: 0px;
+}
+/* Login reset PMPro actions: oculta acciones nativas que no se usan. */
+.vc-login-reset .pmpro_card_actions{
+display: none;
+}
+/* Login title: titulo principal del card. */
+.vc-login-title,
+.vc-login-reset__title {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+/* Login subtitle: texto descriptivo bajo el titulo. */
+.vc-login-subtitle,
+.vc-login-reset__subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.vc-onb-card .subtitle.vc-login-reset__subtitle.vc-login-reset__subtitle--forgot {
+  margin-bottom: 21px;
+}
+
+.vc-login-reset__title--forgot {
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+/* Login form PMPro wrapper: elimina margen raiz del formulario. */
+.vc-login-form-wrap .pmpro {
+  margin: 0;
+}
+
+/* Login form reset: quita margenes del form generado por PMPro. */
+.vc-login-form-wrap .pmpro_form,
+.vc-login-form-wrap form {
+  margin: 0;
+}
+
+/* Login form width: obliga wrappers internos de PMPro a ocupar todo el ancho. */
+.vc-login-form-wrap .pmpro_login_wrap,
+.vc-login-form-wrap .pmpro_card_content,
+.vc-login-form-wrap .pmpro_form,
+.vc-login-form-wrap #loginform {
+  width: 100%;
+}
+
+/* Login form rows: controla ancho y separacion de filas del formulario. */
+.vc-login-form-wrap .pmpro_form p:not(.login-remember),
+.vc-login-form-wrap #loginform p:not(.login-remember) {
+  display: block !important;
+  width: 100%;
+}
+
+/* Login form float reset: elimina flotados nativos de WordPress/PMPro. */
+.vc-login-form-wrap .login-username,
+.vc-login-form-wrap .login-password,
+.vc-login-form-wrap .login-submit,
+.vc-login-form-wrap .login-remember {
+  float: none !important;
+  clear: both;
+}
+
+/* Login form controls: estilo base de campos del formulario. */
+.vc-login-form-wrap .pmpro_form .input,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login,
+.vc-login-form-wrap .pmpro_form input[type="text"],
+.vc-login-form-wrap .pmpro_form input[type="email"],
+.vc-login-form-wrap .pmpro_form input[type="password"] {
+  width: 100%;
+  height: 48px;
+  padding: 4px 16px;
+  background: #F7F7F7;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.vc-login-form-wrap .pmpro_form .input:focus,
+.vc-login-form-wrap .pmpro_form .input:hover,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:focus,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:hover,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:focus,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:hover,
+.vc-login-form-wrap .pmpro_form input[type="text"]:focus,
+.vc-login-form-wrap .pmpro_form input[type="text"]:hover,
+.vc-login-form-wrap .pmpro_form input[type="email"]:focus,
+.vc-login-form-wrap .pmpro_form input[type="email"]:hover,
+.vc-login-form-wrap .pmpro_form input[type="password"]:focus,
+.vc-login-form-wrap .pmpro_form input[type="password"]:hover,
+.vc-login-form-wrap .pmpro_form .input:focus-visible,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:focus-visible,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="text"]:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="email"]:focus-visible,
+.vc-login-form-wrap .pmpro_form input[type="password"]:focus-visible {
+  background: #F7F7F7;
+  border-color: #E2E8F0;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Login autofill: conserva color y fondo cuando el navegador autocompleta. */
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill,
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill:hover,
+.vc-login-form-wrap .pmpro_form .input:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form .pmpro_form_input-user_login:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="text"]:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="email"]:-webkit-autofill:focus,
+.vc-login-form-wrap .pmpro_form input[type="password"]:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #F7F7F7 inset;
+  -webkit-text-fill-color: #5e5e5e;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Login sign-in email: mantiene el campo igual aunque este relleno o en hover. */
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:hover,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:focus,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:focus-visible,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:active,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill:hover,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill:focus {
+  background: #F7F7F7;
+  border-color: #E2E8F0;
+  color: #5e5e5e;
+  -webkit-text-fill-color: #5e5e5e;
+  box-shadow: none;
+  outline: none;
+}
+
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill:hover,
+.vc-onboarding--login-sign-in .vc-login-form-wrap #loginform .login-username .input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #F7F7F7 inset;
+  box-shadow: 0 0 0 1000px #F7F7F7 inset;
+}
+
+.vc-login-form-wrap #loginform .login-username input::placeholder,
+.vc-login-form-wrap #loginform .login-password input::placeholder {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: -0.15px;
+  color: #B8B8B8;
+  opacity: 1;
+}
+
+/* Login form label: estilo base de labels PMPro. */
+.vc-login-form-wrap .pmpro_form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Login form label spacing: unifica margen inferior de labels con variantes PMPro. */
+.vc-login-form-wrap .pmpro_form_field > label,
+.vc-login-form-wrap .pmpro_form_field .pmpro_form_label,
+.vc-login-form-wrap .login-username > label,
+.vc-login-form-wrap .login-password > label,
+.vc-login-password-meta label {
+  margin-bottom: 8px !important;
+}
+
+/* Login password row: permite ubicar controles absolutos dentro del campo. */
+.vc-login-form-wrap .login-password {
+  position: relative;
+}
+
+.vc-login-page .pmpro_section #loginform .login-password {
+  margin: 0 0 20px;
+}
+
+/* Login password meta: alinea label y enlace de recuperacion. */
+.vc-login-password-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+/* Login password meta label: elimina margen heredado en el header del password. */
+.vc-login-password-meta label {
+  margin: 0 !important;
+}
+
+/* Login password wrapper: referencia para toggle de visibilidad. */
+.vc-login-password-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+/* Login submit controls: base visual para botones submit de PMPro. */
+.vc-login-form-wrap .pmpro_submit,
+.vc-login-form-wrap .pmpro_btn,
+.vc-login-form-wrap input[type="submit"] {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Login password input spacing: reserva espacio para el toggle de password. */
+.vc-login-password-wrap input[type="password"],
+.vc-login-password-wrap input[type="text"] {
+  display: block;
+  width: 100% !important;
+  margin: 0;
+  padding-right: 56px;
+}
+
+/* Login password toggle: posiciona el boton de mostrar/ocultar password. */
+.vc-login-form-wrap .pmpro_form_field-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+/* Login password toggle button: convierte el boton nativo en icon button limpio. */
+.vc-login-form-wrap .pmpro_form_field-password-toggle .pmpro_btn {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fuerza el icono del toggle de password al color azul de la UI. */
+.vc-login-form-wrap .pmpro_form_field-password-toggle svg {
+  stroke: #1447E6;
+}
+
+/* Login password toggle state: texto accesible oculto visualmente. */
+.vc-login-form-wrap .pmpro_form_field-password-toggle-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Login password link base: enlace compacto de recuperacion de password. */
+.vc-login-password-link {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* Login password link hover: oscurece el enlace al interactuar. */
+.vc-login-password-link:hover {
+  color: #111;
+}
+
+/* Login remember reset: oculta remember tambien dentro del wrapper del formulario. */
+.vc-login-form-wrap .login-remember {
+  display: none !important;
+}
+
+/* Login PMPro card spacing: el card controla el espacio inferior del formulario. */
+.vc-login-form-wrap .pmpro_card.pmpro_login_wrap,
+.vc-login-page .pmpro_section .pmpro_card.pmpro_login_wrap {
+  margin: 0 0 30px;
+}
+
+.vc-login-form-wrap .pmpro_card.pmpro_login_wrap #loginform .login-submit,
+.vc-login-page .pmpro_section .pmpro_card.pmpro_login_wrap #loginform .login-submit {
+  margin: 0;
+}
+
+.vc-login-card .mensaje{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  text-align: center;
+  color: #666666;
+  margin: 0 0 20px;
+}
+
+.vc-login-card .mensaje a{
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: #1447E6;
+  text-decoration: none;
+}
+
+.vc-login-card .mensaje-break{
+  display: block;
+}
+
+.vc-login-card .mensaje-bottom{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: -0.15px;
+  color: #666666;
+  margin: 0;
+}
+
+.vc-login-card .mensaje-bottom a{
+  text-decoration-line: underline;
+  color: #1447E6;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+/* Login PMPro actions spacing: elimina padding/margen de acciones nativas. */
+.vc-login-form-wrap .pmpro_card_actions,
+.vc-login-form-wrap .pmpro_actions_nav {
+  margin: 0;
+  padding: 0;
+}
+
+/* Login form links: estilo base de enlaces internos del formulario. */
+.vc-login-form-wrap a {
+  color: #111;
+  text-decoration: none;
+}
+
+/* Login form links hover: muestra subrayado solo en interaccion. */
+.vc-login-form-wrap a:hover {
+  text-decoration: underline;
+}
+
+/* Login PMPro message: estilo de avisos internos del formulario. */
+.vc-login-form-wrap .pmpro_message {
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Component: Login Actions
+   Botones principales, links y acciones del formulario.
+   ========================================================================== */
+
+.vc-login-page .vc-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 174px;
+  height: 44px;
+  min-height: 44px;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #1447E6;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--vc-login-font);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -0.3px;
+  text-align: center;
+  opacity: 1;
+}
+
+.vc-login-page .vc-login-btn:hover,
+.vc-login-page .vc-login-btn:focus,
+.vc-login-page .vc-login-btn:focus-visible,
+.vc-login-page .vc-login-btn:active {
+  background: #1447E6;
+  color: #FFFFFF;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Component: Password Reset
+   Vistas de reset, confirmacion, set password y fuerza de password.
+   ========================================================================== */
+
+/* Login reset shell: contenedor principal de reset password. */
+.vc-login-reset {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Login reset confirm: alinea contenido de la pantalla de confirmacion. */
+.vc-login-reset--confirm {
+  text-align: left;
+}
+
+/* Login reset confirm header: conserva header centrado en confirmacion. */
+.vc-login-reset--confirm .vc-login-header {
+  text-align: center;
+}
+
+/* Login back row: fila para alinear el enlace de regreso. */
+.vc-login-back-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.vc-login-reset > .vc-login-reset__badge {
+  margin-bottom: 20px;
+}
+
+/* Login back link: enlace con icono para volver. */
+.vc-login-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 auto 28px 0;
+  justify-content: flex-start;
+  align-self: flex-start;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: -0.15px;
+  color: #666666;
+  text-decoration: none;
+}
+
+/* Login back icon: tamano fijo del icono de regreso. */
+.vc-login-back img {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+}
+
+/* Login back hover: mejora contraste al interactuar. */
+.vc-login-back:hover {
+  color: #212121;
+}
+
+/* Login reset badge: icono circular de estado del reset. */
+.vc-login-reset__badge {
+  width: 80px;
+  height: 80px;
+  margin: 0;
+  border-radius: 999px;
+  background: #E8EEF9;
+  color: #1447E6;
+  display: grid;
+  place-items: center;
+}
+
+/* Login reset badge success: variante visual de exito. */
+.vc-login-reset__badge--success {
+  background: #EEF2FF;
+  color: #2F5BEA;
+}
+
+.vc-login-reset__badge--success .check-circle-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+/* Login reset hidden PMPro copy: oculta instrucciones nativas duplicadas. */
+.vc-login-form-wrap--reset .pmpro_lost_password-instructions,
+.vc-login-form-wrap--reset .pmpro_spacer {
+  display: none;
+}
+
+/* Login reset form width: campos y submit a ancho completo. */
+.vc-login-form-wrap--reset .pmpro_form_fields,
+.vc-login-form-wrap--reset .pmpro_form_submit {
+  width: 100%;
+}
+
+.vc-login-reset--forgot .pmpro_form_submit {
+  margin-top: 0;
+  margin-block-start: 0;
+}
+
+.vc-login-reset__body--forgot {
+  margin-bottom: 20px;
+}
+
+.vc-login-reset__actions--forgot {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.vc-login-page .vc-login-reset__back-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 100%;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.15px;
+  color: #666666;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 5px;
+  white-space: nowrap !important;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Login reset field spacing: separacion entre campos del reset. */
+.vc-login-form-wrap--reset .pmpro_form_field {
+  display: block;
+  width: 100%;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+/* Login reset label: tipografia del label en reset. */
+.vc-login-form-wrap--reset .pmpro_form_label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 21px;
+  letter-spacing: -0.15px;
+  color: #666666;
+  text-align: left;
+}
+
+/* Login reset label weight: neutraliza negrita heredada. */
+.vc-login-form-wrap--reset label {
+  font-weight: 400 !important;
+}
+
+/* Login reset asterisk: oculta asterisco nativo de PMPro. */
+.vc-login-form-wrap--reset .pmpro_asterisk {
+  display: none;
+}
+
+/* Login reset input: estilo del campo email/usuario para recuperar password. */
+.vc-login-form-wrap--reset .pmpro_form_input {
+  display: block;
+  width: 100%;
+  height: 52px;
+  margin: 0;
+  padding: 0 16px;
+  background: #F7F7F7;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #5e5e5e;
+  line-height: 100%;
+  letter-spacing: -0.15px;
+  box-sizing: border-box;
+}
+
+/* Login reset placeholder: color del texto placeholder. */
+.vc-login-form-wrap--reset .pmpro_form_input::placeholder {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: -0.15px;
+  color: #B8B8B8;
+  opacity: 1;
+}
+
+.vc-login-reset__field-help {
+  margin: 8px 0 0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0;
+  color: #B8B8B8;
+  text-align: left;
+}
+
+/* Login reset input focus: mantiene borde estable al enfocar. */
+.vc-login-form-wrap--reset .pmpro_form_input:focus,
+.vc-login-form-wrap--reset .pmpro_form_input:focus-visible,
+.vc-login-form-wrap--reset .pmpro_form_input:hover,
+.vc-login-form-wrap--reset .pmpro_form_input:active {
+  background: #F7F7F7;
+  border-color: #E2E8F0;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Login reset submit: CTA desactivado hasta que el formulario este listo. */
+.vc-login-form-wrap--reset .pmpro_form_submit .pmpro_btn-submit {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #1447E6;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  opacity: 0.45;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+
+/* Login reset submit ready: activa visualmente el CTA cuando el input es valido. */
+.vc-login-form-wrap--reset.is-ready .pmpro_form_submit .pmpro_btn-submit {
+  opacity: 1;
+  background: #1447E6;
+}
+
+/* Login set password message: separacion del aviso superior. */
+.vc-login-form-wrap--set-password .pmpro_message {
+  margin-bottom: 18px;
+}
+
+/* Login set password width: campos y submit ocupan todo el card. */
+.vc-login-form-wrap--set-password .pmpro_form_fields,
+.vc-login-form-wrap--set-password .pmpro_form_submit,
+.vc-login-form-wrap--set-password .pmpro_form_field {
+  width: 100%;
+}
+
+/* Login set password field spacing: separacion entre campos. */
+.vc-login-form-wrap--set-password .pmpro_form_field {
+  margin-bottom: 18px;
+}
+
+/* Login set password label: tipografia de labels de nueva password. */
+.vc-login-form-wrap--set-password .pmpro_form_label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #666666;
+}
+
+/* Login set password asterisk: color de campos requeridos. */
+.vc-login-form-wrap--set-password .pmpro_asterisk {
+  color: #DC2626;
+}
+
+/* Login set password input: estilo de campos de nueva password. */
+.vc-login-form-wrap--set-password .pmpro_form_input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background: #F7F7F7;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #5e5e5e;
+  box-sizing: border-box;
+}
+
+/* Login set password input spacing: reserva espacio para el toggle. */
+.vc-login-form-wrap--set-password .vc-login-password-wrap input[type="password"],
+.vc-login-form-wrap--set-password .vc-login-password-wrap input[type="text"] {
+  padding-right: 56px;
+}
+
+/* Login set password toggle: posicion del control mostrar/ocultar. */
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+/* Login set password toggle button: icon button sin borde. */
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle .pmpro_btn {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login set password toggle icon: color azul del icono. */
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle svg {
+  stroke: #1447E6;
+}
+
+/* Login set password toggle state: texto accesible oculto visualmente. */
+.vc-login-form-wrap--set-password .pmpro_form_field-password-toggle-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Login set password description: texto de ayuda bajo campos. */
+.vc-login-form-wrap--set-password .pmpro_form_field-description {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6B7280;
+}
+
+/* Login set password submit: CTA desactivado hasta cumplir validacion. */
+.vc-login-form-wrap--set-password .pmpro_form_submit .pmpro_btn-submit {
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: 14px;
+  background: #1447E6;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.45;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+
+/* Login set password submit ready: activa el CTA cuando la password es valida. */
+.vc-login-form-wrap--set-password.is-ready .pmpro_form_submit .pmpro_btn-submit {
+  opacity: 1;
+  background: #1447E6;
+}
+
+/* Login set password hint: ayuda textual generada por PMPro. */
+.vc-login-form-wrap--set-password .pmpro_form_hint {
+  margin: 0 0 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6B7280;
+}
+
+/* Login password strength: contenedor de fortaleza de password. */
+.vc-login-form-wrap--set-password #pass-strength-result {
+  margin: 0 0 12px;
+  padding: 0;
+  min-height: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Login password strength empty: oculta el medidor cuando no hay valor. */
+.vc-login-form-wrap--set-password #pass-strength-result.empty,
+.vc-login-form-wrap--set-password #pass-strength-result:empty {
+  display: none;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Component: Email Verification
+   Caja de email, instrucciones, resend y CTA de confirmacion.
+   ========================================================================== */
+
+/* Login email box: muestra email objetivo en la confirmacion. */
+.vc-login-email-box {
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--vc-onboarding-radius);
+  background: #F8FAFC;
+}
+
+/* Login email box icon: icono compacto del email. */
+.vc-login-email-box__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 16777200px;
+  background: #E2E8F0;
+  color: #1447E6;
+  display: grid;
+  place-items: center;
+}
+
+.vc-login-email-box__icon .letter-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+.vc-login-email-box__content {
+  display: grid;
+  gap: 5px;
+}
+
+/* Login email typography: comparte Poppins entre textos de verificacion. */
+.vc-login-email-box__value,
+.vc-login-email-box__meta,
+.vc-login-instructions__title,
+.vc-login-resend {
+  margin: 0;
+}
+
+/* Login email value: email visible del usuario. */
+.vc-login-email-box__value {
+  font-weight: 400;
+  font-size: 14px;
+line-height: 100%;
+letter-spacing: -0.15px;
+  color: #212121;
+}
+
+/* Login email meta: texto auxiliar bajo el email. */
+.vc-login-email-box__meta {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 100%;
+letter-spacing: -0.15px;
+  color: #B8B8B8;
+}
+
+/* Login instructions: caja de pasos de verificacion. */
+.vc-login-instructions {
+  min-height: 158px;
+  margin: 0 0 20px;
+  padding: 17px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #F1F5F9;
+}
+
+/* Login instructions title: titulo breve de la caja de instrucciones. */
+.vc-login-instructions__title {
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.15px;
+  color: #1447E6;
+}
+
+/* Login instructions list: reset de lista dentro de instrucciones. */
+.vc-login-instructions ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+/* Login instructions item: item individual de la lista de ayuda. */
+.vc-login-instructions li {                                                                 
+  margin-bottom: 6px;
+  font-weight: 400;
+font-size: 14px;
+line-height: 21px;
+letter-spacing: -0.15px;
+  color: #1447E6;
+
+}
+
+/* Login primary button: CTA principal de confirmacion/verificacion. */
+.vc-login-page a.vc-login-btn.vc-login-btn--primary {
+  width: 100%;
+  min-height: 44px;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: var(--vc-onboarding-radius);
+  background: #1447E6;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.vc-login-page a.vc-login-btn.vc-login-btn--primary:hover,
+.vc-login-page a.vc-login-btn.vc-login-btn--primary:focus {
+  background: #1447E6;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Login resend copy: texto para reenviar correo de verificacion. */
+.vc-login-resend {
+  margin-top: 14px;
+  font-weight: 400;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #999999;
+}
+
+/* Login confirm resend: centra reenviar en la pantalla de confirmacion. */
+.vc-login-reset--confirm .vc-login-resend {
+  text-align: center;
+}
+
+/* Login resend link: enlace subrayado para reenviar email. */
+.vc-login-resend a {
+  color: #1447E6;
+  text-decoration: underline;
+  font-size:14px;
+}
+
+/* ==========================================================================
+   Page Variant: Login Inside Onboarding
+   Ajustes cuando login se renderiza dentro del layout onboarding.
+   ========================================================================== */
+
+/* Login onboarding card: ancho del card cuando login vive dentro de onboarding. */
+.vc-onboarding--login .vc-onb-card {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Login confirm card: medidas especificas para la pantalla Check your email. */
+.vc-onboarding--login-confirm .vc-onb-card {
+  width: 448px;
+  max-width: 100%;
+  min-height: 646px;
+}
+
+/* Login sign-in card: medidas especificas para la pantalla Welcome back. */
+.vc-onboarding--login-sign-in .vc-onb-card {
+  width: 448px;
+  max-width: 100%;
+  min-height: 647px;
+}
+
+/* Login forgot card: medidas especificas para la pantalla Forgot your password. */
+.vc-onboarding--login-forgot .vc-onb-card {
+  width: 448px;
+  max-width: 100%;
+  min-height: 501px;
+}
+
+/* Login set-password card: medidas especificas para la pantalla Set up your password. */
+.vc-onboarding--login-set-password .vc-onb-card {
+  width: 448px;
+  max-width: 100%;
+  min-height: 545px;
+}
+
+/* Login onboarding page: elimina fondo/padding de pagina independiente. */
+.vc-onboarding--login .vc-login-page {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+}
+
+/* Login onboarding card reset: usa el card del onboarding como superficie. */
+.vc-onboarding--login .vc-login-card {
+  max-width: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* Login onboarding logged state: centra mensaje cuando el usuario ya inicio sesion. */
+.vc-onboarding--login .vc-login-page--logged .vc-login-card {
+  text-align: center;
+}
+
+/* ==========================================================================
+   Responsive
+   Desktop base vive fuera de media query.
+   Objetivo: 1180px, 960px, 720px y 480px.
+   ========================================================================== */
+
+/* Base desktop */
+
+@media (max-width: 1180px) {
+  /* --------------------------------------------------------------------------
+     1180px: desktop compacto.
+     Reservado para ajustes amplios sin redefinir componentes.
+     -------------------------------------------------------------------------- */
+
+  /* Reservado: ajustes de layout amplio para login. */
+}
+
+@media (max-width: 960px) {
+  /* --------------------------------------------------------------------------
+     960px: tablet/login flow.
+     Reservado para ajustes de layout tablet del formulario.
+     -------------------------------------------------------------------------- */
+
+}
+
+@media (max-width: 720px) {
+  /* --------------------------------------------------------------------------
+     720px: layout de una columna y paddings compactos.
+     -------------------------------------------------------------------------- */
+
+  /* 720 Login card density */
+
+  /* Login mobile page: reduce padding externo en pantallas pequenas. */
+  .vc-login-page {
+    padding: 24px 16px;
+  }
+
+  /* Login mobile card: reduce padding interno del card. */
+  .vc-login-card {
+    padding: 24px;
+  }
+
+  /* Login mobile reset: permite ocupar todo el ancho disponible. */
+  .vc-login-reset {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* --------------------------------------------------------------------------
+     480px: diseno mobile propio.
+     Esta capa puede cambiar estructura y espaciados por vista.
+     -------------------------------------------------------------------------- */
+
+  /* 480 Login card and social controls */
+
+  .vc-login-card .mensaje-break {
+    display: none;
+  }
+
+  .vc-login-form-wrap--reset .pmpro_form_submit .pmpro_btn-submit {
+  height: 48px;
+  padding: 14px 12px;
+  text-align: center;
+
+  }
+
+  .vc-onb-card .button-google {
+  min-height: 52px;
+  border-radius: 10px;
+  padding: 14px 0;
+  margin-bottom: 24px;
+
+  }
+  .vc-onb-card .divider {
+  margin-bottom: 24px;
+  }
+
+  /* 480 PMPro login form spacing */
+
+  .vc-login-page .pmpro_section #loginform .login-password {
+  margin: 0 0 24px;
+   }
+  .vc-login-page .pmpro_section .pmpro_card.pmpro_login_wrap {
+  margin: 0 0 24px;
+  }
+  .vc-login-page .pmpro_section .pmpro_card.pmpro_login_wrap #loginform .login-submit {
+  margin: 0;
+  }
+  .vc-login-card .mensaje {
+  margin: 0 0 24px;
+  }
+
+  /* 480 Reset password spacing */
+
+  .vc-login-reset__body--forgot {
+  margin-bottom: 24px;
+  }
+  .vc-onb-card .subtitle.vc-login-reset__subtitle.vc-login-reset__subtitle--forgot {
+  margin-bottom: 24px;
+}
+.vc-login-reset > .vc-login-reset__badge {
+  margin-bottom: 24px;
+}
+.vc-login-form-wrap--reset .pmpro_form_field {
+
+  margin: 0 0 24px;
+}
+}
+

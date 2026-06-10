@@ -1,0 +1,3153 @@
+
+
+/* Base document: permite que el dashboard use alto completo. */
+html {
+  height: 100%;
+}
+
+/* Dashboard body: define la tipografia global del dashboard desde el contenedor padre. */
+body.vc-dashboard-page {
+  --vc-dashboard-font: "Poppins", sans-serif;
+  --vc-dashboard-mobile-menu-width: 256px;
+  /* Dashboard controls: radio unico solo para controles que ya usaban 6px. */
+  --vc-dashboard-control-radius: 6px;
+  /* Dashboard buttons: estandar visual comun para CTAs y botones con superficie. */
+  --vc-dashboard-button-height: 48px;
+  --vc-dashboard-button-radius: var(--vc-dashboard-control-radius);
+  /* Dashboard buttons typography: desktop usa 14px como base comun para botones con superficie. */
+  --vc-dashboard-button-font-size: 14px;
+  --vc-dashboard-button-line-height: 20px;
+  --vc-dashboard-button-font-weight: 500;
+  margin: 0;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #F7F7F7;
+  color: #1f2430;
+  font-family: var(--vc-dashboard-font);
+}
+
+/* Dashboard box sizing: evita calculos inesperados de ancho/alto internos. */
+.vc-dashboard-page * {
+  box-sizing: border-box;
+}
+
+.vc-dashboard-page button,
+.vc-dashboard-page a,
+.vc-dashboard-page input,
+.vc-dashboard-page select,
+.vc-dashboard-page textarea {
+  font-family: var(--vc-dashboard-font);
+}
+
+/* ==========================================================================
+   Layout: Shell
+   Estructura raiz de dos columnas: sidebar + main.
+   ========================================================================== */
+
+/* Dashboard shell: grid raiz que divide sidebar y contenido principal. */
+.vc-dashboard-shell {
+  height: 100dvh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr);
+  overflow: hidden;
+  background: #F7F7F7;
+}
+
+/* ==========================================================================
+   Component: Sidebar
+   Incluye brand, navegacion, grupos, links, iconos y logout.
+   ========================================================================== */
+
+/* Sidebar container: columna lateral fija del dashboard en desktop. */
+.vc-dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 100dvh;
+  border-right: 1px solid #E2E8F0;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+/* Sidebar brand: area superior del logo. */
+.vc-dashboard-brand {
+  min-height: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* Menu hamburguesa: agrupa menu y logo para permitir acciones mobile al extremo derecho. */
+.vc-dashboard-brand-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Menu hamburguesa: oculto en desktop para conservar la sidebar lateral original. */
+.vc-dashboard-menu-toggle {
+  display: none;
+}
+
+/* Menu hamburguesa: acciones compactas ocultas en desktop; se activan solo en responsive. */
+.vc-dashboard-brand-actions {
+  display: none;
+}
+
+/* Menu hamburguesa: logo responsivo dentro del area de marca, sin afectar el avatar mobile. */
+.vc-dashboard-brand-logo {
+  width: 152px;
+  max-width: 100%;
+  max-height: 36px;
+  height: auto;
+}
+
+/* Sidebar menu panel: ocupa el espacio entre brand y footer para anclar el logout al fondo. */
+.vc-dashboard-sidebar-menu-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar navigation: wrapper scrolleable de grupos y links. */
+.vc-dashboard-nav {
+  flex: 1 1 auto;
+  padding: 50px 24px ;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Sidebar nav list: contenedor interno de grupos para controlar spacing independiente del panel. */
+.vc-dashboard-nav-list {
+  min-height: 0;
+}
+
+/* Mobile menu panel header: hidden on desktop; replaces the old nav heading in off-canvas mode. */
+.vc-dashboard-menu-panel-header {
+  display: none;
+}
+
+/* Sidebar nav group spacing: separacion entre grupos de menu. */
+.vc-dashboard-nav-group + .vc-dashboard-nav-group {
+  padding-top: 36px;
+}
+
+/* Sidebar nav title: etiqueta de grupo de navegacion. */
+.vc-dashboard-nav-title {
+  margin: 0 0 8px;
+  height: 32px;
+  border-bottom: 1px solid #E2E8F0;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Sidebar nav link: item navegable principal del menu. */
+.vc-dashboard-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  color: #242b39;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+
+}
+
+/* Sidebar nav link text: etiqueta visible de cada item. */
+.vc-dashboard-nav-link span{
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: -0.31px;
+color: #212121;
+}
+
+/* Sidebar nav link interaction: estados hover y focus. */
+.vc-dashboard-nav-link:hover,
+.vc-dashboard-nav-link:focus {
+  background: #F1F5F9;
+  color: #325CBA;
+}
+
+/* Sidebar nav active: item de la vista actual. */
+.vc-dashboard-nav-link.is-active {
+  background: #F1F5F9;
+  color: #325CBA;
+}
+
+/* Sidebar nav active text: color del label activo. */
+.vc-dashboard-nav-link.is-active span{
+  background: #F1F5F9;
+  color: #1447E6;
+}
+
+/* Sidebar nav icon: caja del icono dentro del link. */
+.vc-dashboard-nav-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sidebar nav icon svg: tamano del icono vectorial. */
+.vc-dashboard-nav-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Sidebar footer: area inferior para logout. */
+.vc-dashboard-sidebar-footer {
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: 24px;
+  border-top: 1px solid #E2E8F0;
+}
+
+/* Sidebar logout: link de cierre de sesion. */
+.vc-dashboard-logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* Sidebar logout text: label del cierre de sesion. */
+.vc-dashboard-logout span{
+  color: #f04438;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: -0.31px;
+text-align: center;
+
+}
+
+/* Sidebar logout icon: icono del cierre de sesion. */
+.vc-dashboard-logout svg {
+  width: 20px;
+  height: 20px;
+  color: #f04438;
+}
+
+/* ==========================================================================
+   Layout: Main
+   Columna principal que contiene topbar y contenido scrolleable.
+   ========================================================================== */
+
+/* Main container: columna derecha con topbar fijo y contenido interno. */
+.vc-dashboard-main {
+  min-width: 0;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 80px minmax(0, 1fr);
+  overflow: hidden;
+  background-color: #F7F7F7;
+}
+
+
+/* ==========================================================================
+   Component: Topbar
+   Incluye buscador, acciones, notificaciones y user pill.
+   ========================================================================== */
+
+/* Topbar container: barra superior con buscador y acciones de usuario. */
+.vc-dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 80px;
+  height: 80px;
+  padding: 0 28px;
+  background: #fff;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* Topbar search: caja visual del buscador. */
+.vc-dashboard-search {
+  flex: 1;
+    max-width: 448px;
+    height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  border: 1px solid #d7dfec;
+  border-radius: 10px;
+  background: #fff;
+  color: #7d8696;
+  box-shadow: inset 0 0 0 1px rgba(231, 236, 244, 0.4);
+}
+
+/* Topbar search input reset: elimina borde nativo del input search. */
+.vc-dashboard-search input[type=search]{
+border:none;
+padding:0px;
+}
+
+/* Topbar icons: tamano compartido para buscador y notificaciones. */
+.vc-dashboard-search svg,
+.vc-dashboard-bell svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Topbar search icon: icono izquierdo del buscador. */
+.vc-dashboard-search svg {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #6f6f73;
+}
+
+/* Topbar search input: campo textual del buscador. */
+.vc-dashboard-search input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #1f2430;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -0.31px;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Topbar search placeholder: color del texto placeholder. */
+.vc-dashboard-search input::placeholder {
+  color: #7d7f85;
+  opacity: 1;
+}
+
+/* Topbar actions: grupo derecho de acciones del usuario. */
+.vc-dashboard-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Topbar bell: boton de notificaciones. */
+.vc-dashboard-bell {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #242b39;
+  cursor: pointer;
+}
+
+.vc-dashboard-bell svg {
+  flex: 0 0 20px;
+  display: block;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+}
+
+.vc-dashboard-bell:is(:hover, :focus, :focus-visible, :active) {
+  border: 0;
+  background: transparent;
+  color: #242b39;
+  outline: 0;
+  box-shadow: none;
+}
+
+/* Topbar bell dot: indicador visual de notificacion pendiente. */
+.vc-dashboard-bell-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+/* Topbar user pill: tarjeta compacta con avatar y datos del usuario. */
+.vc-dashboard-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 188.921875px;
+  min-width: 188.921875px;
+  height: 56px;
+  padding-right: 12px;
+  padding-left: 12px;
+  border-radius: 10px;
+  background: var(--Fondo-Gris, #F7F7F7);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+/* Topbar user pill link: evita que el theme cambie color/subrayado al navegar a My profile. */
+.vc-dashboard-user-pill:is(:hover, :focus, :focus-visible, :active) {
+  color: inherit;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+/* Topbar user pill focus: mantiene una indicacion accesible sin alterar el layout. */
+.vc-dashboard-user-pill:focus-visible {
+  outline: 2px solid #1447E6;
+  outline-offset: 2px;
+}
+
+/* Topbar avatar: contenedor circular de imagen o iniciales. */
+.vc-dashboard-avatar {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #1447E6;
+  color: #fff;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+/* Topbar avatar media: imagen e iniciales ocupan todo el circulo. */
+.vc-dashboard-avatar-image,
+.vc-dashboard-avatar-fallback {
+  width: 100%;
+  height: 100%;
+}
+
+/* Topbar avatar image: recorte de foto del usuario. */
+.vc-dashboard-avatar-image {
+  object-fit: cover;
+}
+
+/* Topbar avatar fallback: iniciales centradas cuando no hay imagen. */
+.vc-dashboard-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
+
+/* Topbar user copy: nombre y membresia apilados. */
+.vc-dashboard-user-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar user name: nombre visible del usuario. */
+.vc-dashboard-user-copy strong {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
+
+/* Topbar user meta: etiqueta de membresia o rol. */
+.vc-dashboard-user-copy small {
+  color: #667085;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   Layout: Content
+   Area principal de contenido y scroll interno del dashboard.
+   ========================================================================== */
+
+/* Content area: espacio scrolleable donde se renderiza cada panel. */
+.vc-dashboard-content {
+  min-height: 0;
+  padding: 50px 26px 26px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: #F7F7F7;
+}
+
+/* ==========================================================================
+   Page Variant: Mock Test Summary
+   Ajustes del layout cuando el resumen del mock test esta activo.
+   ========================================================================== */
+
+/* Mock test summary content: padding especial para centrar el resumen. */
+.vc-dashboard-content--mock-test.is-exam-summary-open {
+  padding: 50px 65px 108px;
+}
+
+/* ==========================================================================
+   Component: Dashboard Heading
+   Titulo, subtitulo y metadata dinamica de la vista activa.
+   ========================================================================== */
+
+/* Dashboard heading: wrapper del titulo y subtitulo de la vista. */
+.vc-dashboard-heading {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+/* Flashcards dashboard host: conserva el espaciado del heading cuando el shortcode vive dentro del panel. */
+.vc-dashboard-content:has(.vc-dashboard-panel--flashcards) .vc-dashboard-heading {
+  margin-bottom: 24px;
+}
+
+/* Dashboard title: titulo principal de cada vista. */
+.vc-dashboard-heading .header-h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  color: #212121;
+}
+
+/* Dashboard subtitle: descripcion secundaria bajo el titulo. */
+.vc-dashboard-heading p {
+  margin: 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
+
+/* ==========================================================================
+   Page Variant: Mock Test Session
+   Ajustes del heading y padding cuando la sesion de examen esta activa.
+   ========================================================================== */
+
+/* Session view compresses the heading into a single row with exam controls. */
+/* Mock test session content: padding especial para la sesion de examen. */
+.vc-dashboard-content--mock-test.is-exam-session {
+  padding: 50px 80px 217px;
+}
+
+/* ==========================================================================
+   Component: Dashboard Grids And Cards
+   Grillas, cards generales, metricas, progreso, CTAs y detail lists.
+   ========================================================================== */
+
+/* Dashboard grids: base compartida para grillas de resumen, temas y paneles. */
+.vc-dashboard-summary-grid,
+.vc-dashboard-subject-grid,
+.vc-dashboard-panel-grid {
+  display: grid;
+  gap: 18px;
+}
+
+/* Dashboard summary grid: grilla de metricas superiores. */
+.vc-dashboard-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 24px;
+}
+
+/* Dashboard subject grid: grilla de tarjetas de materias/temas. */
+.vc-dashboard-subject-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Dashboard panel single grid: layout de una columna para paneles simples. */
+.vc-dashboard-panel-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Dashboard panel two grid: layout de dos columnas para paneles dobles. */
+.vc-dashboard-panel-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Dashboard card surfaces: apariencia base compartida de cards. */
+.vc-dashboard-summary-card,
+.vc-dashboard-subject-card,
+.vc-dashboard-card,
+.vc-dashboard-global-card {
+  border: 1px solid #dbe3f0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 40px rgba(25, 40, 72, 0.07);
+}
+
+/* Dashboard summary card: card horizontal de metrica. */
+.vc-dashboard-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+/* Dashboard summary icon: caja verde del icono de metrica. */
+.vc-dashboard-summary-icon {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #0ea44b;
+  color: #fff;
+}
+
+/* Dashboard summary icon svg: tamano interno del icono. */
+.vc-dashboard-summary-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Dashboard summary copy: textos de la metrica. */
+.vc-dashboard-summary-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dashboard summary label: texto secundario de la metrica. */
+.vc-dashboard-summary-copy small {
+  color: #667085;
+  font-size: 14px;
+}
+
+/* Dashboard summary value: valor numerico destacado. */
+.vc-dashboard-summary-copy strong {
+  color: #0ea44b;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+/* Dashboard subject/card padding: espacio interno de cards principales. */
+.vc-dashboard-subject-card,
+.vc-dashboard-card {
+  padding: 24px;
+}
+
+/* Dashboard card heading: titulo de cards de materia y cards genericas. */
+.vc-dashboard-subject-card h3,
+.vc-dashboard-card h3 {
+  margin: 0 0 22px;
+  font-size: 24px;
+}
+
+/* Dashboard row layout: filas de progreso y detalle con extremos alineados. */
+.vc-dashboard-progress-row,
+.vc-dashboard-detail-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Dashboard progress row: texto superior de una barra de progreso. */
+.vc-dashboard-progress-row {
+  margin-bottom: 10px;
+  color: #667085;
+}
+
+/* Dashboard progress value: valor destacado de progreso. */
+.vc-dashboard-progress-row strong {
+  color: #242b39;
+}
+
+/* Dashboard progress bar: pista visual del progreso. */
+.vc-dashboard-progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #d7dce7;
+  overflow: hidden;
+}
+
+/* Dashboard progress fill: relleno activo del progreso. */
+.vc-dashboard-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2b50da 0%, #2a6cf6 100%);
+}
+
+/* Dashboard subject meta: texto descriptivo de una materia. */
+.vc-dashboard-subject-meta {
+  margin: 16px 0 20px;
+  color: #667085;
+  font-size: 15px;
+}
+
+/* Dashboard button: CTA base de cards del dashboard. */
+.vc-dashboard-button {
+  min-height: var(--vc-dashboard-button-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  border-radius: var(--vc-dashboard-button-radius);
+  border: 1px solid #2b50da;
+  background: #2b50da;
+  color: #fff;
+  text-decoration: none;
+  font-weight: var(--vc-dashboard-button-font-weight);
+  font-size: var(--vc-dashboard-button-font-size);
+  line-height: var(--vc-dashboard-button-line-height);
+}
+
+/* Dashboard button icon: icono dentro del CTA. */
+.vc-dashboard-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dashboard secondary button: variante blanca del CTA. */
+.vc-dashboard-button--secondary {
+  background: #fff;
+  color: #2b50da;
+}
+
+/* Dashboard global card: card destacada de accion global. */
+.vc-dashboard-global-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 18px 24px;
+}
+
+/* Dashboard global icon: icono grande de la card global. */
+.vc-dashboard-global-icon {
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #436bff 0%, #2b4fda 100%);
+  color: #fff;
+}
+
+/* Dashboard global icon svg: tamano interno del icono global. */
+.vc-dashboard-global-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Dashboard global copy: bloque textual de la card global. */
+.vc-dashboard-global-copy {
+  flex: 1;
+}
+
+/* Dashboard global title: titulo de la card global. */
+.vc-dashboard-global-copy h3 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+/* Dashboard card paragraph: textos descriptivos de card global y genericas. */
+.vc-dashboard-global-copy p,
+.vc-dashboard-card p {
+  margin: 0;
+  color: #667085;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Dashboard detail list: lista limpia de pares label/value. */
+.vc-dashboard-detail-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Dashboard detail list divider: separador entre items. */
+.vc-dashboard-detail-list li + li {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e3e8f2;
+}
+
+/* Dashboard detail label: texto secundario del item. */
+.vc-dashboard-detail-list span {
+  color: #667085;
+}
+
+/* Dashboard detail value/link: valor o enlace principal del item. */
+.vc-dashboard-detail-list strong,
+.vc-dashboard-detail-list a {
+  color: #1f2430;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Integration: Paid Memberships Pro
+   Estilos para contenido PMPro renderizado dentro de paneles del dashboard.
+   ========================================================================== */
+
+/* PMPro wrapper: layout interno del contenido de membresia. */
+.vc-dashboard-panel .pmpro {
+  display: grid;
+  gap: 18px;
+}
+
+/* PMPro section title: titulo de seccion dentro del panel. */
+.vc-dashboard-panel .pmpro_section_title {
+  margin: 0 0 18px;
+  font-size: 28px;
+}
+
+/* PMPro card: superficie visual de cards PMPro. */
+.vc-dashboard-panel .pmpro_card {
+  border: 1px solid #dbe3f0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 40px rgba(25, 40, 72, 0.07);
+}
+
+/* PMPro card actions: separacion superior de acciones. */
+.vc-dashboard-panel .pmpro_card_actions {
+  padding-top: 18px;
+}
+
+/* PMPro buttons: estandariza solo botones PMPro y evita afectar submits textuales del dashboard. */
+.vc-dashboard-panel .pmpro_btn {
+  min-height: var(--vc-dashboard-button-height);
+  border-radius: var(--vc-dashboard-button-radius);
+  font-size: var(--vc-dashboard-button-font-size);
+  font-weight: var(--vc-dashboard-button-font-weight);
+  line-height: var(--vc-dashboard-button-line-height);
+}
+
+/* ==========================================================================
+   Component: Profile Notices
+   Mensajes de exito, error e informacion del perfil.
+   ========================================================================== */
+
+/* Profile notice layout: ancho, margen y superficie de mensajes del perfil. */
+.vc-profile-notice-wrap .vc-notice {
+  max-width: none;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+
+/* Profile notice success: variante de exito. */
+.vc-profile-notice-wrap .vc-notice--success {
+  border: 1px solid #86efac;
+  background: #ecfdf3;
+  color: #166534;
+}
+
+/* Profile notice error: variante de error. */
+.vc-profile-notice-wrap .vc-notice--error {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* Profile notice info: variante informativa. */
+.vc-profile-notice-wrap .vc-notice--info {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* ==========================================================================
+   Component: Profile
+   Card de perfil, hero, avatar, foto, campos, email verification y acciones.
+   ========================================================================== */
+
+/* Account card surface: superficie compartida por Profile, Privacy y Help. */
+.vc-profile-card {
+  padding: 33px;
+  border: 1px solid var(--Outline-cards, #E2E8F0);
+  background-color: #FFFFFF;
+  border-radius: 12px;
+}
+
+/* Profile hero: bloque superior con avatar y datos del usuario. */
+.vc-profile-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+/* Profile avatar wrapper: circulo del avatar grande. */
+.vc-profile-avatar-wrap {
+  flex: 0 0 auto;
+  width: 98px;
+  height: 98px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #1447E6;
+  overflow: hidden;
+}
+
+/* Profile avatar media: imagen o iniciales llenan el circulo. */
+.vc-profile-avatar-image,
+.vc-profile-avatar-fallback {
+  width: 100%;
+  height: 100%;
+}
+
+/* Profile avatar image: recorte de imagen del perfil. */
+.vc-profile-avatar-image {
+  object-fit: cover;
+}
+
+/* Profile avatar fallback: iniciales centradas cuando no hay foto. */
+.vc-profile-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+/* Profile hero copy: texto lateral junto al avatar. */
+.vc-profile-hero-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+/* Profile hero title: nombre/titulo del perfil. */
+.vc-profile-hero-copy .h2-profile {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.45px;
+  color: #212121;
+}
+
+/* Profile hero description: texto secundario del perfil. */
+.vc-profile-hero-copy p {
+  margin: 0;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+}
+
+/* Profile photo actions: grupo de botones para cambiar/eliminar foto. */
+.vc-profile-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+/* Profile photo button: boton para subir/cambiar foto con superficie estable. */
+.vc-profile-photo-button {
+  min-height: var(--vc-dashboard-button-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border: 1px solid var(--Outline-cards, #E2E8F0);
+  border-radius: var(--vc-dashboard-button-radius);
+  background: #fff;
+  color: #212121;
+  font-weight: var(--vc-dashboard-button-font-weight);
+  font-size: var(--vc-dashboard-button-font-size);
+  line-height: var(--vc-dashboard-button-line-height);
+  letter-spacing: -0.15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Profile delete account: accion destructiva textual. */
+.vc-profile-delete-account {
+  min-height: 0;
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #B00020;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Profile photo delete: accion textual para eliminar foto. */
+.vc-profile-photo-delete {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #B00020;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Profile divider: separador entre hero y formulario. */
+.vc-profile-divider {
+  height: 1px;
+  margin: 30px 0 26px;
+  background: #e3e8f2;
+}
+
+.vc-profile-divider-action {
+  display: none;
+  height: 1px;
+  background: #e3e8f2;
+}
+
+/* Profile grid: layout base de campos. */
+.vc-profile-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Profile grid two: variante de dos columnas. */
+.vc-profile-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Profile field: wrapper de label, input y ayuda. */
+.vc-profile-field {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.vc-profile-field.has-profile-field-error:not(.vc-profile-field--email) {
+  margin-bottom: 34px;
+}
+
+/* Profile field label: texto descriptivo directo sobre cada campo. */
+.vc-profile-field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #666666;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
+
+/* Profile required marker: asterisco de campos obligatorios dentro de Profile. */
+.vc-profile-field .vc-profile-required {
+  color: #DC2626;
+}
+
+/* Profile form controls: inputs y textarea del perfil. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="text"],
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="email"],
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field select,
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field textarea {
+  width: 100%;
+  opacity: 1;
+  padding: 10px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #fff;
+  color: #212121;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Profile desktop inputs: altura fija de 46px solo para campos de una linea. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="text"],
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="email"],
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field select {
+  height: 46px;
+  min-height: 46px;
+}
+
+/* Profile select arrow: alinea la flecha con el padding interno del control. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field select {
+  appearance: none;
+  padding-right: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px 16px;
+}
+
+/* Profile phone inputs: separa prefijo y numero manteniendo el control de 46px. */
+.vc-profile-phone-inputs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+}
+
+.vc-profile-phone-control {
+  display: block;
+  margin: 0;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field--phone .vc-profile-phone-control input[type="text"] {
+  height: 46px;
+  min-height: 46px;
+  padding: 11px;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field--phone .vc-profile-phone-control:first-child {
+  width: 52px;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field--phone .vc-profile-phone-control:first-child input[type="text"] {
+  text-align: center;
+}
+
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field--phone .vc-profile-phone-mobile {
+  display: none;
+}
+
+/* Profile textarea: campo multilinea del perfil. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-field textarea {
+  min-height: 154px;
+  resize: vertical;
+}
+
+/* Profile helper text: ayuda o nota bajo un campo. */
+.vc-profile-field small {
+  color: #B8B8B8;
+  font-size: 12px;
+}
+
+.vc-profile-field > .vc-profile-field-error {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  margin: 0;
+  color: #B00020;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.vc-profile-field > .vc-profile-field-error.is-visible {
+  visibility: visible;
+}
+
+/* Profile email row: input de email y boton de verificacion en una fila; el margen inferior vive en la fila. */
+.vc-profile-email-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 8px;
+}
+
+/* Profile email row field: elimina margen del campo para que la fila controle el espaciado. */
+.vc-profile-email-row .vc-profile-field--email {
+  margin-bottom: 0;
+}
+
+.vc-profile-email-row.has-profile-field-error {
+  margin-bottom: 34px;
+}
+
+/* Profile verify button: accion para verificar email. */
+.vc-profile-verify-button {
+  min-height: var(--vc-dashboard-button-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: end;
+  padding: 11px 23px;
+  border: 0;
+  border-radius: var(--vc-dashboard-button-radius);
+  text-decoration: none;
+  background: #1447E6;
+  color: #FFFFFF;
+  font-weight: var(--vc-dashboard-button-font-weight);
+  font-style: normal;
+  font-size: var(--vc-dashboard-button-font-size);
+  line-height: var(--vc-dashboard-button-line-height);
+  letter-spacing: -0.15px;
+  text-align: center;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+/* Profile verify disabled: estado inactivo del boton de verificacion. */
+.vc-profile-verify-button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Profile email status: mensaje/estado visual del email. */
+.vc-profile-email-status {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: -6px 0 24px;
+  color: #667085;
+  font-size: 14px;
+}
+
+/* Profile email status active: muestra solo estados reales de verificacion o pendiente. */
+.vc-profile-email-status.is-verified,
+.vc-profile-email-status.is-pending {
+  display: inline-flex;
+}
+
+/* Profile email verified: color cuando el email esta verificado. */
+.vc-profile-email-status.is-verified {
+  color: #16a34a;
+}
+
+/* Profile email pending: color cuando hay verificacion pendiente. */
+.vc-profile-email-status.is-pending {
+  color: #B45309;
+}
+
+/* Profile email status dot: punto indicador del estado. */
+.vc-profile-email-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Profile actions: fila final de cancelar/guardar. */
+.vc-profile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+/* Profile actions main: agrupa cancel/save al extremo derecho. */
+.vc-profile-actions-main {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Profile action buttons: estructura compartida de Cancel y Save. */
+.vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-cancel,
+.vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-save {
+  gap: 10px;
+  height: 46px;
+  min-height: 46px;
+  min-width: 148px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  opacity: 1;
+  padding: 10px;
+  border-radius: var(--vc-dashboard-button-radius);
+  font-weight: var(--vc-dashboard-button-font-weight);
+  font-style: normal;
+  font-size: var(--vc-dashboard-button-font-size);
+  line-height: var(--vc-dashboard-button-line-height);
+  letter-spacing: -0.31px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+/* Profile cancel button: accion secundaria. */
+.vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-cancel {
+  border: 1px solid #1447E6;
+  background: #fff;
+  color: #1447E6;
+}
+
+.vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-cancel:visited {
+  color: #1447E6;
+}
+
+/* Profile save button: accion primaria. */
+.vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-save {
+  border: 0;
+  background: #1447E6;
+  color: #FFFFFF;
+}
+
+/* Neutraliza el hover/focus global heredado solo dentro de My profile.
+   Cada control conserva su color real en lugar del fondo rosa del tema base. */
+/* Profile hover reset: mantiene estable el boton Cancel. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-cancel:is(:hover, :focus, :focus-visible) {
+  background: #fff;
+  color: #1447E6;
+  border-color: #1447E6;
+  text-decoration: none;
+}
+
+/* Profile hover reset: mantiene estable el boton de foto. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-photo-button:is(:hover, :focus, :focus-visible) {
+  background: #fff;
+  color: #1447E6;
+  border-color: #1447E6;
+  text-decoration: none;
+}
+
+/* Profile hover reset: mantiene estable el boton guardar. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-save:is(:hover, :focus, :focus-visible) {
+  background: #1447E6;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Profile hover reset: mantiene estable la accion Delete account. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-delete-account:is(:hover, :focus, :focus-visible) {
+  border: 0;
+  background: transparent;
+  color: #DC2626;
+  text-decoration: underline;
+}
+
+/* Profile hover reset: mantiene estable el boton verificar email. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-verify-button:is(:hover, :focus, :focus-visible) {
+  background: #1447E6;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Profile hover reset: mantiene estable la accion eliminar foto. */
+.vc-dashboard-panel--profile .vc-profile-card .vc-profile-photo-delete:is(:hover, :focus, :focus-visible) {
+  background: transparent;
+  color: #f04438;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Component: Privacy
+   Card de privacidad, password fields y accion de guardado.
+   ========================================================================== */
+
+/* Privacy header title: titulo de la seccion de privacidad. */
+.vc-privacy-header h2 {
+  margin: 0 0 28px;
+  color: #212121;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.45px;
+}
+
+/* Privacy password input: campos de contrasena dentro de privacidad. */
+.vc-dashboard-panel .vc-privacy-card .vc-profile-field input[type="password"] {
+  width: 100%;
+  height: 46px;
+  min-height: 46px;
+  padding: 10px 16px;
+  opacity: 1;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--vc-dashboard-control-radius);
+  background: #fff;
+  color: #212121;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Privacy actions: fila de accion para guardar cambios. */
+.vc-privacy-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+/* Privacy save button: CTA para actualizar contrasena. */
+.vc-privacy-save {
+  height: 46px;
+  min-height: 46px;
+  padding: 10px;
+  border: 0;
+  border-radius: var(--vc-dashboard-button-radius);
+  background: #1447E6;
+  color: #FFFFFF;
+  font-style: normal;
+  font-size: var(--vc-dashboard-button-font-size);
+  font-weight: var(--vc-dashboard-button-font-weight);
+  line-height: var(--vc-dashboard-button-line-height);
+  letter-spacing: -0.31px;
+  text-align: center;
+}
+
+.vc-privacy-card .vc-privacy-save:is(:hover, :focus, :focus-visible) {
+  background: #1447E6;
+  color: #FFFFFF;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Component: Help
+   Contenido informativo y lista de soporte.
+   ========================================================================== */
+
+
+/* Help title: titulo de la card de ayuda. */
+.vc-help-card h2 {
+  margin: 0 0 8px;
+  color: #212121;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.45px;
+}
+
+/* Help paragraph: texto introductorio de soporte. */
+.vc-help-card p {
+  margin: 0 0 24px;
+}
+
+/* Help detail list: lista de informacion dentro de ayuda. */
+.vc-help-card .vc-dashboard-detail-list {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Component: Subscription
+   Resumen de plan, metricas, cards, facturas y acciones.
+   ========================================================================== */
+
+/* Subscription shell: wrapper general de toda la vista de suscripcion. */
+.vc-subscription-shell {
+  display: grid;
+  gap: 28px;
+}
+
+/* Subscription summary: card superior con informacion del plan actual. */
+.vc-subscription-summary {
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  background: #FFFFFF;
+}
+
+/* Subscription summary top: franja principal que contiene plan y acciones. */
+.vc-subscription-summary-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+    padding: 16px 24px;
+  background: linear-gradient(135deg, #1D235F 0%, #3237B7 50%, #464DFF 100%);
+
+}
+
+/* Subscription plan: bloque izquierdo con icono, nombre y estado del plan. */
+.vc-subscription-plan {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  color: #FFFFFF;
+}
+
+/* Subscription plan icon: caja del icono dentro del resumen del plan. */
+.vc-subscription-plan-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Subscription plan icon svg: tamano interno del icono del plan. */
+.vc-subscription-plan-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Subscription typography: textos secundarios compartidos en metricas, cards y listas. */
+.vc-subscription-plan small{
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: -0.15px;
+color:#ffffff;
+}
+
+.vc-subscription-metrics small,
+.vc-subscription-card-header h3,
+.vc-subscription-empty p,
+.vc-subscription-invoice-copy span,
+.vc-subscription-action-item span {
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Subscription plan text: nombre y descripcion del plan actual. */
+.vc-subscription-plan small {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Subscription plan name: nombre visible del plan activo. */
+.vc-subscription-plan strong {
+  display: block;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: -0.31px;
+
+}
+
+/* Subscription summary actions: acciones del resumen, como badge de estado y manage. */
+.vc-subscription-summary-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Subscription summary action controls: base comun ordenada para badge y manage en desktop. */
+.vc-subscription-badge,
+.vc-subscription-manage {
+  min-height: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: var(--vc-dashboard-button-radius);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Subscription summary action text: fija la altura de linea para que badge y manage midan igual en desktop. */
+.vc-subscription-badge span,
+.vc-subscription-manage span {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
+
+/* Subscription summary action icons: fija todos los iconos de badge/manage en 16x16. */
+.vc-subscription-badge svg,
+.vc-subscription-manage svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+/* Subscription badge active: estado visual cuando la suscripcion esta activa. */
+.vc-subscription-badge.is-active {
+  background: #16A34A;
+  color: #FFFFFF;
+}
+
+/* Subscription badge inactive: estado visual cuando la suscripcion no esta activa. */
+.vc-subscription-badge.is-inactive {
+  background: rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+}
+
+/* Subscription manage button: boton claro para abrir gestion de suscripcion. */
+.vc-subscription-manage {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: #FFFFFF;
+  color: #3155DD;
+}
+
+/* Subscription metrics: grilla con datos de plan, billing y estado. */
+.vc-subscription-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding: 25px;
+}
+
+/* Subscription metric item: apila etiqueta y valor de cada metrica. */
+.vc-subscription-metrics > div {
+  display: grid;
+  gap: 8px;       
+}
+
+/* Subscription metric label row: alinea el icono de 16x16 con el texto small. */
+.vc-subscription-metric-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Subscription metric icon: estilo compartido para Price, billing date y payment status. */
+.vc-subscription-metric-icon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: #666666;
+}
+
+/* Subscription metric label: texto secundario de cada metrica. */
+.vc-subscription-metrics small {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #666666;
+}
+
+/* Subscription metric value: valor principal de cada metrica. */
+.vc-subscription-metrics strong {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  color: #212121;
+}
+
+/* Subscription metric active value: valor positivo resaltado en verde. */
+.vc-subscription-metrics strong.is-active {
+  color: #16A34A;
+}
+
+/* Subscription metric inactive value: valor negativo resaltado en rojo. */
+.vc-subscription-metrics strong.is-inactive {
+  color: #DC2626;
+}
+
+/* Subscription card: contenedor base de bloques de facturas y acciones. */
+.vc-subscription-card {
+  padding: 25px;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  background: #FFFFFF;
+}
+
+/* Subscription management anchor: ajusta el salto al bloque de gestion. */
+#vc-subscription-management {
+  scroll-margin-top: 24px;
+}
+
+/* Subscription card header: titulo de cada card y enlace de soporte/accion. */
+.vc-subscription-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Subscription card title: titulo de cada bloque interno. */
+.vc-subscription-card-header h3 {
+  margin: 0;
+  color: #212121;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+}
+
+/* Subscription card link: enlace contextual dentro del header de card. */
+.vc-subscription-card-link {
+  color: #3155DD;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  text-decoration: none;
+}
+
+/* Subscription card link disabled: neutraliza enlaces no disponibles. */
+.vc-subscription-card-link.is-disabled {
+  color: #94A3B8;
+  pointer-events: none;
+}
+
+/* Subscription empty state: mensaje cuando no hay facturas o datos disponibles. */
+.vc-subscription-empty {
+  display: flex;
+  align-items: center;
+  height: 84px;
+  min-height: 84px;
+  opacity: 1;
+  padding: 17px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #F8FBFF;
+}
+
+/* Subscription invoices empty: medidas propias del estado vacio de Latest Invoices. */
+.vc-subscription-empty--invoices {
+  height: 80px;
+  min-height: 80px;
+  padding: 16px;
+}
+
+/* Subscription empty paragraph: texto del estado vacio. */
+.vc-subscription-empty p {
+  max-width: 560px;
+  margin: 0;
+  color: #666666;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+}
+
+/* Subscription invoice/action lists: listas internas de facturas y acciones. */
+.vc-subscription-invoice-list,
+.vc-subscription-action-list {
+  display: grid;
+  gap: 12px;
+}
+
+/* Subscription invoice/action item: fila individual de factura o accion. */
+.vc-dashboard-page .vc-subscription-invoice-item,
+.vc-dashboard-page .vc-subscription-action-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #F7F7F7;
+  text-decoration: none;
+}
+
+/* Subscription action link: protege estos enlaces de reglas globales de Elementor. */
+.vc-dashboard-page .vc-subscription-action-item:is(:link, :visited, :hover, :focus, :active) {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Subscription action main: agrupa icono y texto para mantenerlos alineados. */
+.vc-subscription-action-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Subscription cancel icon: icono fijo a la izquierda del texto de cancelar. */
+.vc-subscription-action-item--cancel .vc-subscription-action-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #666666;
+}
+
+/* Subscription invoice copy: textos principales y secundarios de cada factura. */
+.vc-subscription-invoice-copy {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Subscription action copy: bloque interno de texto separado del enlace padre. */
+.vc-subscription-action-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* Subscription invoice/action title: texto principal de factura o accion. */
+.vc-dashboard-page .vc-subscription-invoice-copy strong,
+.vc-dashboard-page .vc-subscription-action-item strong {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #212121;
+}
+
+/* Subscription invoice/action meta: texto secundario de factura o accion. */
+.vc-dashboard-page .vc-subscription-invoice-copy span,
+.vc-dashboard-page .vc-subscription-action-item span {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #666666;
+}
+
+/* Subscription invoice amount: monto fijo alineado al final de la fila. */
+.vc-dashboard-page .vc-subscription-invoice-amount {
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  color: #212121;
+}
+
+/* Subscription action arrow: SVG fijo a la derecha en desktop y mobile. */
+.vc-dashboard-page .vc-subscription-action-arrow {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #64748B;
+}
+
+/* ==========================================================================
+   Responsive
+   Mantener las reglas responsive al final, agrupadas por breakpoint.
+   Cada comentario indica que componente cambia dentro de esa resolucion.
+   ========================================================================== */
+
+/* Base desktop */
+
+@media (max-width: 1180px) {
+  /* --------------------------------------------------------------------------
+     1180px: desktop compacto.
+     Solo ajusta densidad de contenido y columnas; no redefine componentes.
+     -------------------------------------------------------------------------- */
+
+  /* Content responsive: padding controlado para desktop compacto. */
+  .vc-dashboard-content {
+    padding: 44px 24px 28px;
+  }
+
+  /* Content responsive: reduce paddings especiales del mock test en desktop compacto. */
+  .vc-dashboard-content--mock-test.is-exam-summary-open {
+    padding: 44px 40px 72px;
+  }
+
+  /* Content responsive: padding especial para sesion del mock test en desktop compacto. */
+  .vc-dashboard-content--mock-test.is-exam-session {
+    padding: 44px 48px 120px;
+  }
+
+  /* Dashboard grids: reduce grillas principales de 3 a 2 columnas. */
+  .vc-dashboard-summary-grid,
+  .vc-dashboard-subject-grid,
+  .vc-dashboard-panel-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Subscription: metricas en una sola columna antes de tablet. */
+  .vc-subscription-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  /* --------------------------------------------------------------------------
+     960px: tablet/header mobile.
+     Aqui nace el header superior, el menu off-canvas y el search compacto.
+     -------------------------------------------------------------------------- */
+
+  /* 960 Page flow and shell */
+
+  /* Dashboard body: permite scroll normal cuando el dashboard deja de ser app fija. */
+  body.vc-dashboard-page {
+    height: auto;
+    overflow: auto;
+  }
+
+  /* Menu hamburguesa: overlay del off-canvas mobile sin agregar markup extra. */
+  body.vc-dashboard-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+  }
+
+  /* Menu hamburguesa: muestra overlay y bloquea el fondo cuando el menu esta abierto. */
+  body.vc-dashboard-page.is-dashboard-menu-open {
+    overflow: hidden;
+  }
+
+  /* Menu hamburguesa: activa el overlay clickeable cuando el menu esta abierto. */
+  body.vc-dashboard-page.is-dashboard-menu-open::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Layout shell: sidebar y main pasan de columnas a flujo vertical. */
+  .vc-dashboard-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  /* Sidebar: se convierte en header mobile y host del panel off-canvas. */
+  .vc-dashboard-sidebar {
+    position: relative;
+    z-index: 110;
+    height: auto;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid #dbe3f0;
+    overflow: visible;
+  }
+
+  /* Menu abierto: el sidebar deja que el overlay cubra el brand cerrado,
+     mientras nav/footer fijos quedan por encima como panel real. */
+  .vc-dashboard-sidebar.is-menu-open {
+    z-index: auto;
+  }
+
+  .vc-dashboard-sidebar.is-menu-open > .vc-dashboard-brand {
+    z-index: 80;
+  }
+
+  /* Menu hamburguesa: el panel deja de ocupar alto en el header mobile. */
+  .vc-dashboard-sidebar-menu-panel {
+    flex: 0 0 auto;
+    min-height: 0;
+    display: block;
+  }
+
+  /* Menu hamburguesa: brand compacto con boton a la izquierda, logo y busqueda + avatar en una línea. */
+  .vc-dashboard-brand {
+    position: relative;
+    z-index: 130;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 0 16px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    min-height: 70px;
+  }
+
+  /* Menu hamburguesa: separa logo/menu a la izquierda y acciones compactas al extremo derecho. */
+  .vc-dashboard-brand-left {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 14px;
+  }
+
+  /* Mobile search: el buscador se integra en el brand como búsqueda reducida con avatar. */
+  /* Brand search icon: tamano del icono de busqueda compacto. */
+  .vc-dashboard-brand-search svg {
+    color: #212121;
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Menu hamburguesa: el perfil compacto muestra solo el avatar sin reducirse. */
+  /* Brand actions: agrupa búsqueda y avatar a la derecha en una línea. */
+  .vc-dashboard-brand-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: auto;
+  }
+
+  /* Menu hamburguesa: boton tactil accesible que solo aparece en tablet/mobile. */
+  .vc-dashboard-menu-toggle {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    /* Menu toggle: elimina el borde para conservar el boton limpio en responsive. */
+    border: 0;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #212121;
+    cursor: pointer;
+  }
+
+  /* Menu toggle: mantiene el boton estable y sin hover/focus visual heredado. */
+  .vc-dashboard-menu-toggle:is(:hover, :focus, :focus-visible) {
+    border: 0;
+    background: #FFFFFF;
+    color: #212121;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  /* Menu hamburguesa: lineas internas del icono. */
+  .vc-dashboard-menu-toggle span {
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* Menu hamburguesa: estado abierto, convierte el icono en una X limpia. */
+  .vc-dashboard-sidebar.is-menu-open .vc-dashboard-menu-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  /* Menu hamburguesa abierto: oculta la linea central para formar la X. */
+  .vc-dashboard-sidebar.is-menu-open .vc-dashboard-menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  /* Menu hamburguesa abierto: rota la linea inferior para completar la X. */
+  .vc-dashboard-sidebar.is-menu-open .vc-dashboard-menu-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Menu hamburguesa: nav y logout comparten el ancho exacto pedido para mobile 480px.
+     La variable evita numeros magicos y min() protege viewports menores a 256px. */
+  .vc-dashboard-nav,
+  .vc-dashboard-sidebar-footer {
+    position: fixed;
+    left: 0;
+    width: min(var(--vc-dashboard-mobile-menu-width), 100vw);
+    z-index: 120;
+    background: #FFFFFF;
+    transform: translateX(-100%);
+    transition: transform 0.24s ease;
+  }
+
+  /* Mobile menu panel header: close button first, logo second, matching the 480px off-canvas layout. */
+  .vc-dashboard-menu-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 80px;
+    height: 80px;
+    margin: 0;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  /* Mobile menu panel header inner: controls spacing for close action and logo. */
+  .vc-dashboard-menu-panel-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    min-height: 80px;
+    height: 80px;
+    padding: 0 16px;
+  }
+
+  /* Mobile menu panel logo link: mantiene el logo clickeable sin alterar su caja visual. */
+  .vc-dashboard-menu-panel-logo-link {
+    display: block;
+    width: 110px;
+    height: 24px;
+    flex: 0 0 110px;
+    text-decoration: none;
+  }
+
+  /* Mobile menu panel logo: exact requested mobile artboard size, isolated from desktop brand logo. */
+  .vc-dashboard-menu-panel-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  /* Mobile menu close: requested 26x20 visible X and control area. */
+  .vc-dashboard-menu-close {
+    width: 26px;
+    height: 20px;
+    flex: 0 0 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #212121;
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .vc-dashboard-menu-close:is(:hover, :focus, :focus-visible) {
+    border: 0;
+    background: transparent;
+    color: #212121;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  .vc-dashboard-menu-close svg {
+    width: 26px;
+    height: 20px;
+  }
+
+  /* Menu hamburguesa: nav ocupa el alto disponible del panel y conserva scroll interno. */
+  .vc-dashboard-nav {
+    top: 0;
+    bottom: 76px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - 76px);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Menu hamburguesa: el listado de grupos controla padding y scroll debajo del header. */
+  .vc-dashboard-nav-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 36px 16px;
+  
+    overflow-y: auto;
+  }
+
+  /* Menu hamburguesa: los grupos delegan el padding lateral al contenedor del listado. */
+  .vc-dashboard-nav-group {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* Menu hamburguesa: footer queda fijo al final del panel off-canvas. */
+  .vc-dashboard-sidebar-footer {
+    bottom: 0;
+    min-height: 76px;
+    padding: 16px 16px 20px;
+    border-top: 1px solid #E2E8F0;
+  }
+
+  /* Menu hamburguesa: al abrir, desliza nav y footer desde el lateral izquierdo. */
+  .vc-dashboard-sidebar.is-menu-open .vc-dashboard-nav,
+  .vc-dashboard-sidebar.is-menu-open .vc-dashboard-sidebar-footer {
+    transform: translateX(0);
+  }
+
+  /* 960 Main content flow */
+
+  /* Mobile search: oculta topbar cuando búsqueda y avatar están en el brand. */
+  .vc-dashboard-topbar {
+    display: none;
+  }
+
+  .vc-dashboard-topbar .vc-dashboard-search {
+    display: none;
+  }
+
+  .vc-dashboard-topbar-actions {
+    display: none;
+  }
+
+  /* Main: libera alto fijo y overflow interno en pantallas menores. */
+  .vc-dashboard-main {
+    height: auto;
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: visible;
+  }
+
+  /* Content: el scroll pasa a la pagina completa. */
+  .vc-dashboard-content {
+    padding: 32px 22px 30px;
+    overflow: visible;
+  }
+
+  /* Content responsive: paddings especiales del mock test adaptados al layout mobile. */
+  .vc-dashboard-content--mock-test.is-exam-summary-open {
+    padding: 32px 22px 56px;
+  }
+
+  /* Content responsive: padding especial para sesion del mock test en tablet/mobile. */
+  .vc-dashboard-content--mock-test.is-exam-session {
+    padding: 32px 22px 72px;
+  }
+
+  /* 960 Brand search and compact user controls */
+
+  .vc-dashboard-brand-search {
+    flex: 0 0 36px;
+    width: 36px;
+    min-width: 36px;
+    max-width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .vc-dashboard-brand-search svg,
+  .vc-dashboard-brand-bell svg {
+    flex: 0 0 16px;
+    display: block;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .vc-dashboard-brand-search:is(:hover, :focus, :focus-visible) {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .vc-dashboard-brand-search input {
+    display: none;
+    width: 0;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-search {
+    flex: 0 1 250px;
+    width: 250px;
+    min-width: 0;
+    max-width: min(250px, 42vw);
+    justify-content: flex-start;
+    padding: 0 12px;
+    border: 1px solid #d7dfec;
+    background: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgba(231, 236, 244, 0.4);
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-search input {
+    display: block;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .vc-dashboard-brand-bell {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vc-dashboard-brand-user-pill {
+    width: 156px;
+    min-width: 0;
+    height: 48px;
+    gap: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-avatar {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-user-copy {
+    min-width: 0;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-user-copy strong,
+  .vc-dashboard-brand-user-pill .vc-dashboard-user-copy small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 720px) {
+  /* --------------------------------------------------------------------------
+     720px: layout de una columna y paddings compactos.
+     Mantiene la estructura creada en 960px sin asumir el diseno de 480px.
+     -------------------------------------------------------------------------- */
+
+  /* Content responsive: padding controlado para tablet pequena/mobile grande. */
+  .vc-dashboard-content {
+    padding: 24px 18px 32px;
+  }
+
+  /* Content responsive: mantiene paddings especiales del mock test dentro del ancho mobile. */
+  .vc-dashboard-content--mock-test.is-exam-summary-open {
+    padding: 24px 18px 44px;
+  }
+
+  /* Content responsive: padding especial para sesion del mock test en 720px. */
+  .vc-dashboard-content--mock-test.is-exam-session {
+    padding: 24px 18px 56px;
+  }
+
+  /* Menu hamburguesa: reduce paddings laterales del brand. */
+  .vc-dashboard-brand {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .vc-dashboard-brand-user-pill {
+    width: 148px;
+  }
+
+  /* Dashboard grids: cards principales pasan a una sola columna. */
+  .vc-dashboard-summary-grid,
+  .vc-dashboard-subject-grid,
+  .vc-dashboard-panel-grid--two {
+    grid-template-columns: 1fr;
+  }
+
+  /* Global dashboard card: apila contenido y CTA. */
+  .vc-dashboard-global-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Global dashboard card: CTA a ancho completo. */
+  .vc-dashboard-global-card .vc-dashboard-button {
+    width: 100%;
+  }
+
+  /* Profile tablet: solo reduce padding; conserva estructura base para no crear diseno mobile en 720px. */
+  .vc-dashboard-panel--profile .vc-profile-card {
+    padding: 22px 18px;
+  }
+
+  /* Subscription: reduce padding de resumen y cards. */
+  .vc-subscription-summary-top,
+  .vc-subscription-card {
+    padding: 22px 18px;
+  }
+
+  /* Subscription: filas horizontales pasan a stack vertical. */
+  .vc-subscription-card-header,
+  .vc-subscription-summary-top,
+  .vc-subscription-summary-actions,
+  .vc-subscription-invoice-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Subscription mobile action item: conserva texto a la izquierda y flecha a la derecha. */
+  .vc-dashboard-page .vc-subscription-action-item {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /* Subscription: reduce padding de metricas. */
+  .vc-subscription-metrics {
+    padding: 20px 18px 22px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  /* --------------------------------------------------------------------------
+     480px: diseno mobile propio.
+     Esta capa puede cambiar estructura, orden visual y medidas por vista.
+     No mezclar con 720px salvo que el valor sea identico y probado.
+     -------------------------------------------------------------------------- */
+
+  /* Dashboard buttons typography mobile: los botones con variable comun suben a 16px en 480px. */
+  body.vc-dashboard-page {
+    --vc-dashboard-button-font-size: 16px;
+    --vc-dashboard-button-line-height: 24px;
+  }
+
+  /* 480 Header and navigation */
+
+  /* Menu hamburguesa: compacta controles del brand para pantallas pequenas. */
+  .vc-dashboard-brand {
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Menu hamburguesa: reduce padding vertical de cada link en 480px. */
+  .vc-dashboard-nav-link {
+    padding: 12px 16px;
+  }
+
+  /* 480 Layout and generic content */
+
+  /* Layout mobile 480px: evita que la fila del sidebar se estire dentro del grid raiz. */
+  .vc-dashboard-shell {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  /* Content responsive: padding exacto para mobile 480px e inferiores. */
+  .vc-dashboard-content {
+    padding: 16px 16px 33px;
+  }
+
+  /* Menu mobile nav list: sin alto fijo para que Support no quede oculto en viewports bajos como 375x667. */
+  .vc-dashboard-nav-list {
+    min-height: 0;
+  }
+
+  /* Sidebar footer mobile 480px: conserva la misma alineacion lateral que los nav links. */
+  .vc-dashboard-sidebar-footer {
+    bottom: 0;
+    min-height: 80px;
+    padding: 16px;
+    border-top: 1px solid #E2E8F0;
+  }
+
+  /* 480 Mock test */
+
+  /* Mock test mobile: elimina el padding del content para que heading y panel controlen su espacio. */
+  .vc-dashboard-content--mock-test,
+  .vc-dashboard-content--mock-test.is-exam-summary-open,
+  .vc-dashboard-content--mock-test.is-exam-session {
+    padding: 0;
+  }
+
+  /* Mock test mobile panel: el modulo interno controla el padding de cada vista. */
+  .vc-dashboard-content--mock-test .vc-dashboard-panel--mock-test {
+    padding: 0;
+  }
+
+  /* 480 Privacy */
+
+  /* Privacy mobile: el content queda limpio para que shell y heading manejen su espacio. */
+  .vc-dashboard-content--privacy {
+    padding: 0;
+  }
+
+  /* Privacy mobile heading: franja blanca compacta de Privacy & Security. */
+  .vc-dashboard-content--privacy .vc-dashboard-heading {
+    min-height: 80px;
+    align-content: center;
+    margin-bottom: 0;
+    padding: 16px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+  }
+
+  .vc-dashboard-heading .header-h1 {
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #212121;
+  }
+
+  .vc-profile-field {
+  gap: 8px;
+  margin-bottom: 16px;
+ }
+
+  /* Privacy mobile shell: padding propio del contenido en 480px. */
+  .vc-dashboard-panel--privacy .vc-privacy-shell {
+    padding: 18px 16px 34px;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="text"],
+  .vc-dashboard-panel--profile .vc-profile-card .vc-profile-field input[type="email"],
+  .vc-dashboard-panel--profile .vc-profile-card .vc-profile-field select {
+    width: 100%;
+    height: 46px;
+    min-height: 46px;
+    opacity: 1;
+    padding: 10px 16px;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--vc-dashboard-control-radius);
+    background: #fff;
+    color: #212121;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-card .vc-profile-field select {
+    appearance: none;
+    padding-right: 42px;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px 16px;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-card .vc-profile-field--textarea textarea {
+    height: 118px;
+    min-height: 118px;
+    resize: vertical;
+  }
+
+  /* Privacy mobile card: padding especifico solo para Privacy & Security en 480px. */
+  .vc-dashboard-panel--privacy .vc-privacy-card {
+    padding: 33px 20px;
+  }
+
+  /* Privacy mobile save: boton compacto de 44px con padding interno uniforme. */
+  .vc-dashboard-panel--privacy .vc-privacy-save {
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+
+  /* 480 Subscription */
+
+  /* Subscription mobile: igual que Privacy, el content deja el espacio al heading y al shell interno. */
+  .vc-dashboard-content--subscription {
+    padding: 0;
+  }
+
+  /* Subscription mobile heading: franja blanca compacta consistente con Privacy & Security. */
+  .vc-dashboard-content--subscription .vc-dashboard-heading {
+    min-height: 80px;
+    align-content: center;
+    margin-bottom: 0;
+    padding: 16px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+  }
+
+  /* Subscription mobile shell: padding propio de la vista para separar cards del borde. */
+  .vc-dashboard-content--subscription .vc-subscription-shell {
+    padding: 18px 16px 34px;
+  }
+
+  /* Subscription mobile summary top: organiza plan a la izquierda y estado/manage a la derecha en 480px. */
+  .vc-dashboard-content--subscription .vc-subscription-summary-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  /* Subscription mobile plan: permite que el texto respire sin empujar el badge de estado. */
+  .vc-dashboard-content--subscription .vc-subscription-plan {
+    min-width: 0;
+  }
+
+  /* Subscription mobile plan copy: evita que nombres largos rompan la columna derecha de acciones. */
+  .vc-dashboard-content--subscription .vc-subscription-plan > div {
+    min-width: 0;
+  }
+
+  /* Subscription mobile plan text: trunca con elegancia si el nombre del plan es muy largo. */
+  .vc-dashboard-content--subscription .vc-subscription-plan small,
+  .vc-dashboard-content--subscription .vc-subscription-plan strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .vc-subscription-plan small {
+
+  margin: 0px;
+}
+
+  /* Subscription mobile summary actions: permite alinear badge con plan y bajar manage a fila completa. */
+  .vc-dashboard-content--subscription .vc-subscription-summary-actions {
+    display: contents;
+  }
+
+  /* Subscription mobile status badge: queda en la misma fila que el plan, alineado a la derecha. */
+  .vc-dashboard-content--subscription .vc-subscription-badge {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    flex: 0 0 auto;
+
+    min-width: 75px;
+    height: 40px;
+    min-height: 40px;
+    padding: 5px 12px;
+    box-sizing: border-box;
+  }
+
+  /* Subscription mobile manage: baja debajo del plan y ocupa todo el ancho disponible. */
+  .vc-dashboard-content--subscription .vc-subscription-manage {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    min-height: 32px;
+    height: 40px;
+    padding: 5px 12px;
+    box-sizing: border-box;
+  }
+
+  /* Subscription mobile manage icon: mantiene el engranaje centrado dentro del boton full-width. */
+  .vc-dashboard-content--subscription .vc-subscription-manage svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Subscription mobile manage text: se muestra en 480px porque el boton ocupa todo el ancho. */
+  .vc-dashboard-content--subscription .vc-subscription-manage span {
+    display: inline;
+  }
+
+  /* Subscription mobile cards: padding compacto solo para las cards internas en 480px. */
+  .vc-dashboard-content--subscription .vc-subscription-card {
+    padding: 16px;
+  }
+
+  /* Subscription mobile metrics: una columna para que cada dato respire en pantallas pequenas. */
+  .vc-dashboard-content--subscription .vc-subscription-metrics {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  /* Subscription mobile actions: botones internos a ancho completo como Privacy en 480px. */
+  .vc-dashboard-content--subscription .vc-subscription-action-item,
+  .vc-dashboard-content--subscription .vc-subscription-invoice-item {
+    width: 100%;
+  }
+
+  /* 480 Help */
+
+  /* Help mobile: iguala el layout de Privacy/Profile para que el body maneje el scroll completo. */
+  .vc-dashboard-content--help {
+    padding: 0;
+  }
+
+  /* Help mobile heading: franja blanca compacta consistente con las otras vistas mobile. */
+  .vc-dashboard-content--help .vc-dashboard-heading {
+    min-height: 80px;
+    align-content: center;
+    margin-bottom: 0;
+    padding: 16px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+  }
+
+  /* Help mobile panel: padding interno propio para que el contenido no quede cortado. */
+  .vc-dashboard-content--help .vc-dashboard-panel-grid {
+    padding: 18px 16px 34px;
+  }
+
+  /* Help mobile detail row: apila label y email para evitar que el correo flote. */
+  .vc-dashboard-content--help .vc-dashboard-detail-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  /* Help mobile email value: permite cortar correos largos sin romper el ancho. */
+  .vc-dashboard-content--help .vc-dashboard-detail-list strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* 480 Profile */
+
+  /* Profile mobile 480px: elimina el padding del content para que Profile controle su propio espacio. */
+  .vc-dashboard-content--profile {
+    padding: 0;
+  }
+
+  /* Profile mobile shell: margen interno general de la vista Profile en 480px. */
+  .vc-dashboard-panel--profile .vc-profile-shell {
+    padding: 16px 16px 33px;
+  }
+
+  /* Profile mobile card: deja el espacio exterior al shell y mantiene solo aire interno. */
+  .vc-dashboard-content--profile .vc-profile-card {
+    padding: 33px 16px;
+  }
+
+  /* Profile mobile heading: superficie compacta dentro del breakpoint 480px. */
+  .vc-dashboard-content--profile .vc-dashboard-heading {
+    min-height: 80px;
+    height: auto;
+    align-content: center;
+    margin-bottom: 0;
+    padding: 16px;
+    gap: 7px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+  }
+
+  /* Profile mobile heading title: escala compacta solo en la vista Profile 480px. */
+  .vc-dashboard-content--profile #vc-dashboard-panel-title,
+  .vc-dashboard-content--profile .vc-dashboard-heading .header-h1 {
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+
+  /* Profile mobile heading subtitle: escala compacta solo en la vista Profile 480px. */
+  .vc-dashboard-content--profile .vc-dashboard-heading p {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    vertical-align: bottom;
+  }
+
+  /* Profile mobile hero: centra avatar, iniciales y textos del bloque superior. */
+  .vc-dashboard-panel--profile .vc-profile-hero {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  /* Profile mobile photo edit: oculta el boton textual y usa el avatar como accion. */
+  .vc-dashboard-panel--profile .vc-profile-photo-button {
+    display: none;
+  }
+
+  /* Profile mobile avatar action: avatar de 96px con icono de edicion superpuesto. */
+  .vc-dashboard-panel--profile .vc-profile-avatar-wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: visible;
+    background-color: #1447E6;
+    cursor: pointer;
+  }
+
+  /* Profile mobile avatar media: conserva el recorte circular aunque el wrapper permita el icono externo. */
+  .vc-dashboard-panel--profile .vc-profile-avatar-image,
+  .vc-dashboard-panel--profile .vc-profile-avatar-fallback {
+    border-radius: 50%;
+  }
+
+  /* Profile mobile avatar initials: reduce iniciales dentro del circulo de 96px. */
+  .vc-dashboard-panel--profile .vc-profile-avatar-fallback {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  /* Profile mobile avatar edit icon: lapiz visual para abrir el selector de foto. */
+  .vc-dashboard-panel--profile .vc-profile-avatar-wrap::after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #E2E8F0;
+    border-radius: 50%;
+    background: #FFFFFF url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 20H21' stroke='%23666666' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M16.5 3.5C16.8978 3.10217 17.4374 2.87868 18 2.87868C18.2786 2.87868 18.5544 2.93355 18.8118 3.04016C19.0692 3.14676 19.303 3.30302 19.5 3.5C19.697 3.69698 19.8532 3.93084 19.9598 4.18821C20.0665 4.44558 20.1213 4.72142 20.1213 5C20.1213 5.27858 20.0665 5.55442 19.9598 5.81179C19.8532 6.06916 19.697 6.30302 19.5 6.5L7 19L3 20L4 16L16.5 3.5Z' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px 14px no-repeat;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.16);
+  }
+
+  /* Profile mobile hero text: asegura centrado de iniciales y copy. */
+  .vc-dashboard-panel--profile .vc-profile-avatar-fallback,
+  .vc-dashboard-panel--profile .vc-profile-hero-copy {
+    text-align: center;
+  }
+
+  .vc-dashboard-panel .vc-privacy-card .vc-profile-field input[type="password"] {
+    height: 46px;
+    min-height: 46px;
+    padding: 10px 16px;
+    border-radius: var(--vc-dashboard-control-radius);
+  }
+
+  /* Profile mobile membership date: baja la fecha a segunda linea solo en 480px. */
+  .vc-dashboard-panel--profile .vc-profile-member-since-date {
+    display: block;
+  }
+
+  /* Profile mobile photo actions: centra la accion restante cuando existe Delete photo. */
+  .vc-dashboard-panel--profile .vc-profile-photo-actions {
+    justify-content: center;
+  }
+
+  /* Profile mobile fields: separacion vertical consistente entre campos apilados. */
+  .vc-dashboard-panel--profile .vc-profile-grid--two {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-field > .vc-profile-field-error {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  /* Profile mobile email: mantiene input y Verify en la misma linea con 8px de separacion. */
+  .vc-dashboard-panel--profile .vc-profile-email-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  /* Profile mobile email field: elimina margen para alinear input y Verify en la misma recta. */
+  .vc-dashboard-panel--profile .vc-profile-email-row .vc-profile-field--email {
+    margin-bottom: 0;
+  }
+
+  /* Profile mobile verify button: iguala altura y eje vertical del input de email. */
+  .vc-dashboard-panel--profile .vc-profile-email-row .vc-profile-verify-button {
+    min-height: 48px;
+    width: auto;
+    align-self: end;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Profile mobile email status: elimina el margen negativo que hacia flotar el estado del email. */
+  .vc-dashboard-panel--profile .vc-profile-email-status {
+    margin: 0 0 24px;
+  }
+
+  /* Profile mobile actions: ordena Cancel, Save y Delete en columna con 12px. */
+  .vc-dashboard-panel--profile .vc-profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  /* Profile mobile actions main: apila Cancel y Save antes de Delete. */
+  .vc-dashboard-panel--profile .vc-profile-actions-main {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Profile mobile delete action: queda como texto despues del separador en 480px. */
+  .vc-dashboard-panel--profile .vc-profile-delete-account {
+    order: 3;
+    width: auto;
+    align-self: center;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-divider-action {
+    order: 2;
+    display: block;
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  /* Profile mobile actions: botones a ancho completo solo en 480px. */
+  .vc-dashboard-panel--profile .vc-profile-cancel {
+    width: 100%;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-save {
+    width: 100%;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-cancel {
+    height: 44px;
+    min-height: 44px;
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-actions-main .vc-profile-save {
+    height: 44px;
+    min-height: 44px;
+    min-width: 100%;
+    padding: 10px;
+    border: 1px solid transparent;
+  }
+
+  /* 480 Header compact controls */
+
+  /* Header mobile: reduce separacion entre logo, menu y acciones compactas. */
+  .vc-dashboard-brand-left,
+  .vc-dashboard-brand-actions {
+    align-items: center;
+  }
+
+  .vc-dashboard-brand-left {
+    gap: 30px;
+  }
+
+  .vc-dashboard-brand-left {
+    justify-content: flex-start;
+  }
+
+  .vc-dashboard-brand-actions {
+    justify-content: flex-end;
+    margin-left: auto;
+    gap: 0;
+  }
+
+  /* Header mobile: reduce logo para que no compita con las acciones. */
+  .vc-dashboard-brand-logo {
+    width: 118px;
+  }
+
+  /* Header mobile: compacta el boton tactil de menu. */
+  .vc-dashboard-menu-toggle {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .vc-dashboard-brand-bell {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vc-dashboard-brand-bell svg {
+    flex: 0 0 16px;
+    display: block;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .vc-dashboard-brand-bell .vc-dashboard-bell-dot {
+    top: 5px;
+    right: 5px;
+    width: 6px;
+    height: 6px;
+  }
+
+  .vc-dashboard-brand-search {
+    flex: 0 0 36px;
+    width: 36px;
+    min-width: 36px;
+    max-width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .vc-dashboard-brand-search:is(:hover, :focus, :focus-visible) {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .vc-dashboard-brand-search svg {
+    color: #212121;
+    flex: 0 0 16px;
+    display: block;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+  }
+
+  .vc-dashboard-brand-search input {
+    display: none;
+    width: 0;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .vc-dashboard-brand-user-pill {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 0;
+    gap: 0;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-avatar {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-avatar {
+    padding-right: 6px;
+    padding-left: 6px;
+    box-sizing: border-box;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-avatar-fallback {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0;
+  }
+
+  .vc-dashboard-brand-user-pill .vc-dashboard-user-copy {
+    display: none;
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-logo {
+    display: none;
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-left {
+    flex: 0 0 auto;
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-actions {
+    flex: 1 1 auto;
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-search {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    justify-content: flex-start;
+    padding: 0 12px;
+    border: 1px solid #d7dfec;
+    background: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgba(231, 236, 244, 0.4);
+  }
+
+  body.is-dashboard-search-open .vc-dashboard-brand-search input {
+    display: block;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .vc-subscription-metrics small {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: #666666;
+  }
+
+  .vc-subscription-empty p {
+  max-width: 400px;
+  margin: 0;
+  color: #666666;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: -0.31px;
+  }
+
+  .vc-subscription-empty {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 102px;
+  min-height: 102px;
+  opacity: 1;
+  padding: 12px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #F8FBFF;
+  }
+
+  /* Subscription invoices empty mobile: mantiene Latest Invoices compacto y separado del empty general. */
+  .vc-subscription-empty--invoices {
+    height: 80px;
+    min-height: 80px;
+    padding: 12px;
+  }
+
+  .vc-subscription-shell {
+    display: grid;
+    gap: 24px;
+  }
+
+  .vc-dashboard-page .vc-subscription-invoice-copy strong, .vc-dashboard-page .vc-subscription-action-item strong {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: #212121;
+  }
+  .vc-dashboard-page .vc-subscription-invoice-copy span, .vc-dashboard-page .vc-subscription-action-item span {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    color: #666666;
+  }
+  /* Profile mobile fields: elimina margen final heredado solo en 480px. */    
+  .vc-dashboard-panel--profile .vc-profile-field {
+    margin-bottom: 0;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-field.has-profile-field-error:not(.vc-profile-field--email) {
+    margin-bottom: 28px;
+  }
+
+  .vc-dashboard-panel--profile .vc-profile-email-row.has-profile-field-error {
+    margin-bottom: 28px;
+  }
+
+}
+
