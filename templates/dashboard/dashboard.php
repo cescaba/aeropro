@@ -114,15 +114,27 @@ $render_icon = static function (string $icon): string {
           aria-expanded="false"
           data-vc-dashboard-search-toggle
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.5 17.5L13.8833 13.8833" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#212121" stroke-width="1.66648" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 14L11.1333 11.1333" stroke="#212121" stroke-width="1.66648" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
           <input type="search" placeholder="<?php echo esc_attr__('Search courses', 'vc-onboarding-wizard'); ?>" aria-label="<?php echo esc_attr($search_placeholder); ?>">
         </label>
 
         <button class="vc-dashboard-bell vc-dashboard-brand-bell" type="button" aria-label="Notifications">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8m6 12a3 3 0 0 0 2.12-.88A3 3 0 0 0 15 18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2365_1641)">
+<path d="M6.84521 14C6.96224 14.2027 7.13056 14.371 7.33324 14.488C7.53593 14.605 7.76584 14.6666 7.99988 14.6666C8.23392 14.6666 8.46383 14.605 8.66652 14.488C8.8692 14.371 9.03752 14.2027 9.15455 14" stroke="#212121" stroke-width="1.66648" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.17467 10.2173C2.08758 10.3128 2.0301 10.4315 2.00924 10.559C1.98837 10.6865 2.00501 10.8174 2.05714 10.9356C2.10926 11.0538 2.19462 11.1544 2.30284 11.225C2.41105 11.2956 2.53745 11.3332 2.66667 11.3333H13.3333C13.4625 11.3334 13.589 11.2959 13.6972 11.2254C13.8055 11.1549 13.891 11.0545 13.9433 10.9363C13.9955 10.8182 14.0123 10.6874 13.9916 10.5599C13.9709 10.4323 13.9136 10.3136 13.8267 10.218C12.94 9.304 12 8.33267 12 5.33334C12 4.27247 11.5786 3.25505 10.8284 2.50491C10.0783 1.75476 9.06087 1.33334 8 1.33334C6.93914 1.33334 5.92172 1.75476 5.17157 2.50491C4.42143 3.25505 4 4.27247 4 5.33334C4 8.33267 3.05933 9.304 2.17467 10.2173Z" stroke="#212121" stroke-width="1.66648" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_2365_1641">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
           <span class="vc-dashboard-bell-dot"></span>
         </button>
 

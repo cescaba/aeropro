@@ -155,7 +155,7 @@ margin-bottom:30px;
 
 /* Onboarding right panel: columna blanca que centra el card del formulario. */
 .vc-onb-right{
-  --vc-onb-right-padding-x: 96px;
+  --vc-onb-right-padding-x: 50px;
   --vc-onb-right-padding-y: clamp(24px, 5vh, 40px);
   width:50%;
   min-height: 100vh;
@@ -800,7 +800,7 @@ font-size:14px;
 /* Final step title: titulo principal de finalizacion. */
 .vc-onb-card .vc-final-step__title{
   opacity: 1;
-  margin: 0 0 7px;
+  margin: 0;
   font-size: 28px;
   font-weight: 600;
   line-height:41px;
