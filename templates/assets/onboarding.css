@@ -378,11 +378,20 @@ margin-bottom:30px;
     box-sizing: border-box;
 }
 
+#step-3 #vc_last_name {
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+}
+
 #step-3 #vc_first_name:focus,
 #step-3 #vc_first_name:focus-visible,
-#step-3 #vc_first_name:active,
-#step-3 #vc_first_name:not(:placeholder-shown),
-#step-3 #vc_first_name:-webkit-autofill {
+#step-3 #vc_first_name:active {
+    border: 2px solid #E2E8F0;
+}
+
+#step-3 #vc_last_name:focus,
+#step-3 #vc_last_name:focus-visible,
+#step-3 #vc_last_name:active {
     border: 2px solid #E2E8F0;
 }
 /* Onboarding labels: tipografia base de labels del formulario. */

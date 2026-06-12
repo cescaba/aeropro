@@ -167,6 +167,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       'sign_in_url' => wp_logout_url($sign_in_url),
       'resend_url' => wp_logout_url($reset_password_url),
       'notices_html' => $notices_html,
+      'is_email_verification' => true,
     ]);
 
     return $html . $this->inline_css();

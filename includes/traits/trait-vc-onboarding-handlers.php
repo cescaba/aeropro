@@ -68,14 +68,26 @@ trait VC_Onboarding_Wizard_Handlers {
       exit;
     }
 
-    update_user_meta($user_id, self::META_VERIFIED, 0);
+    // En desarrollo/local, auto-verificar para saltarse el email
+    $is_local = defined('WP_ENV') && WP_ENV === 'local' ||
+                (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') ||
+                strpos($_SERVER['HTTP_HOST'] ?? '', 'localhost') !== false ||
+                strpos($_SERVER['HTTP_HOST'] ?? '', '.local') !== false;
 
-    $token = wp_generate_password(32, false, false);
-    $hash  = wp_hash($token);
-    update_user_meta($user_id, self::META_TOKEN, $hash);
-    update_user_meta($user_id, self::META_TOKEN_EXPIRES, time() + 24 * 3600);
+    if ($is_local) {
+      update_user_meta($user_id, self::META_VERIFIED, 1);
+      // Opcional: agregar un aviso en la página
+      error_log('Onboarding: Usuario auto-verificado en desarrollo');
+    } else {
+      update_user_meta($user_id, self::META_VERIFIED, 0);
 
-    $this->send_verification_email($user_id, $token);
+      $token = wp_generate_password(32, false, false);
+      $hash  = wp_hash($token);
+      update_user_meta($user_id, self::META_TOKEN, $hash);
+      update_user_meta($user_id, self::META_TOKEN_EXPIRES, time() + 24 * 3600);
+
+      $this->send_verification_email($user_id, $token);
+    }
 
     wp_set_current_user($user_id);
     wp_set_auth_cookie($user_id);

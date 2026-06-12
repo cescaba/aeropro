@@ -53,12 +53,11 @@ if (!defined('ABSPATH')) exit;
         <div class="vc-login-reset__body">
           <div class="vc-login-email-box">
             <div class="vc-login-email-box__icon" aria-hidden="true">
-              <svg class="letter-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 38L60 65L98 38" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M22 88L50 60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-                <path d="M98 88L70 60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-                <rect x="20" y="35" width="80" height="55" rx="6" fill="none" stroke="currentColor" stroke-width="5" />
-              </svg>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.6667 3.33325H3.33341C2.41294 3.33325 1.66675 4.07944 1.66675 4.99992V14.9999C1.66675 15.9204 2.41294 16.6666 3.33341 16.6666H16.6667C17.5872 16.6666 18.3334 15.9204 18.3334 14.9999V4.99992C18.3334 4.07944 17.5872 3.33325 16.6667 3.33325Z" stroke="#1447E6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3334 5.83325L10.8584 10.5833C10.6011 10.7444 10.3037 10.8299 10.0001 10.8299C9.69648 10.8299 9.39902 10.7444 9.14175 10.5833L1.66675 5.83325" stroke="#1447E6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
             </div>
             <div class="vc-login-email-box__content">
               <p class="vc-login-email-box__value"><?php echo esc_html($reset_login_hint !== '' ? $reset_login_hint : 'your email address'); ?></p>
