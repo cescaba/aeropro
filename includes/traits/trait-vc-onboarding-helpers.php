@@ -320,13 +320,27 @@ trait VC_Onboarding_Wizard_Helpers {
     $recipient_name = $this->get_user_display_label($user);
     $subject = 'Confirm your new email address';
 
-    $message = sprintf(
-      "Hi %s,\n\nPlease confirm your new email address by clicking the link below:\n\n%s\n\nIf you didn't request this change, you can ignore this email.\n",
-      $recipient_name,
-      $confirm_url
-    );
+    $message = $this->render_template('templates/emails/verification-email-my-profile.php', [
+      'subject' => $subject,
+      'recipient_name' => $recipient_name,
+      'pending_email' => $pending_email,
+      'confirm_url' => $confirm_url,
+      'site_name' => wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES),
+    ]);
 
-    return wp_mail($pending_email, $subject, $message);
+    if ($message === '') {
+      $message = sprintf(
+        "Hi %s,\n\nPlease confirm your new email address by clicking the link below:\n\n%s\n\nIf you didn't request this change, you can ignore this email.\n",
+        $recipient_name,
+        $confirm_url
+      );
+
+      return wp_mail($pending_email, $subject, $message);
+    }
+
+    $headers = ['Content-Type: text/html; charset=UTF-8'];
+
+    return wp_mail($pending_email, $subject, $message, $headers);
   }
 
   private function get_profile_avatar_url(int $user_id, string $size = 'thumbnail'): string {
