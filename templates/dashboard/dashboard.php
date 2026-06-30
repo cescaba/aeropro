@@ -2,12 +2,12 @@
 if (!defined('ABSPATH')) exit;
 
 $grouped_nav = [];
-$flashcards_url = '#';
+$study_sessions_url = '#';
 $profile_url = '#';
 foreach ($nav_items as $item) {
   $grouped_nav[$item['group']][] = $item;
-  if (($item['view'] ?? '') === 'flashcards') {
-    $flashcards_url = (string) ($item['url'] ?? '#');
+  if (($item['view'] ?? '') === 'study-sessions') {
+    $study_sessions_url = (string) ($item['url'] ?? '#');
   }
   if (($item['view'] ?? '') === 'profile') {
     $profile_url = (string) ($item['url'] ?? '#');
@@ -64,10 +64,9 @@ $render_icon = static function (string $icon): string {
     </clipPath>
   </defs>
 </svg>';
-    case 'cards':
-    default:
-      return '<svg class="icon icon-flashcards" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g clip-path="url(#clip0_flashcards)">
+    case 'study-sessions':
+      return '<svg class="icon icon-study-sessions" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_study_sessions)">
     <path d="M9.99951 14.9994V4.16649" stroke="currentColor" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M12.4996 10.8329C11.7786 10.6222 11.1453 10.1835 10.6946 9.58254C10.2439 8.98163 10.0001 8.25085 9.99966 7.49971C9.99921 8.25085 9.75537 8.98163 9.30469 9.58254C8.854 10.1835 8.22073 10.6222 7.49976 10.8329" stroke="currentColor" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M14.6644 5.41645C14.8561 5.08437 14.9689 4.71263 14.994 4.32999C15.0191 3.94735 14.9558 3.56406 14.8091 3.20978C14.6624 2.8555 14.4361 2.53973 14.1478 2.28689C13.8595 2.03405 13.5169 1.85092 13.1465 1.75167C12.7761 1.65242 12.3878 1.63971 12.0117 1.71453C11.6356 1.78934 11.2818 1.94967 10.9776 2.18312C10.6734 2.41656 10.4269 2.71686 10.2573 3.06078C10.0877 3.40471 9.99954 3.78304 9.99956 4.1665C9.99958 3.78304 9.91138 3.40471 9.74179 3.06078C9.5722 2.71686 9.32576 2.41656 9.02154 2.18312C8.71732 1.94967 8.36348 1.78934 7.98738 1.71453C7.61129 1.63971 7.22302 1.65242 6.85263 1.75167C6.48223 1.85092 6.13963 2.03405 5.85133 2.28689C5.56303 2.53973 5.33676 2.8555 5.19002 3.20978C5.04329 3.56406 4.98002 3.94735 5.00512 4.32999C5.03021 4.71263 5.14299 5.08437 5.33474 5.41645" stroke="currentColor" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,10 +77,15 @@ $render_icon = static function (string $icon): string {
     <path d="M5.00218 4.27068C4.51237 4.39662 4.05764 4.63237 3.67242 4.96008C3.28721 5.28778 2.98163 5.69885 2.7788 6.16214C2.57598 6.62544 2.48125 7.12881 2.50177 7.63414C2.52229 8.13947 2.65754 8.6335 2.89726 9.07882" stroke="currentColor" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <defs>
-    <clipPath id="clip0_flashcards">
+    <clipPath id="clip0_study_sessions">
       <rect width="19.9992" height="19.9992" fill="white"/>
     </clipPath>
   </defs>
+</svg>';
+    case 'cards':
+    default:
+      return '<svg class="icon icon-flashcards" width="22" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M6.73584 3.40076H5.98881C4.9426 3.40076 4.41911 3.40076 4.01952 3.60436C3.66802 3.78346 3.38246 4.06902 3.20336 4.42052C2.99976 4.82011 2.99976 5.34361 2.99976 6.38981V15.3564C2.99976 16.4026 2.99976 16.9254 3.20336 17.325C3.38246 17.6765 3.66802 17.9626 4.01952 18.1417C4.41872 18.3451 4.94158 18.3451 5.98574 18.3451H6.73584M6.73584 3.40076H14.9554C16.0016 3.40076 16.524 3.40076 16.9236 3.60436C17.2751 3.78346 17.5616 4.06902 17.7407 4.42052C17.9441 4.81972 17.9441 5.34258 17.9441 6.38674V15.3596C17.9441 16.4037 17.9441 16.9258 17.7407 17.325C17.5616 17.6765 17.2751 17.9626 16.9236 18.1417C16.5244 18.3451 16.0023 18.3451 14.9581 18.3451H6.73584M6.73584 3.40076V18.3451M10.4719 9.9389H14.208M10.4719 7.13684H14.208" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>';
   }
 };
@@ -177,8 +181,8 @@ $render_icon = static function (string $icon): string {
                 />
               </svg>
             </button>
-            <?php /* Mobile menu logo link: envia al usuario a la vista principal de Flashcards. */ ?>
-            <a class="vc-dashboard-menu-panel-logo-link" href="<?php echo esc_url($flashcards_url); ?>" aria-label="<?php esc_attr_e('Go to Flashcards', 'vc-onboarding-wizard'); ?>">
+            <?php /* Mobile menu logo link: envia al usuario a la vista principal de Study sessions. */ ?>
+            <a class="vc-dashboard-menu-panel-logo-link" href="<?php echo esc_url($study_sessions_url); ?>" aria-label="<?php esc_attr_e('Go to Study sessions', 'vc-onboarding-wizard'); ?>">
               <img class="vc-dashboard-menu-panel-logo" src="<?php echo esc_url($logo_url); ?>" alt="Aeropro">
             </a>
           </div>
@@ -188,14 +192,24 @@ $render_icon = static function (string $icon): string {
             <div class="vc-dashboard-nav-group">
               <p class="vc-dashboard-nav-title"><?php echo esc_html($group_label); ?></p>
               <?php foreach ($items as $item): ?>
-                <a
-                  class="vc-dashboard-nav-link<?php echo !empty($item['is_active']) ? ' is-active' : ''; ?>"
-                  href="<?php echo esc_url($item['url']); ?>"
-                  <?php echo !empty($item['is_active']) ? 'aria-current="page"' : ''; ?>
-                >
-                  <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-                  <span><?php echo esc_html($item['label']); ?></span>
-                </a>
+                <?php if (!empty($item['disabled'])): ?>
+                  <span class="vc-dashboard-nav-link is-disabled" aria-disabled="true">
+                    <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+                    <span class="vc-dashboard-nav-label-wrap">
+                      <span><?php echo esc_html($item['label']); ?></span>
+                      <span class="vc-dashboard-nav-badge"><?php esc_html_e('Coming soon', 'vc-onboarding-wizard'); ?></span>
+                    </span>
+                  </span>
+                <?php else: ?>
+                  <a
+                    class="vc-dashboard-nav-link<?php echo !empty($item['is_active']) ? ' is-active' : ''; ?>"
+                    href="<?php echo esc_url($item['url']); ?>"
+                    <?php echo !empty($item['is_active']) ? 'aria-current="page"' : ''; ?>
+                  >
+                    <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+                    <span><?php echo esc_html($item['label']); ?></span>
+                  </a>
+                <?php endif; ?>
               <?php endforeach; ?>
             </div>
           <?php endforeach; ?>

@@ -285,10 +285,10 @@ trait VC_Onboarding_Wizard_Shortcodes {
       return '';
     }
 
-    $view = isset($_GET['view']) ? sanitize_key(wp_unslash($_GET['view'])) : 'flashcards';
-    $allowed_views = ['flashcards', 'mock-test', 'profile', 'privacy', 'subscription', 'help'];
+    $view = isset($_GET['view']) ? sanitize_key(wp_unslash($_GET['view'])) : 'study-sessions';
+    $allowed_views = ['study-sessions', 'mock-test', 'profile', 'privacy', 'subscription', 'help'];
     if (!in_array($view, $allowed_views, true)) {
-      $view = 'flashcards';
+      $view = 'study-sessions';
     }
 
     $view_data = $this->get_dashboard_view_data($view, $uid);
@@ -311,8 +311,9 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
   private function get_dashboard_nav_items(string $active_view): array {
     $items = [
-      ['view' => 'flashcards', 'label' => 'Flashcards', 'group' => 'A&P Study tools', 'icon' => 'cards'],
+      ['view' => 'study-sessions', 'label' => 'Study sessions', 'group' => 'A&P Study tools', 'icon' => 'study-sessions'],
       ['view' => 'mock-test', 'label' => 'A&P Mock Test', 'group' => 'A&P Study tools', 'icon' => 'clipboard'],
+      ['view' => 'flashcards', 'label' => 'Flashcards', 'group' => 'A&P Study tools', 'icon' => 'cards', 'disabled' => true],
       ['view' => 'profile', 'label' => 'Profile', 'group' => 'My profile', 'icon' => 'user'],
       ['view' => 'privacy', 'label' => 'Privacy', 'group' => 'My profile', 'icon' => 'lock'],
       ['view' => 'subscription', 'label' => 'Subscription', 'group' => 'My profile', 'icon' => 'wallet'],
@@ -320,15 +321,15 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ];
 
     foreach ($items as &$item) {
-      $item['url'] = $this->dashboard_view_url($item['view']);
-      $item['is_active'] = $item['view'] === $active_view;
+      $item['url'] = !empty($item['disabled']) ? '#' : $this->dashboard_view_url($item['view']);
+      $item['is_active'] = empty($item['disabled']) && $item['view'] === $active_view;
     }
 
     return $items;
   }
 
   private function dashboard_view_url(string $view): string {
-    if ($view === 'flashcards') {
+    if ($view === 'study-sessions') {
       return $this->dashboard_url();
     }
 
@@ -367,17 +368,17 @@ trait VC_Onboarding_Wizard_Shortcodes {
           'subtitle' => 'Support resources and the fastest way to get assistance.',
           'content' => $this->render_dashboard_help_view(),
         ];
-      case 'flashcards':
+      case 'study-sessions':
       default:
         return [
-          'title' => 'Flashcards',
+          'title' => 'Study sessions',
           'subtitle' => 'Practice under exam conditions and track your progress.',
-          'content' => $this->render_dashboard_flashcards_view($user_id),
+          'content' => $this->render_dashboard_study_sessions_view($user_id),
         ];
     }
   }
 
-  private function render_dashboard_flashcards_view(int $user_id): string {
+  private function render_dashboard_study_sessions_view(int $user_id): string {
     if (shortcode_exists('vc_flashcards_app')) {
       return do_shortcode('[vc_flashcards_app]');
     }
@@ -396,6 +397,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $summary_stats = apply_filters('vc_onboarding_dashboard_summary_stats', $default_stats, $user_id);
     $subjects = apply_filters('vc_onboarding_dashboard_flashcard_subjects', $default_subjects, $user_id);
+    $subjects = apply_filters('vc_onboarding_dashboard_study_session_subjects', $subjects, $user_id);
     $global_card = apply_filters('vc_onboarding_dashboard_global_practice', [
       'title' => 'Global Random Practice',
       'description' => 'Mix cards from all categories for a comprehensive review',
@@ -403,7 +405,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       'cta_url' => '#',
     ], $user_id);
 
-    return $this->render_template('templates/dashboard/flashcards.php', [
+    return $this->render_template('templates/dashboard/study-sessions.php', [
       'summary_stats' => is_array($summary_stats) ? $summary_stats : $default_stats,
       'subjects' => is_array($subjects) ? $subjects : $default_subjects,
       'global_card' => is_array($global_card) ? $global_card : [],
