@@ -372,7 +372,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       default:
         return [
           'title' => 'Study sessions',
-          'subtitle' => 'Practice under exam conditions and track your progress.',
+          'subtitle' => 'Track every study session and see your progress over time.',
           'content' => $this->render_dashboard_study_sessions_view($user_id),
         ];
     }
