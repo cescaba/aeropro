@@ -192,24 +192,14 @@ $render_icon = static function (string $icon): string {
             <div class="vc-dashboard-nav-group">
               <p class="vc-dashboard-nav-title"><?php echo esc_html($group_label); ?></p>
               <?php foreach ($items as $item): ?>
-                <?php if (!empty($item['disabled'])): ?>
-                  <span class="vc-dashboard-nav-link is-disabled" aria-disabled="true">
-                    <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-                    <span class="vc-dashboard-nav-label-wrap">
-                      <span><?php echo esc_html($item['label']); ?></span>
-                      <span class="vc-dashboard-nav-badge"><?php esc_html_e('Coming soon', 'vc-onboarding-wizard'); ?></span>
-                    </span>
-                  </span>
-                <?php else: ?>
-                  <a
-                    class="vc-dashboard-nav-link<?php echo !empty($item['is_active']) ? ' is-active' : ''; ?>"
-                    href="<?php echo esc_url($item['url']); ?>"
-                    <?php echo !empty($item['is_active']) ? 'aria-current="page"' : ''; ?>
-                  >
-                    <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-                    <span><?php echo esc_html($item['label']); ?></span>
-                  </a>
-                <?php endif; ?>
+                <a
+                  class="vc-dashboard-nav-link<?php echo !empty($item['is_active']) ? ' is-active' : ''; ?>"
+                  href="<?php echo esc_url($item['url']); ?>"
+                  <?php echo !empty($item['is_active']) ? 'aria-current="page"' : ''; ?>
+                >
+                  <span class="vc-dashboard-nav-icon"><?php echo $render_icon($item['icon']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+                  <span><?php echo esc_html($item['label']); ?></span>
+                </a>
               <?php endforeach; ?>
             </div>
           <?php endforeach; ?>

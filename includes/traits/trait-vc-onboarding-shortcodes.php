@@ -286,7 +286,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
 
     $view = isset($_GET['view']) ? sanitize_key(wp_unslash($_GET['view'])) : 'study-sessions';
-    $allowed_views = ['study-sessions', 'mock-test', 'profile', 'privacy', 'subscription', 'help'];
+    $allowed_views = ['study-sessions', 'mock-test', 'flashcards', 'profile', 'privacy', 'subscription', 'help'];
     if (!in_array($view, $allowed_views, true)) {
       $view = 'study-sessions';
     }
@@ -313,7 +313,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     $items = [
       ['view' => 'study-sessions', 'label' => 'Study sessions', 'group' => 'A&P Study tools', 'icon' => 'study-sessions'],
       ['view' => 'mock-test', 'label' => 'A&P Mock Test', 'group' => 'A&P Study tools', 'icon' => 'clipboard'],
-      ['view' => 'flashcards', 'label' => 'Flashcards', 'group' => 'A&P Study tools', 'icon' => 'cards', 'disabled' => true],
+      ['view' => 'flashcards', 'label' => 'Flashcards', 'group' => 'A&P Study tools', 'icon' => 'cards'],
       ['view' => 'profile', 'label' => 'Profile', 'group' => 'My profile', 'icon' => 'user'],
       ['view' => 'privacy', 'label' => 'Privacy', 'group' => 'My profile', 'icon' => 'lock'],
       ['view' => 'subscription', 'label' => 'Subscription', 'group' => 'My profile', 'icon' => 'wallet'],
@@ -321,8 +321,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ];
 
     foreach ($items as &$item) {
-      $item['url'] = !empty($item['disabled']) ? '#' : $this->dashboard_view_url($item['view']);
-      $item['is_active'] = empty($item['disabled']) && $item['view'] === $active_view;
+      $item['url'] = $this->dashboard_view_url($item['view']);
+      $item['is_active'] = $item['view'] === $active_view;
     }
 
     return $items;
@@ -343,6 +343,12 @@ trait VC_Onboarding_Wizard_Shortcodes {
           'title' => 'A&P Mock Test',
           'subtitle' => 'Practice under real exam conditions and track your progress',
           'content' => $this->render_dashboard_mock_test_view(),
+        ];
+      case 'flashcards':
+        return [
+          'title' => 'Flashcards',
+          'subtitle' => 'Review key concepts at your own pace and build long-term retention',
+          'content' => $this->render_dashboard_flashcards_view($user_id),
         ];
       case 'profile':
         return [
@@ -418,6 +424,14 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
 
     return '<p>' . esc_html__('The exam simulator is not available.', 'vc-onboarding-wizard') . '</p>';
+  }
+
+  private function render_dashboard_flashcards_view(int $user_id): string {
+    if (shortcode_exists('vc_flashcards_library')) {
+      return do_shortcode('[vc_flashcards_library]');
+    }
+
+    return '<p>' . esc_html__('Flashcards are not available.', 'vc-onboarding-wizard') . '</p>';
   }
 
   private function render_dashboard_profile_view(int $user_id): string {

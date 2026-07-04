@@ -178,52 +178,6 @@ color: #212121;
   color: #325CBA;
 }
 
-/* Sidebar nav disabled: mantiene apariencia normal, pero sin navegacion. */
-.vc-dashboard-nav-link.is-disabled {
-  cursor: default;
-  color: #242b39;
-}
-
-.vc-dashboard-nav-link.is-disabled:hover,
-.vc-dashboard-nav-link.is-disabled:focus {
-  background: transparent;
-  color: #242b39;
-}
-
-.vc-dashboard-nav-link.is-disabled span {
-  color: #212121;
-}
-
-/* Sidebar nav disabled label: agrupa texto y badge Coming soon con separacion exacta. */
-.vc-dashboard-nav-label-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-/* Sidebar nav badge: etiqueta compacta para herramientas aun no disponibles. */
-.vc-dashboard-nav-badge {
-  width: 67px;
-  height: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 8px;
-  border: 1px solid #DDDDDD;
-  border-radius: 20px;
-  background: #F1F5F9;
-  color: #325CBA !important;
-  font-family: Poppins, sans-serif;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  font-style: normal;
-  line-height: 24px !important;
-  letter-spacing: -0.31px !important;
-  white-space: nowrap;
-}
-
 /* Sidebar nav active: item de la vista actual. */
 .vc-dashboard-nav-link.is-active {
   background: #F1F5F9;
