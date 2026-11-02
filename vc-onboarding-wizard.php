@@ -2,7 +2,7 @@
 /**
  * Plugin Name: VC Onboarding Wizard (PMPro)
  * Description: Registro multi-paso + verificación email + trial 14 días sin tarjeta (PMPro level) + bloqueo dashboard.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: VC Studio
  */
 
