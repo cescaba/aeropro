@@ -8,7 +8,7 @@ $onboarding_css = $assets_url . 'onboarding.css';
 $onboarding_css_ver = file_exists($assets_dir . 'onboarding.css') ? (string) filemtime($assets_dir . 'onboarding.css') : null;
 
 // Visual assets and static copy for the left marketing panel.
-$left_bg = $assets_url . 'onboarding-left.png';
+$left_bg = $assets_url . 'onboarding-left.webp';
 $logo    = $assets_url . 'aeropro-logo.svg';
 $logo2	 = $assets_url . 'aeropro-logo2.svg';
 $left_title = 'A better way to prepare for the A&amp;P written exam.';

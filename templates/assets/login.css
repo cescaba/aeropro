@@ -1184,6 +1184,21 @@ letter-spacing: -0.15px;
   text-align: center;
 }
 
+.vc-onboarding--login .vc-onb-card:has(.vc-login-page--logged) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.vc-onboarding--login .vc-onb-card:has(.vc-login-page--logged) .vc-onb-card__content,
+.vc-onboarding--login .vc-login-page--logged,
+.vc-onboarding--login .vc-login-page--logged .vc-login-card,
+.vc-onboarding--login .vc-login-page--logged .vc-login-state--logged {
+  width: 100%;
+}
+
 /* ==========================================================================
    Responsive
    Desktop base vive fuera de media query.

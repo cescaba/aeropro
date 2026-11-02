@@ -148,13 +148,20 @@ trait VC_Onboarding_Wizard_Helpers {
     return trim((string) get_user_meta($user_id, $meta_key, true));
   }
 
+  // H-01: cacheado con transient versionado por la marca de tiempo del CSV importado
+  // (vc_ow_countries_csv_imported), asi la invalidacion es automatica cuando se reimporta.
   private function get_profile_countries(): array {
-    global $wpdb;
-
     if (!function_exists('vc_ow_locations_table_name')) {
       return [];
     }
 
+    $cache_key = 'vc_ow_profile_countries_' . get_option('vc_ow_countries_csv_imported', '0');
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) {
+      return $cached;
+    }
+
+    global $wpdb;
     $table_name = vc_ow_locations_table_name();
     $rows = $wpdb->get_results(
       "SELECT country_code, country_name
@@ -165,17 +172,27 @@ trait VC_Onboarding_Wizard_Helpers {
       ORDER BY country_name ASC",
       ARRAY_A
     );
+    $rows = is_array($rows) ? $rows : [];
 
-    return is_array($rows) ? $rows : [];
+    set_transient($cache_key, $rows, DAY_IN_SECONDS);
+    return $rows;
   }
 
+  // H-01: mismo esquema de caché que get_profile_countries(), versionado por
+  // vc_ow_states_csv_imported. Evita escanear las 5.309 filas de wp_vc_locations
+  // en cada render/guardado de la vista Profile.
   private function get_profile_states(): array {
-    global $wpdb;
-
     if (!function_exists('vc_ow_locations_table_name')) {
       return [];
     }
 
+    $cache_key = 'vc_ow_profile_states_' . get_option('vc_ow_states_csv_imported', '0');
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) {
+      return $cached;
+    }
+
+    global $wpdb;
     $table_name = vc_ow_locations_table_name();
     $rows = $wpdb->get_results(
       "SELECT country_code, state_code, state_name
@@ -186,30 +203,31 @@ trait VC_Onboarding_Wizard_Helpers {
       ORDER BY country_code ASC, state_name ASC",
       ARRAY_A
     );
+    $rows = is_array($rows) ? $rows : [];
 
-    return is_array($rows) ? $rows : [];
+    set_transient($cache_key, $rows, DAY_IN_SECONDS);
+    return $rows;
   }
 
+  // H-02: reutiliza get_profile_countries()/get_profile_states() (cacheadas por H-01)
+  // en vez de golpear la base de datos con 2 consultas nuevas en cada guardado de perfil.
   private function get_profile_location_label(string $country_code, string $state_code): string {
-    global $wpdb;
-
-    if ($country_code === '' || !function_exists('vc_ow_locations_table_name')) {
+    if ($country_code === '') {
       return '';
     }
 
-    $table_name = vc_ow_locations_table_name();
-    $country_name = (string) $wpdb->get_var($wpdb->prepare(
-      "SELECT country_name FROM {$table_name} WHERE country_code = %s AND country_name <> '' ORDER BY location_type = 'country' DESC LIMIT 1",
-      $country_code
-    ));
+    $country_row = current(array_filter($this->get_profile_countries(), static function ($country) use ($country_code) {
+      return strtoupper((string) ($country['country_code'] ?? '')) === $country_code;
+    }));
+    $country_name = $country_row ? (string) ($country_row['country_name'] ?? '') : '';
 
     $state_name = '';
     if ($state_code !== '') {
-      $state_name = (string) $wpdb->get_var($wpdb->prepare(
-        "SELECT state_name FROM {$table_name} WHERE country_code = %s AND state_code = %s AND state_name <> '' LIMIT 1",
-        $country_code,
-        $state_code
-      ));
+      $state_row = current(array_filter($this->get_profile_states(), static function ($state) use ($country_code, $state_code) {
+        return strtoupper((string) ($state['country_code'] ?? '')) === $country_code
+          && strtoupper((string) ($state['state_code'] ?? '')) === $state_code;
+      }));
+      $state_name = $state_row ? (string) ($state_row['state_name'] ?? '') : '';
     }
 
     return trim(implode(', ', array_filter([$state_name, $country_name])));
