@@ -6,6 +6,7 @@ require_once __DIR__ . '/traits/trait-vc-onboarding-helpers.php';
 require_once __DIR__ . '/traits/trait-vc-onboarding-shortcodes.php';
 require_once __DIR__ . '/traits/trait-vc-onboarding-handlers.php';
 require_once __DIR__ . '/traits/trait-vc-onboarding-guards.php';
+require_once __DIR__ . '/traits/trait-vc-onboarding-google.php';
 
 if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
   class VC_Onboarding_Wizard_PMPro {
@@ -13,6 +14,7 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
     use VC_Onboarding_Wizard_Shortcodes;
     use VC_Onboarding_Wizard_Handlers;
     use VC_Onboarding_Wizard_Guards;
+    use VC_Onboarding_Wizard_Google;
 
     const META_VERIFIED = 'vc_email_verified';
     const META_TOKEN = 'vc_email_verification_token';
@@ -34,7 +36,13 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
     const TRIAL_LEVEL_ID = 1; // <-- CAMBIA ESTO al ID del level "Trial 14 días"
     const DASHBOARD_SLUG = 'dashboard'; // página /dashboard/
 
+    const OPTION_GOOGLE = 'vc_ow_google';
+    const GOOGLE_SETTINGS_GROUP = 'vc_ow_google_group';
+    const GOOGLE_SETTINGS_SLUG = 'vc-ow-google';
+
     public function __construct() {
+      $this->register_google_hooks();
+
       add_shortcode('vc_onboard_step1', [$this, 'shortcode_step1']);
       add_shortcode('vc_onboard_step2', [$this, 'shortcode_step2']);
       add_shortcode('vc_onboard_step3', [$this, 'shortcode_step3']);

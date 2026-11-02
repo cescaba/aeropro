@@ -60,7 +60,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
 
     $html = $this->render_template('templates/steps/step1.php', [
-      'google_login_url' => wp_login_url($this->step_url('registro-datos')),
+      'google_login_url' => $this->google_login_url($this->step_url('registro-datos')),
       'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'action_email_url' => $this->step_url('registro-email'),
       'notices_html' => $notices_html,
@@ -258,7 +258,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
       'check_email_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/check_email.svg',
       'check_email_body_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/check_email_body.svg',
       'email_forget_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/email-forget.svg',
-      'google_login_url' => wp_login_url($this->dashboard_url()),
+      'google_login_url' => $this->google_login_url($this->dashboard_url()),
       'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'terms_url' => home_url('/terms-of-service/'),
       'privacy_url' => get_privacy_policy_url() ?: home_url('/privacy-policy/'),

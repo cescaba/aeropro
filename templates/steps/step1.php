@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
     <p class="subtitle vc-start-step__subtitle">Join hundreds of students preparing for the A&amp;P exam</p>
   </header>
 
+<?php if (!empty($google_login_url)): ?>
   <div class="vc-start-step__social">
     <a class="button button-google vc-start-step__google" href="<?php echo esc_url($google_login_url); ?>">
       <img class="vc-start-step__google-icon" src="<?php echo esc_url($google_logo_url); ?>" alt="">
@@ -17,6 +18,7 @@ if (!defined('ABSPATH')) exit;
   <div class="divider vc-start-step__divider" aria-hidden="true">
     <span>or</span>
   </div>
+<?php endif; ?>
 
   <form id="step-1" class="vc-start-step__form" method="get" action="<?php echo esc_url($action_email_url); ?>">
     <p class="vc-start-step__field">

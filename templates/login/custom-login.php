@@ -117,6 +117,7 @@ if (!defined('ABSPATH')) exit;
           <p class="subtitle vc-login-subtitle vc-login-subtitle--sign-in">Sign in to your account to continue studying</p>
         </header>
 
+<?php if (!empty($google_login_url)): ?>
         <div class="vc-login-state__social">
           <a class="button button-google vc-login-state__google" href="<?php echo esc_url($google_login_url); ?>">
             <img class="vc-login-state__google-icon" src="<?php echo esc_url($google_logo_url); ?>" alt="">
@@ -127,6 +128,7 @@ if (!defined('ABSPATH')) exit;
         <div class="divider vc-login-state__divider" aria-hidden="true">
           <span>or</span>
         </div>
+<?php endif; ?>
 
         <div class="vc-login-state__body">
           <div class="vc-login-form-wrap">
