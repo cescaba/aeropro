@@ -2,15 +2,17 @@
 
 if (!defined('ABSPATH')) exit;
 
-trait VC_Onboarding_Wizard_Shortcodes {
-  public function use_blank_template_for_onboarding($template) {
+trait Aeropro_Shortcodes
+{
+  public function use_blank_template_for_onboarding($template)
+  {
     if (!is_page()) return $template;
 
     global $post;
     if (!$post) return $template;
 
     if ($post->post_name === self::DASHBOARD_SLUG || has_shortcode($post->post_content, 'vc_member_dashboard')) {
-      $dashboard_template = VC_OW_PLUGIN_DIR . 'templates/vc-dashboard-page.php';
+      $dashboard_template = AEROPRO_PLUGIN_DIR . 'templates/vc-dashboard-page.php';
       if (file_exists($dashboard_template)) {
         return $dashboard_template;
       }
@@ -26,13 +28,14 @@ trait VC_Onboarding_Wizard_Shortcodes {
       if ($found) return $found;
     }
 
-    $fallback = VC_OW_PLUGIN_DIR . 'templates/vc-blank-page.php';
+    $fallback = AEROPRO_PLUGIN_DIR . 'templates/vc-blank-page.php';
     if (file_exists($fallback)) return $fallback;
 
     return $template;
   }
 
-  public function shortcode_step1(): string {
+  public function shortcode_step1(): string
+  {
     if (is_user_logged_in()) {
       $uid = get_current_user_id();
       if (!$this->is_verified($uid)) {
@@ -61,7 +64,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
 
     $html = $this->render_template('templates/steps/step1.php', [
       'google_login_url' => $this->google_login_url($this->step_url('registro-datos')),
-      'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
+      'google_logo_url' => AEROPRO_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'action_email_url' => $this->step_url('registro-email'),
       'notices_html' => $notices_html,
     ]);
@@ -69,7 +72,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html . $this->inline_css();
   }
 
-  public function shortcode_step2(): string {
+  public function shortcode_step2(): string
+  {
     if (is_user_logged_in()) {
       wp_safe_redirect($this->step_url('registro-datos'));
       exit;
@@ -102,7 +106,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html . $this->inline_css();
   }
 
-  public function shortcode_step3(): string {
+  public function shortcode_step3(): string
+  {
     if (!is_user_logged_in()) {
       wp_safe_redirect($this->step_url('register'));
       exit;
@@ -133,7 +138,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html . $this->inline_css();
   }
 
-  public function shortcode_check_email(): string {
+  public function shortcode_check_email(): string
+  {
     if (!is_user_logged_in()) {
       wp_safe_redirect($this->step_url('register'));
       exit;
@@ -173,7 +179,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html . $this->inline_css();
   }
 
-  public function shortcode_final(): string {
+  public function shortcode_final(): string
+  {
     if (!is_user_logged_in()) {
       wp_safe_redirect($this->step_url('register'));
       exit;
@@ -192,22 +199,24 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html . $this->inline_css();
   }
 
-  public function shortcode_verify(): string {
+  public function shortcode_verify(): string
+  {
     return $this->render_notice('Verifying…', 'info') . $this->inline_css();
   }
 
-  public function shortcode_custom_login($atts = [], $content = null): string {
+  public function shortcode_custom_login($atts = [], $content = null): string
+  {
     wp_enqueue_style(
       'vc-custom-login-css',
-      VC_OW_PLUGIN_URL . 'templates/assets/login.css',
+      AEROPRO_PLUGIN_URL . 'templates/assets/login.css',
       [],
-      file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/login.css') : '1.0.0'
+      file_exists(AEROPRO_PLUGIN_DIR . 'templates/assets/login.css') ? (string) filemtime(AEROPRO_PLUGIN_DIR . 'templates/assets/login.css') : '1.0.0'
     );
     wp_enqueue_script(
       'vc-custom-login-js',
-      VC_OW_PLUGIN_URL . 'templates/assets/login.js',
+      AEROPRO_PLUGIN_URL . 'templates/assets/login.js',
       [],
-      file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/login.js') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/login.js') : '1.0.0',
+      file_exists(AEROPRO_PLUGIN_DIR . 'templates/assets/login.js') ? (string) filemtime(AEROPRO_PLUGIN_DIR . 'templates/assets/login.js') : '1.0.0',
       true
     );
 
@@ -229,7 +238,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
         $links['lost_password'] = sprintf(
           '<a href="%s">%s</a>',
           esc_url(add_query_arg('action', urlencode('reset_pass'), pmpro_login_url())),
-          esc_html__('Forgot your password?', 'vc-onboarding-wizard')
+          esc_html__('Forgot your password?', 'aeropro')
         );
       }
 
@@ -254,12 +263,12 @@ trait VC_Onboarding_Wizard_Shortcodes {
       'sign_in_url' => $sign_in_url,
       'reset_password_url' => $reset_password_url,
       'reset_login_hint' => $reset_login_hint,
-      'back_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/flecha_back.svg',
-      'check_email_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/check_email.svg',
-      'check_email_body_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/check_email_body.svg',
-      'email_forget_icon_url' => VC_OW_PLUGIN_URL . 'templates/assets/icons/email-forget.svg',
+      'back_icon_url' => AEROPRO_PLUGIN_URL . 'templates/assets/icons/flecha_back.svg',
+      'check_email_icon_url' => AEROPRO_PLUGIN_URL . 'templates/assets/icons/check_email.svg',
+      'check_email_body_icon_url' => AEROPRO_PLUGIN_URL . 'templates/assets/icons/check_email_body.svg',
+      'email_forget_icon_url' => AEROPRO_PLUGIN_URL . 'templates/assets/icons/email-forget.svg',
       'google_login_url' => $this->google_login_url($this->dashboard_url()),
-      'google_logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/logo-google.svg',
+      'google_logo_url' => AEROPRO_PLUGIN_URL . 'templates/assets/logo-google.svg',
       'terms_url' => home_url('/terms-of-service/'),
       'privacy_url' => get_privacy_policy_url() ?: home_url('/privacy-policy/'),
       'pmpro_login_html' => $pmpro_login_html,
@@ -268,7 +277,37 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $html;
   }
 
-  public function shortcode_member_dashboard(): string {
+  /** CSS compartido por los 3 shortcodes legales: trae las reglas .vc-privacy-doc* de dashboard.css. */
+  private function enqueue_legal_doc_css(): void
+  {
+    wp_enqueue_style(
+      'vc-dashboard-css',
+      AEROPRO_PLUGIN_URL . 'templates/assets/dashboard.css',
+      [],
+      file_exists(AEROPRO_PLUGIN_DIR . 'templates/assets/dashboard.css') ? (string) filemtime(AEROPRO_PLUGIN_DIR . 'templates/assets/dashboard.css') : '1.0.0'
+    );
+  }
+
+  public function shortcode_privacy_policy(): string
+  {
+    $this->enqueue_legal_doc_css();
+    return $this->render_template('templates/legal/privacy-policy.php', ['standalone' => true]);
+  }
+
+  public function shortcode_cookie_policy(): string
+  {
+    $this->enqueue_legal_doc_css();
+    return $this->render_template('templates/legal/cookie-policy.php', ['standalone' => true]);
+  }
+
+  public function shortcode_terms_and_conditions(): string
+  {
+    $this->enqueue_legal_doc_css();
+    return $this->render_template('templates/legal/terms-and-conditions.php', ['standalone' => true]);
+  }
+
+  public function shortcode_member_dashboard(): string
+  {
     if (!is_user_logged_in()) {
       wp_safe_redirect($this->step_url('register'));
       exit;
@@ -286,7 +325,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
 
     $view = isset($_GET['view']) ? sanitize_key(wp_unslash($_GET['view'])) : 'study-sessions';
-    $allowed_views = ['study-sessions', 'mock-test', 'flashcards', 'profile', 'privacy', 'subscription', 'help'];
+    $allowed_views = ['study-sessions', 'mock-test', 'flashcards', 'profile', 'privacy', 'subscription', 'help', 'password', 'privacy-policy', 'cookie-policy', 'terms-and-conditions'];
     if (!in_array($view, $allowed_views, true)) {
       $view = 'study-sessions';
     }
@@ -294,7 +333,7 @@ trait VC_Onboarding_Wizard_Shortcodes {
     $view_data = $this->get_dashboard_view_data($view, $uid);
 
     return $this->render_template('templates/dashboard/dashboard.php', [
-      'logo_url' => VC_OW_PLUGIN_URL . 'templates/assets/aeropro-logo2.svg',
+      'logo_url' => AEROPRO_PLUGIN_URL . 'templates/assets/aeropro-logo2.svg',
       'search_placeholder' => apply_filters('vc_onboarding_dashboard_search_placeholder', 'Search courses, resources...', $uid),
       'display_name' => $this->get_user_display_label($user),
       'membership_label' => $this->get_membership_label($uid),
@@ -309,12 +348,14 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ]);
   }
 
-  private function get_dashboard_nav_items(string $active_view): array {
+  private function get_dashboard_nav_items(string $active_view): array
+  {
     $items = [
       ['view' => 'study-sessions', 'label' => 'Study sessions', 'group' => 'A&P Study tools', 'icon' => 'study-sessions'],
       ['view' => 'mock-test', 'label' => 'A&P Mock Test', 'group' => 'A&P Study tools', 'icon' => 'clipboard'],
       ['view' => 'flashcards', 'label' => 'Flashcards', 'group' => 'A&P Study tools', 'icon' => 'cards'],
       ['view' => 'profile', 'label' => 'Profile', 'group' => 'My profile', 'icon' => 'user'],
+      ['view' => 'password', 'label' => 'Password', 'group' => 'My profile', 'icon' => 'user'],
       ['view' => 'privacy', 'label' => 'Privacy', 'group' => 'My profile', 'icon' => 'lock'],
       ['view' => 'subscription', 'label' => 'Subscription', 'group' => 'My profile', 'icon' => 'wallet'],
       ['view' => 'help', 'label' => 'Help', 'group' => 'Support', 'icon' => 'help'],
@@ -328,7 +369,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $items;
   }
 
-  private function dashboard_view_url(string $view): string {
+  private function dashboard_view_url(string $view): string
+  {
     if ($view === 'study-sessions') {
       return $this->dashboard_url();
     }
@@ -336,7 +378,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return add_query_arg('view', $view, $this->dashboard_url());
   }
 
-  private function get_dashboard_view_data(string $view, int $user_id): array {
+  private function get_dashboard_view_data(string $view, int $user_id): array
+  {
     switch ($view) {
       case 'mock-test':
         return [
@@ -356,10 +399,17 @@ trait VC_Onboarding_Wizard_Shortcodes {
           'subtitle' => 'Manage your personal information and account details',
           'content' => $this->render_dashboard_profile_view($user_id),
         ];
-      case 'privacy':
+      case 'password':
         return [
           'title' => 'Privacy & Security',
           'subtitle' => 'Manage your account security',
+          'content' => $this->render_dashboard_password_view($user_id),
+        ];
+
+      case 'privacy':
+        return [
+          'title' => 'Help',
+          'subtitle' => 'FAQs & Contact',
           'content' => $this->render_dashboard_privacy_view($user_id),
         ];
       case 'subscription':
@@ -374,6 +424,24 @@ trait VC_Onboarding_Wizard_Shortcodes {
           'subtitle' => 'Support resources and the fastest way to get assistance.',
           'content' => $this->render_dashboard_help_view(),
         ];
+      case 'privacy-policy':
+        return [
+          'title' => 'Help',
+          'subtitle' => 'FAQs & Contact',
+          'content' => $this->render_dashboard_privacy_policy_view(),
+        ];
+      case 'cookie-policy':
+        return [
+          'title' => 'Help',
+          'subtitle' => 'FAQs & Contact',
+          'content' => $this->render_dashboard_cookie_policy_view(),
+        ];
+      case 'terms-and-conditions':
+        return [
+          'title' => 'Help',
+          'subtitle' => 'FAQs & Contact',
+          'content' => $this->render_dashboard_terms_view(),
+        ];
       case 'study-sessions':
       default:
         return [
@@ -384,7 +452,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     }
   }
 
-  private function render_dashboard_study_sessions_view(int $user_id): string {
+  private function render_dashboard_study_sessions_view(int $user_id): string
+  {
     if (shortcode_exists('vc_flashcards_app')) {
       return do_shortcode('[vc_flashcards_app]');
     }
@@ -418,23 +487,26 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ]);
   }
 
-  private function render_dashboard_mock_test_view(): string {
+  private function render_dashboard_mock_test_view(): string
+  {
     if (shortcode_exists('vc_exam_simulator')) {
       return do_shortcode('[vc_exam_simulator]');
     }
 
-    return '<p>' . esc_html__('The exam simulator is not available.', 'vc-onboarding-wizard') . '</p>';
+    return '<p>' . esc_html__('The exam simulator is not available.', 'aeropro') . '</p>';
   }
 
-  private function render_dashboard_flashcards_view(int $user_id): string {
+  private function render_dashboard_flashcards_view(int $user_id): string
+  {
     if (shortcode_exists('vc_flashcards_library')) {
       return do_shortcode('[vc_flashcards_library]');
     }
 
-    return '<p>' . esc_html__('Flashcards are not available.', 'vc-onboarding-wizard') . '</p>';
+    return '<p>' . esc_html__('Flashcards are not available.', 'aeropro') . '</p>';
   }
 
-  private function render_dashboard_profile_view(int $user_id): string {
+  private function render_dashboard_profile_view(int $user_id): string
+  {
     $user = get_userdata($user_id);
     if (!$user instanceof WP_User) {
       return '';
@@ -477,15 +549,45 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ]);
   }
 
-  private function render_dashboard_privacy_view(int $user_id): string {
-    return $this->render_template('templates/dashboard/privacy.php', [
+  private function render_dashboard_password_view(int $user_id): string
+  {
+    return $this->render_template('templates/dashboard/password.php', [
       'notice_html' => $this->get_profile_notice_from_query(),
       'action_url' => admin_url('admin-post.php'),
       'nonce_html' => wp_nonce_field('vc_onboard_change_password', 'vc_change_password_nonce', false, false),
     ]);
   }
 
-  private function render_dashboard_subscription_view(int $user_id): string {
+  private function render_dashboard_privacy_view(int $user_id): string
+  {
+    return $this->render_template('templates/dashboard/privacy.php', [
+      'notice_html' => $this->get_profile_notice_from_query(),
+      'action_url' => admin_url('admin-post.php'),
+      'nonce_html' => wp_nonce_field('vc_onboard_change_password', 'vc_change_password_nonce', false, false),
+      'privacy_policy_url' => $this->dashboard_view_url('privacy-policy'),
+      'cookie_policy_url' => $this->dashboard_view_url('cookie-policy'),
+      'terms_url' => $this->dashboard_view_url('terms-and-conditions'),
+      'faq_sections' => $this->get_help_faq_sections(),
+    ]);
+  }
+
+  private function render_dashboard_privacy_policy_view(): string
+  {
+    return $this->render_template('templates/legal/privacy-policy.php', []);
+  }
+
+  private function render_dashboard_cookie_policy_view(): string
+  {
+    return $this->render_template('templates/legal/cookie-policy.php', []);
+  }
+
+  private function render_dashboard_terms_view(): string
+  {
+    return $this->render_template('templates/legal/terms-and-conditions.php', []);
+  }
+
+  private function render_dashboard_subscription_view(int $user_id): string
+  {
     $level = $this->get_primary_membership_level($user_id);
     $subscription = null;
     $next_payment_date = '';
@@ -592,7 +694,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     ]);
   }
 
-  private function get_dashboard_membership_timestamp($value): int {
+  private function get_dashboard_membership_timestamp($value): int
+  {
     if (is_numeric($value)) {
       $timestamp = (int) $value;
       return $timestamp > 0 ? $timestamp : 0;
@@ -607,7 +710,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
     return $timestamp ?: 0;
   }
 
-  private function render_dashboard_help_view(): string {
+  private function render_dashboard_help_view(): string
+  {
     $support_email = apply_filters('vc_onboarding_dashboard_support_email', get_option('admin_email'));
 
     return '<section class="vc-dashboard-panel-grid vc-dashboard-panel-grid--single">'
@@ -618,7 +722,8 @@ trait VC_Onboarding_Wizard_Shortcodes {
       . '</section>';
   }
 
-  private function inline_css(): string {
+  private function inline_css(): string
+  {
     return '<style>
       .vc-onboard{--vc-onboarding-radius:8px;max-width:520px;margin:40px auto;padding:24px;border:1px solid #e5e5e5;border-radius:12px;background:#fff}
       .vc-onboard h2{margin:0 0 10px}
@@ -630,4 +735,3 @@ trait VC_Onboarding_Wizard_Shortcodes {
     </style>';
   }
 }
-

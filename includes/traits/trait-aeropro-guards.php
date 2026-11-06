@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-trait VC_Onboarding_Wizard_Guards {
+trait Aeropro_Guards {
   public function guard_routes() {
     $path = $this->normalize_path((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 

@@ -2,19 +2,21 @@
 
 if (!defined('ABSPATH')) exit;
 
-require_once __DIR__ . '/traits/trait-vc-onboarding-helpers.php';
-require_once __DIR__ . '/traits/trait-vc-onboarding-shortcodes.php';
-require_once __DIR__ . '/traits/trait-vc-onboarding-handlers.php';
-require_once __DIR__ . '/traits/trait-vc-onboarding-guards.php';
-require_once __DIR__ . '/traits/trait-vc-onboarding-google.php';
+require_once __DIR__ . '/traits/trait-aeropro-helpers.php';
+require_once __DIR__ . '/traits/trait-aeropro-shortcodes.php';
+require_once __DIR__ . '/traits/trait-aeropro-handlers.php';
+require_once __DIR__ . '/traits/trait-aeropro-guards.php';
+require_once __DIR__ . '/traits/trait-aeropro-google.php';
+require_once __DIR__ . '/traits/trait-aeropro-help-faq.php';
 
-if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
-  class VC_Onboarding_Wizard_PMPro {
-    use VC_Onboarding_Wizard_Helpers;
-    use VC_Onboarding_Wizard_Shortcodes;
-    use VC_Onboarding_Wizard_Handlers;
-    use VC_Onboarding_Wizard_Guards;
-    use VC_Onboarding_Wizard_Google;
+if (!class_exists('Aeropro_Plugin')) {
+  class Aeropro_Plugin {
+    use Aeropro_Helpers;
+    use Aeropro_Shortcodes;
+    use Aeropro_Handlers;
+    use Aeropro_Guards;
+    use Aeropro_Google;
+    use Aeropro_Help_Faq;
 
     const META_VERIFIED = 'vc_email_verified';
     const META_TOKEN = 'vc_email_verification_token';
@@ -40,8 +42,13 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
     const GOOGLE_SETTINGS_GROUP = 'vc_ow_google_group';
     const GOOGLE_SETTINGS_SLUG = 'vc-ow-google';
 
+    const OPTION_HELP_FAQ = 'vc_ow_help_faq';
+    const HELP_FAQ_SETTINGS_GROUP = 'vc_ow_help_faq_group';
+    const HELP_FAQ_SETTINGS_SLUG = 'vc-ow-help-faq';
+
     public function __construct() {
       $this->register_google_hooks();
+      $this->register_help_faq_hooks();
 
       add_shortcode('vc_onboard_step1', [$this, 'shortcode_step1']);
       add_shortcode('vc_onboard_step2', [$this, 'shortcode_step2']);
@@ -51,6 +58,9 @@ if (!class_exists('VC_Onboarding_Wizard_PMPro')) {
       add_shortcode('vc_onboard_verify', [$this, 'shortcode_verify']);
       add_shortcode('vc_custom_login', [$this, 'shortcode_custom_login']);
       add_shortcode('vc_member_dashboard', [$this, 'shortcode_member_dashboard']);
+      add_shortcode('vc_privacy_policy', [$this, 'shortcode_privacy_policy']);
+      add_shortcode('vc_cookie_policy', [$this, 'shortcode_cookie_policy']);
+      add_shortcode('vc_terms_and_conditions', [$this, 'shortcode_terms_and_conditions']);
 
       add_action('admin_post_nopriv_vc_onboard_email_start', [$this, 'handle_email_start']);
       add_action('admin_post_vc_onboard_email_start', [$this, 'handle_email_start']);

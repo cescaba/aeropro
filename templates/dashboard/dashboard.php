@@ -123,7 +123,7 @@ $render_icon = static function (string $icon): string {
 <path d="M14 14L11.1333 11.1333" stroke="#212121" stroke-width="1.66648" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-          <input type="search" placeholder="<?php echo esc_attr__('Search courses', 'vc-onboarding-wizard'); ?>" aria-label="<?php echo esc_attr($search_placeholder); ?>">
+          <input type="search" placeholder="<?php echo esc_attr__('Search courses', 'aeropro'); ?>" aria-label="<?php echo esc_attr($search_placeholder); ?>">
         </label>
 
         <button class="vc-dashboard-bell vc-dashboard-brand-bell" type="button" aria-label="Notifications">
@@ -143,7 +143,7 @@ $render_icon = static function (string $icon): string {
         </button>
 
         <?php /* Brand user pill link: usa la URL real de My profile desde la navegacion del dashboard. */ ?>
-        <a class="vc-dashboard-user-pill vc-dashboard-brand-user-pill" href="<?php echo esc_url($profile_url); ?>" aria-label="<?php esc_attr_e('Go to My profile', 'vc-onboarding-wizard'); ?>">
+        <a class="vc-dashboard-user-pill vc-dashboard-brand-user-pill" href="<?php echo esc_url($profile_url); ?>" aria-label="<?php esc_attr_e('Go to My profile', 'aeropro'); ?>">
           <span class="vc-dashboard-avatar">
             <?php if (!empty($avatar_url)): ?>
               <img class="vc-dashboard-avatar-image" src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($display_name); ?>">
@@ -182,7 +182,7 @@ $render_icon = static function (string $icon): string {
               </svg>
             </button>
             <?php /* Mobile menu logo link: envia al usuario a la vista principal de Study sessions. */ ?>
-            <a class="vc-dashboard-menu-panel-logo-link" href="<?php echo esc_url($study_sessions_url); ?>" aria-label="<?php esc_attr_e('Go to Study sessions', 'vc-onboarding-wizard'); ?>">
+            <a class="vc-dashboard-menu-panel-logo-link" href="<?php echo esc_url($study_sessions_url); ?>" aria-label="<?php esc_attr_e('Go to Study sessions', 'aeropro'); ?>">
               <img class="vc-dashboard-menu-panel-logo" src="<?php echo esc_url($logo_url); ?>" alt="Aeropro">
             </a>
           </div>
@@ -232,7 +232,7 @@ $render_icon = static function (string $icon): string {
         </button>
 
         <?php /* Topbar user pill link: mantiene el mismo destino de perfil que el brand responsive. */ ?>
-        <a class="vc-dashboard-user-pill" href="<?php echo esc_url($profile_url); ?>" aria-label="<?php esc_attr_e('Go to My profile', 'vc-onboarding-wizard'); ?>">
+        <a class="vc-dashboard-user-pill" href="<?php echo esc_url($profile_url); ?>" aria-label="<?php esc_attr_e('Go to My profile', 'aeropro'); ?>">
           <span class="vc-dashboard-avatar" data-vc-dashboard-avatar>
             <?php if (!empty($avatar_url)): ?>
               <img class="vc-dashboard-avatar-image" src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($display_name); ?>">

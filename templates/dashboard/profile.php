@@ -32,7 +32,7 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
     <?php /* Profile hero: avatar editable, nombre visible, membresia y controles de foto. */ ?>
     <div class="vc-profile-hero">
       <?php /* Profile mobile photo edit: el avatar tambien abre el selector de foto. */ ?>
-      <label class="vc-profile-avatar-wrap" for="vc_profile_photo" data-vc-profile-avatar aria-label="<?php esc_attr_e('Edit profile photo', 'vc-onboarding-wizard'); ?>">
+      <label class="vc-profile-avatar-wrap" for="vc_profile_photo" data-vc-profile-avatar aria-label="<?php esc_attr_e('Edit profile photo', 'aeropro'); ?>">
         <?php if (!empty($avatar_url)): ?>
           <img class="vc-profile-avatar-image" src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($member_name); ?>">
         <?php else: ?>
@@ -45,16 +45,16 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
         <?php /* Profile membership meta: separa la fecha para poder bajarla de linea solo en 480px. */ ?>
         <p>
           <?php echo esc_html($membership_label); ?><?php if (!empty($member_since)): ?>
-            <span class="vc-profile-member-since-label">&middot; <?php esc_html_e('Member since', 'vc-onboarding-wizard'); ?></span>
+            <span class="vc-profile-member-since-label">&middot; <?php esc_html_e('Member since', 'aeropro'); ?></span>
             <span class="vc-profile-member-since-date"><?php echo esc_html($member_since); ?></span>
           <?php endif; ?>
         </p>
 
         <?php /* Profile photo actions: desktop mantiene boton textual; mobile usa el avatar con icono. */ ?>
         <div class="vc-profile-photo-actions">
-          <label class="vc-profile-photo-button" for="vc_profile_photo"><?php esc_html_e('Edit photo', 'vc-onboarding-wizard'); ?></label>
+          <label class="vc-profile-photo-button" for="vc_profile_photo"><?php esc_html_e('Edit photo', 'aeropro'); ?></label>
           <?php if (!empty($show_delete_photo)): ?>
-            <button type="submit" class="vc-profile-photo-delete" name="remove_avatar" value="1"><?php esc_html_e('Delete', 'vc-onboarding-wizard'); ?></button>
+            <button type="submit" class="vc-profile-photo-delete" name="remove_avatar" value="1"><?php esc_html_e('Delete', 'aeropro'); ?></button>
           <?php endif; ?>
         </div>
 
@@ -67,13 +67,13 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
     <div class="vc-profile-grid vc-profile-grid--two">
       <label class="vc-profile-field">
         <?php /* Profile required field: marca visible para la validacion custom de Profile. */ ?>
-        <span class="vc-profile-field-label"><?php esc_html_e('Name', 'vc-onboarding-wizard'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
-        <input type="text" name="first_name" value="<?php echo esc_attr($first_name); ?>" placeholder="<?php esc_attr_e('First name', 'vc-onboarding-wizard'); ?>" required aria-required="true">
+        <span class="vc-profile-field-label"><?php esc_html_e('Name', 'aeropro'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
+        <input type="text" name="first_name" value="<?php echo esc_attr($first_name); ?>" placeholder="<?php esc_attr_e('First name', 'aeropro'); ?>" required aria-required="true">
       </label>
 
       <label class="vc-profile-field">
-        <span class="vc-profile-field-label"><?php esc_html_e('Last name', 'vc-onboarding-wizard'); ?></span>
-        <input type="text" name="last_name" value="<?php echo esc_attr($last_name); ?>" placeholder="<?php esc_attr_e('Last name', 'vc-onboarding-wizard'); ?>">
+        <span class="vc-profile-field-label"><?php esc_html_e('Last name', 'aeropro'); ?></span>
+        <input type="text" name="last_name" value="<?php echo esc_attr($last_name); ?>" placeholder="<?php esc_attr_e('Last name', 'aeropro'); ?>">
       </label>
     </div>
 
@@ -81,7 +81,7 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
     <div class="vc-profile-email-row">
       <label class="vc-profile-field vc-profile-field--email">
         <?php /* Profile required field: email obligatorio al guardar sin cambiar el flujo Verify. */ ?>
-        <span class="vc-profile-field-label"><?php esc_html_e('E-mail', 'vc-onboarding-wizard'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
+        <span class="vc-profile-field-label"><?php esc_html_e('E-mail', 'aeropro'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
         <input
           type="email"
           name="email"
@@ -99,10 +99,10 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
         name="profile_action"
         value="request_email_change"
         formnovalidate
-        data-default-label="<?php echo esc_attr($pending_email !== '' ? __('Pending', 'vc-onboarding-wizard') : (!empty($email_verified) ? __('Verified', 'vc-onboarding-wizard') : __('Verify', 'vc-onboarding-wizard'))); ?>"
+        data-default-label="<?php echo esc_attr($pending_email !== '' ? __('Pending', 'aeropro') : (!empty($email_verified) ? __('Verified', 'aeropro') : __('Verify', 'aeropro'))); ?>"
         <?php echo ($pending_email === '' && strcasecmp($email, $current_email) === 0) ? 'disabled' : ''; ?>
       >
-        <?php echo $pending_email !== '' ? esc_html__('Pending', 'vc-onboarding-wizard') : (!empty($email_verified) ? esc_html__('Verified', 'vc-onboarding-wizard') : esc_html__('Verify', 'vc-onboarding-wizard')); ?>
+        <?php echo $pending_email !== '' ? esc_html__('Pending', 'aeropro') : (!empty($email_verified) ? esc_html__('Verified', 'aeropro') : esc_html__('Verify', 'aeropro')); ?>
       </button>
     </div>
 
@@ -111,11 +111,11 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
       <span class="vc-profile-email-status-dot"></span>
       <?php
       if ($pending_email !== '') {
-        esc_html_e('Email verification pending', 'vc-onboarding-wizard');
+        esc_html_e('Email verification pending', 'aeropro');
       } elseif (!empty($email_verified)) {
-        esc_html_e('Email verified', 'vc-onboarding-wizard');
+        esc_html_e('Email verified', 'aeropro');
       } else {
-        esc_html_e('Email verification pending', 'vc-onboarding-wizard');
+        esc_html_e('Email verification pending', 'aeropro');
       }
       ?>
     </p>
@@ -123,9 +123,9 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
     <?php /* Profile contact fields: phone opcional y ubicacion estructurada para Save Changes. */ ?>
     <div class="vc-profile-grid vc-profile-grid--two">
       <label class="vc-profile-field">
-        <span class="vc-profile-field-label"><?php esc_html_e('Country', 'vc-onboarding-wizard'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
+        <span class="vc-profile-field-label"><?php esc_html_e('Country', 'aeropro'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
         <select name="country_code" required aria-required="true" data-vc-profile-country>
-          <option value=""><?php esc_html_e('Select country', 'vc-onboarding-wizard'); ?></option>
+          <option value=""><?php esc_html_e('Select country', 'aeropro'); ?></option>
           <?php foreach ((array) $countries as $country): ?>
             <?php
             $option_country_code = strtoupper((string) ($country['country_code'] ?? ''));
@@ -142,9 +142,9 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
       </label>
 
       <label class="vc-profile-field">
-        <span class="vc-profile-field-label"><?php esc_html_e('State', 'vc-onboarding-wizard'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
+        <span class="vc-profile-field-label"><?php esc_html_e('State', 'aeropro'); ?> <span class="vc-profile-required" aria-hidden="true">*</span></span>
         <select name="state_code" required aria-required="true" data-vc-profile-state>
-          <option value=""><?php esc_html_e('Select state', 'vc-onboarding-wizard'); ?></option>
+          <option value=""><?php esc_html_e('Select state', 'aeropro'); ?></option>
           <?php foreach ((array) $states as $state): ?>
             <?php
             $option_state_country = strtoupper((string) ($state['country_code'] ?? ''));
@@ -168,25 +168,25 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
 
     <div class="vc-profile-grid vc-profile-grid--two">
       <div class="vc-profile-field vc-profile-field--phone">
-        <span class="vc-profile-field-label"><?php esc_html_e('Phone', 'vc-onboarding-wizard'); ?></span>
+        <span class="vc-profile-field-label"><?php esc_html_e('Phone', 'aeropro'); ?></span>
         <div class="vc-profile-phone-inputs">
           <label class="vc-profile-phone-control">
-            <span class="screen-reader-text"><?php esc_html_e('Phone prefix', 'vc-onboarding-wizard'); ?></span>
-            <input type="text" name="phone_prefix" value="<?php echo esc_attr($phone_prefix); ?>" placeholder="<?php esc_attr_e('+1', 'vc-onboarding-wizard'); ?>" inputmode="tel" autocomplete="tel-country-code">
+            <span class="screen-reader-text"><?php esc_html_e('Phone prefix', 'aeropro'); ?></span>
+            <input type="text" name="phone_prefix" value="<?php echo esc_attr($phone_prefix); ?>" placeholder="<?php esc_attr_e('+1', 'aeropro'); ?>" inputmode="tel" autocomplete="tel-country-code">
           </label>
           <label class="vc-profile-phone-control">
-            <span class="screen-reader-text"><?php esc_html_e('Phone number', 'vc-onboarding-wizard'); ?></span>
-            <input type="text" name="phone_number" value="<?php echo esc_attr($phone_number); ?>" placeholder="<?php esc_attr_e('555 123 4567', 'vc-onboarding-wizard'); ?>" inputmode="tel" autocomplete="tel-national">
+            <span class="screen-reader-text"><?php esc_html_e('Phone number', 'aeropro'); ?></span>
+            <input type="text" name="phone_number" value="<?php echo esc_attr($phone_number); ?>" placeholder="<?php esc_attr_e('555 123 4567', 'aeropro'); ?>" inputmode="tel" autocomplete="tel-national">
           </label>
         </div>
-        <input class="vc-profile-phone-mobile" type="text" name="phone_mobile" value="<?php echo esc_attr($phone); ?>" placeholder="<?php esc_attr_e('+1 555 123 4567', 'vc-onboarding-wizard'); ?>" inputmode="tel" autocomplete="tel" disabled>
+        <input class="vc-profile-phone-mobile" type="text" name="phone_mobile" value="<?php echo esc_attr($phone); ?>" placeholder="<?php esc_attr_e('+1 555 123 4567', 'aeropro'); ?>" inputmode="tel" autocomplete="tel" disabled>
       </div>
     </div>
 
     <label class="vc-profile-field vc-profile-field--textarea">
-      <span class="vc-profile-field-label"><?php esc_html_e('Bio', 'vc-onboarding-wizard'); ?></span>
-      <textarea name="bio" rows="7" maxlength="200" placeholder="<?php esc_attr_e('Tell us a bit about yourself', 'vc-onboarding-wizard'); ?>"><?php echo esc_textarea($bio); ?></textarea>
-      <small><?php esc_html_e('Maximum 200 characters', 'vc-onboarding-wizard'); ?></small>
+      <span class="vc-profile-field-label"><?php esc_html_e('Bio', 'aeropro'); ?></span>
+      <textarea name="bio" rows="7" maxlength="200" placeholder="<?php esc_attr_e('Tell us a bit about yourself', 'aeropro'); ?>"><?php echo esc_textarea($bio); ?></textarea>
+      <small><?php esc_html_e('Maximum 200 characters', 'aeropro'); ?></small>
     </label>
 
     <?php /* Profile actions: desktop separa Delete account a la izquierda; mobile reordena desde CSS. */ ?>
@@ -199,15 +199,15 @@ if ($phone_number !== '' && preg_match('/^\s*(\+\d{1,4})\s*(.*)$/', $phone_numbe
         value="delete_account"
         formnovalidate
         data-vc-profile-delete-account
-        data-confirm-message="<?php esc_attr_e('Are you sure you want to delete your account? This action cannot be undone.', 'vc-onboarding-wizard'); ?>"
+        data-confirm-message="<?php esc_attr_e('Are you sure you want to delete your account? This action cannot be undone.', 'aeropro'); ?>"
       >
-        <?php esc_html_e('Delete account', 'vc-onboarding-wizard'); ?>
+        <?php esc_html_e('Delete account', 'aeropro'); ?>
       </button>
 
       <?php /* Profile actions main: acciones no destructivas agrupadas para responsive. */ ?>
       <div class="vc-profile-actions-main">
-        <a class="vc-profile-cancel" href="<?php echo esc_url($cancel_url); ?>"><?php esc_html_e('Cancel', 'vc-onboarding-wizard'); ?></a>
-        <button type="submit" class="vc-profile-save" name="profile_action" value="save_profile"><?php esc_html_e('Save Changes', 'vc-onboarding-wizard'); ?></button>
+        <a class="vc-profile-cancel" href="<?php echo esc_url($cancel_url); ?>"><?php esc_html_e('Cancel', 'aeropro'); ?></a>
+        <button type="submit" class="vc-profile-save" name="profile_action" value="save_profile"><?php esc_html_e('Save Changes', 'aeropro'); ?></button>
       </div>
       <div class="vc-profile-divider-action"></div>
     </div>

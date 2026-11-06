@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 $vc_onboarding_radius = '8px';
-$vc_onboarding_logo_url = VC_OW_PLUGIN_URL . 'templates/assets/aeropro-logo2.svg';
+$vc_onboarding_logo_url = AEROPRO_PLUGIN_URL . 'templates/assets/aeropro-logo2.svg';
 $vc_greeting_style = 'padding:0 0 8px; font-family:Poppins, Arial, Helvetica, sans-serif; font-size:18px; line-height:27px; font-weight:500; letter-spacing:0; color:#212121; text-align:center;';
 $vc_description_style = 'padding:0 0 37px; font-family:Poppins, Arial, Helvetica, sans-serif; font-size:18px; line-height:100%; font-weight:500; letter-spacing:0; color:#666666; text-align:center;';
 $vc_meta_style = 'font-family:Poppins, Arial, Helvetica, sans-serif; font-size:14px; line-height:14px; font-weight:400; letter-spacing:-0.15px; color:#666666; text-align:center;';

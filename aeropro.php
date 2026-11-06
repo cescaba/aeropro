@@ -1,39 +1,40 @@
 <?php
 /**
- * Plugin Name: VC Onboarding Wizard (PMPro)
+ * Plugin Name: Aeropro Onboarding & Membership
  * Description: Registro multi-paso + verificación email + trial 14 días sin tarjeta (PMPro level) + bloqueo dashboard.
  * Version: 1.1.0
  * Author: VC Studio
+ * Text Domain: aeropro
  */
 
 if (!defined('ABSPATH')) exit;
 
-if (!defined('VC_OW_PLUGIN_FILE')) {
-  define('VC_OW_PLUGIN_FILE', __FILE__);
+if (!defined('AEROPRO_PLUGIN_FILE')) {
+  define('AEROPRO_PLUGIN_FILE', __FILE__);
 }
 
-if (!defined('VC_OW_PLUGIN_DIR')) {
-  define('VC_OW_PLUGIN_DIR', plugin_dir_path(__FILE__));
+if (!defined('AEROPRO_PLUGIN_DIR')) {
+  define('AEROPRO_PLUGIN_DIR', plugin_dir_path(__FILE__));
 }
 
-if (!defined('VC_OW_PLUGIN_URL')) {
-  define('VC_OW_PLUGIN_URL', plugin_dir_url(__FILE__));
+if (!defined('AEROPRO_PLUGIN_URL')) {
+  define('AEROPRO_PLUGIN_URL', plugin_dir_url(__FILE__));
 }
 
-if (!defined('VC_OW_DB_VERSION')) {
-  define('VC_OW_DB_VERSION', '1.0.7');
+if (!defined('AEROPRO_DB_VERSION')) {
+  define('AEROPRO_DB_VERSION', '1.0.7');
 }
 
-function vc_ow_locations_table_name() {
+function aeropro_locations_table_name() {
   global $wpdb;
 
   return $wpdb->prefix . 'vc_locations';
 }
 
-function vc_ow_create_locations_table() {
+function aeropro_create_locations_table() {
   global $wpdb;
 
-  $table_name = vc_ow_locations_table_name();
+  $table_name = aeropro_locations_table_name();
   $charset_collate = $wpdb->get_charset_collate();
 
   require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -57,13 +58,13 @@ function vc_ow_create_locations_table() {
 
   dbDelta($sql);
 
-  update_option('vc_ow_db_version', VC_OW_DB_VERSION);
+  update_option('vc_ow_db_version', AEROPRO_DB_VERSION);
 }
 
-function vc_ow_insert_location_if_missing(array $location) {
+function aeropro_insert_location_if_missing(array $location) {
   global $wpdb;
 
-  $table_name = vc_ow_locations_table_name();
+  $table_name = aeropro_locations_table_name();
   $now = current_time('mysql');
   [$type, $country_code, $country_name, $state_code, $state_name, $city_name] = $location;
 
@@ -100,17 +101,17 @@ function vc_ow_insert_location_if_missing(array $location) {
   );
 }
 
-function vc_ow_cleanup_unsupported_locations() {
+function aeropro_cleanup_unsupported_locations() {
   global $wpdb;
 
-  $table_name = vc_ow_locations_table_name();
+  $table_name = aeropro_locations_table_name();
   $wpdb->query("DELETE FROM {$table_name} WHERE location_type = 'city' OR city_name <> ''");
 
   delete_option('vc_ow_locations_csv_imported');
   delete_metadata('user', 0, 'vc_profile_city_name', '', true);
 }
 
-function vc_ow_seed_countries_from_csv(string $csv_path) {
+function aeropro_seed_countries_from_csv(string $csv_path) {
   if (!file_exists($csv_path) || !is_readable($csv_path)) {
     return;
   }
@@ -142,14 +143,14 @@ function vc_ow_seed_countries_from_csv(string $csv_path) {
       continue;
     }
 
-    vc_ow_insert_location_if_missing(['country', $country_code, $country_name, '', '', '']);
+    aeropro_insert_location_if_missing(['country', $country_code, $country_name, '', '', '']);
   }
 
   fclose($handle);
   update_option('vc_ow_countries_csv_imported', $csv_mtime);
 }
 
-function vc_ow_seed_states_from_csv(string $csv_path) {
+function aeropro_seed_states_from_csv(string $csv_path) {
   if (!file_exists($csv_path) || !is_readable($csv_path)) {
     return;
   }
@@ -183,17 +184,17 @@ function vc_ow_seed_states_from_csv(string $csv_path) {
       continue;
     }
 
-    vc_ow_insert_location_if_missing(['state', $country_code, $country_name, $state_code, $state_name, '']);
+    aeropro_insert_location_if_missing(['state', $country_code, $country_name, $state_code, $state_name, '']);
   }
 
   fclose($handle);
   update_option('vc_ow_states_csv_imported', $csv_mtime);
 }
 
-function vc_ow_seed_default_us_states() {
+function aeropro_seed_default_us_states() {
   $seeded = get_option('vc_ow_us_states_seeded');
 
-  if ($seeded === VC_OW_DB_VERSION) {
+  if ($seeded === AEROPRO_DB_VERSION) {
     return;
   }
 
@@ -252,39 +253,39 @@ function vc_ow_seed_default_us_states() {
   ];
 
   foreach ($defaults as $location) {
-    vc_ow_insert_location_if_missing($location);
+    aeropro_insert_location_if_missing($location);
   }
 
-  update_option('vc_ow_us_states_seeded', VC_OW_DB_VERSION);
+  update_option('vc_ow_us_states_seeded', AEROPRO_DB_VERSION);
 }
 
-function vc_ow_install_locations_table() {
-  vc_ow_create_locations_table();
-  vc_ow_cleanup_unsupported_locations();
-  vc_ow_seed_countries_from_csv(VC_OW_PLUGIN_DIR . 'data/countries.csv');
-  vc_ow_seed_states_from_csv(VC_OW_PLUGIN_DIR . 'data/states.csv');
-  vc_ow_seed_default_us_states();
+function aeropro_install_locations_table() {
+  aeropro_create_locations_table();
+  aeropro_cleanup_unsupported_locations();
+  aeropro_seed_countries_from_csv(AEROPRO_PLUGIN_DIR . 'data/countries.csv');
+  aeropro_seed_states_from_csv(AEROPRO_PLUGIN_DIR . 'data/states.csv');
+  aeropro_seed_default_us_states();
 }
 
-function vc_ow_maybe_install_locations_table() {
-  $countries_csv_path = VC_OW_PLUGIN_DIR . 'data/countries.csv';
-  $states_csv_path = VC_OW_PLUGIN_DIR . 'data/states.csv';
+function aeropro_maybe_install_locations_table() {
+  $countries_csv_path = AEROPRO_PLUGIN_DIR . 'data/countries.csv';
+  $states_csv_path = AEROPRO_PLUGIN_DIR . 'data/states.csv';
   $countries_csv_mtime = file_exists($countries_csv_path) ? (string) filemtime($countries_csv_path) : '';
   $states_csv_mtime = file_exists($states_csv_path) ? (string) filemtime($states_csv_path) : '';
 
   if (
-    get_option('vc_ow_db_version') !== VC_OW_DB_VERSION
-    || get_option('vc_ow_us_states_seeded') !== VC_OW_DB_VERSION
+    get_option('vc_ow_db_version') !== AEROPRO_DB_VERSION
+    || get_option('vc_ow_us_states_seeded') !== AEROPRO_DB_VERSION
     || ($countries_csv_mtime !== '' && get_option('vc_ow_countries_csv_imported') !== $countries_csv_mtime)
     || ($states_csv_mtime !== '' && get_option('vc_ow_states_csv_imported') !== $states_csv_mtime)
   ) {
-    vc_ow_install_locations_table();
+    aeropro_install_locations_table();
   }
 }
 
-register_activation_hook(__FILE__, 'vc_ow_install_locations_table');
-add_action('plugins_loaded', 'vc_ow_maybe_install_locations_table');
+register_activation_hook(__FILE__, 'aeropro_install_locations_table');
+add_action('plugins_loaded', 'aeropro_maybe_install_locations_table');
 
-require_once VC_OW_PLUGIN_DIR . 'includes/class-vc-onboarding-wizard-pmpro.php';
+require_once AEROPRO_PLUGIN_DIR . 'includes/class-aeropro-plugin.php';
 
-new VC_Onboarding_Wizard_PMPro();
+new Aeropro_Plugin();

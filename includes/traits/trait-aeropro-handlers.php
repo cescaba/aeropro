@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-trait VC_Onboarding_Wizard_Handlers {
+trait Aeropro_Handlers {
   public function handle_email_start() {
     $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
     $pass  = isset($_POST['password']) ? (string) $_POST['password'] : '';

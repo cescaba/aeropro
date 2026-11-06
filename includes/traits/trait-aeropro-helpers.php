@@ -2,29 +2,29 @@
 
 if (!defined('ABSPATH')) exit;
 
-trait VC_Onboarding_Wizard_Helpers {
+trait Aeropro_Helpers {
   public function enqueue_public_assets() {
     if (is_page()) {
       wp_enqueue_script(
         'vc-onboarding-js',
-        VC_OW_PLUGIN_URL . 'templates/assets/js/onboarding.js',
+        AEROPRO_PLUGIN_URL . 'templates/assets/js/onboarding.js',
         [],
-        file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/js/onboarding.js') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/js/onboarding.js') : '1.0.0',
+        file_exists(AEROPRO_PLUGIN_DIR . 'templates/assets/js/onboarding.js') ? (string) filemtime(AEROPRO_PLUGIN_DIR . 'templates/assets/js/onboarding.js') : '1.0.0',
         true
       );
 
       wp_enqueue_script(
         'vc-dashboard-js',
-        VC_OW_PLUGIN_URL . 'templates/assets/js/dashboard.js',
+        AEROPRO_PLUGIN_URL . 'templates/assets/js/dashboard.js',
         [],
-        file_exists(VC_OW_PLUGIN_DIR . 'templates/assets/js/dashboard.js') ? (string) filemtime(VC_OW_PLUGIN_DIR . 'templates/assets/js/dashboard.js') : '1.0.0',
+        file_exists(AEROPRO_PLUGIN_DIR . 'templates/assets/js/dashboard.js') ? (string) filemtime(AEROPRO_PLUGIN_DIR . 'templates/assets/js/dashboard.js') : '1.0.0',
         true
       );
     }
   }
 
   private function render_template(string $template_relative_path, array $vars = []): string {
-    $template_file = VC_OW_PLUGIN_DIR . ltrim($template_relative_path, '/');
+    $template_file = AEROPRO_PLUGIN_DIR . ltrim($template_relative_path, '/');
     if (!file_exists($template_file)) return '';
 
     if (!empty($vars)) {
@@ -151,7 +151,7 @@ trait VC_Onboarding_Wizard_Helpers {
   // H-01: cacheado con transient versionado por la marca de tiempo del CSV importado
   // (vc_ow_countries_csv_imported), asi la invalidacion es automatica cuando se reimporta.
   private function get_profile_countries(): array {
-    if (!function_exists('vc_ow_locations_table_name')) {
+    if (!function_exists('aeropro_locations_table_name')) {
       return [];
     }
 
@@ -162,7 +162,7 @@ trait VC_Onboarding_Wizard_Helpers {
     }
 
     global $wpdb;
-    $table_name = vc_ow_locations_table_name();
+    $table_name = aeropro_locations_table_name();
     $rows = $wpdb->get_results(
       "SELECT country_code, country_name
       FROM {$table_name}
@@ -182,7 +182,7 @@ trait VC_Onboarding_Wizard_Helpers {
   // vc_ow_states_csv_imported. Evita escanear las 5.309 filas de wp_vc_locations
   // en cada render/guardado de la vista Profile.
   private function get_profile_states(): array {
-    if (!function_exists('vc_ow_locations_table_name')) {
+    if (!function_exists('aeropro_locations_table_name')) {
       return [];
     }
 
@@ -193,7 +193,7 @@ trait VC_Onboarding_Wizard_Helpers {
     }
 
     global $wpdb;
-    $table_name = vc_ow_locations_table_name();
+    $table_name = aeropro_locations_table_name();
     $rows = $wpdb->get_results(
       "SELECT country_code, state_code, state_name
       FROM {$table_name}

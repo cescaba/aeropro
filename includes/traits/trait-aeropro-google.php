@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) exit;
  * Las credenciales se administran en Ajustes > Google Login y se inyectan en NSL
  * via filtros, asi no hace falta tocar la pantalla de NSL.
  */
-trait VC_Onboarding_Wizard_Google {
+trait Aeropro_Google {
   private function register_google_hooks() {
     // Estos filtros deben existir antes de que NSL lea sus ajustes (plugins_loaded).
     add_filter('nsl_finalize_settings_nextend_social_login', [$this, 'google_filter_nsl_settings']);
